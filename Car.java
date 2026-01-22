@@ -37,15 +37,21 @@ public class Car {
         currentSpeed = 0;
     }
 
-    public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+    public void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public void setTurboOn(){
-        turboOn = true;
+    public void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    public void setTurboOff(){
-        turboOn = false;
+    // TODO fix this method according to lab pm
+    public void gas(double amount){
+        incrementSpeed(amount);
+    }
+
+    // TODO fix this method according to lab pm
+    public void brake(double amount){
+        decrementSpeed(amount);
     }
 }
