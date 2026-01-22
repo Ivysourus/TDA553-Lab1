@@ -1,7 +1,6 @@
 import java.awt.*;
 
-public abstract class Car implements Movable{
-
+public abstract class Car implements Movable {
     public int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -11,48 +10,49 @@ public abstract class Car implements Movable{
     private double xPos; // X coordinate
     private double yPos; // X coordinate
 
-    public int getNrDoors(){
+    public int getNrDoors() {
         return nrDoors;
     }
-    public double getEnginePower(){
+
+    public double getEnginePower() {
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Color clr){
+    public void setColor(Color clr) {
         color = clr;
     }
 
-    public void startEngine(){
+    public void startEngine() {
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
-    public void incrementSpeed(double amount){
+    public void incrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public void decrementSpeed(double amount){
+    public void decrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
     // TODO fix this method according to lab pm
-    public void gas(double amount){
+    public void gas(double amount) {
         incrementSpeed(amount);
     }
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
+    public void brake(double amount) {
         decrementSpeed(amount);
     }
 
@@ -65,11 +65,11 @@ public abstract class Car implements Movable{
         this.yPos += Math.sin(angle) * currentSpeed;
     };
 
-    public void turnLeft(){
-        turn(Math.PI*0.5);
+    public void turnLeft() {
+        turn(Math.PI * 0.5);
     };
 
-    public void turnRight(){
-        turn(Math.PI*-0.5);
+    public void turnRight() {
+        turn(Math.PI * -0.5);
     };
 }
