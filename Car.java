@@ -2,8 +2,6 @@ import java.awt.*;
 
 public abstract class Car implements Movable{
 
-    public double trimFactor;
-    public boolean turboOn;
     public int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car
@@ -40,16 +38,22 @@ public abstract class Car implements Movable{
         currentSpeed = 0;
     }
 
-    public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+    public void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    public void setTurboOn(){
-        turboOn = true;
+    public void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    public void setTurboOff(){
-        turboOn = false;
+    // TODO fix this method according to lab pm
+    public void gas(double amount){
+        incrementSpeed(amount);
+    }
+
+    // TODO fix this method according to lab pm
+    public void brake(double amount){
+        decrementSpeed(amount);
     }
 
     private void turn(double angle) {
