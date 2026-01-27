@@ -28,6 +28,13 @@ class Volvo240Test {
     }
 
     @Test
+    void setColor() {
+        Color color = Color.red;
+        volvo240.setColor(color);
+        assertEquals(color, volvo240.getColor());
+    }
+
+    @Test
     void startEngine() {
         volvo240.startEngine();
         assertEquals(0.1, volvo240.getCurrentSpeed());

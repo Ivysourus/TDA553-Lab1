@@ -39,7 +39,7 @@ public abstract class Car implements Movable {
         return color;
     }
 
-    private void setColor(Color clr) {
+    protected void setColor(Color clr) {
         color = clr;
     }
 
