@@ -66,22 +66,14 @@ class Volvo240Test {
 
     @Test
     void gasWithAmountOutsideRange() {
-        assertThrows(AssertionError.class, () -> {
-            volvo240.gas(2.0);
-        });
-        assertThrows(AssertionError.class, () -> {
-            volvo240.gas(-1.0);
-        });
+        assertThrows(AssertionError.class, () -> volvo240.gas(2.0));
+        assertThrows(AssertionError.class, () -> volvo240.gas(-1.0));
     }
 
     @Test
     void brakeWithAmountOutsideRange() {
-        assertThrows(AssertionError.class, () -> {
-            volvo240.brake(2.0);
-        });
-        assertThrows(AssertionError.class, () -> {
-            volvo240.brake(-1.0);
-        });
+        assertThrows(AssertionError.class, () -> volvo240.brake(2.0));
+        assertThrows(AssertionError.class, () -> volvo240.brake(-1.0));
     }
 
     @Test
