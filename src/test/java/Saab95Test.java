@@ -1,23 +1,71 @@
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class Saab95Test {
     private final Saab95 saab95 = new Saab95();
 
     @Test
-    void setTurboOn() {
+    void getNrDoors() {
+        assertEquals(2, saab95.getNrDoors());
     }
 
     @Test
-    void setTurboOff() {
+    void getEnginePower() {
+        assertEquals(125.0, saab95.getEnginePower());
+    }
+
+    @Test
+    void initialSpeedZero() {
+        assertEquals(0.0, saab95.getCurrentSpeed());
+    }
+
+    @Test
+    void getColor() {
+        assertEquals(Color.red, saab95.getColor());
+    }
+
+    @Test
+    void startEngine() {
+        saab95.startEngine();
+        assertEquals(0.1, saab95.getCurrentSpeed());
+    }
+
+    @Test
+    void stopEngine() {
+        saab95.stopEngine();
+        assertEquals(0.0, saab95.getCurrentSpeed());
+    }
+
+    @Test
+    void checkTurboOn() {
+        double oldSpeed = saab95.getCurrentSpeed();
+        saab95.setTurboOn();
+        saab95.gas(1);
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 1, saab95.getEnginePower()));
+    }
+
+    @Test
+    void checkTurboOff() {
+        double oldSpeed = saab95.getCurrentSpeed();
+        saab95.setTurboOff();
+        saab95.gas(1);
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 1, saab95.getEnginePower()));
     }
 
     @Test
     void incrementSpeed() {
+        double oldSpeed = saab95.getCurrentSpeed();
+        saab95.gas(5);
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 5, saab95.getEnginePower()));
     }
 
     @Test
     void decrementSpeed() {
+        double oldSpeed = saab95.getCurrentSpeed();
+        saab95.brake(5);
+        assertEquals(saab95.getCurrentSpeed(), Math.max(oldSpeed - saab95.speedFactor() * 5, 0));
     }
 }

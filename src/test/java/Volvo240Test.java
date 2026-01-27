@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 class Volvo240Test {
     private final Volvo240 volvo240 = new Volvo240();
 
@@ -12,22 +14,29 @@ class Volvo240Test {
 
     @Test
     void getEnginePower() {
+        assertEquals(100.0, volvo240.getEnginePower());
     }
 
     @Test
-    void getCurrentSpeed() {
+    void initialSpeedZero() {
+        assertEquals(0.0, volvo240.getCurrentSpeed());
     }
 
     @Test
     void getColor() {
+        assertEquals(Color.black, volvo240.getColor());
     }
 
     @Test
     void startEngine() {
+        volvo240.startEngine();
+        assertEquals(0.1, volvo240.getCurrentSpeed());
     }
 
     @Test
     void stopEngine() {
+        volvo240.stopEngine();
+        assertEquals(0.0, volvo240.getCurrentSpeed());
     }
 
     @Test
