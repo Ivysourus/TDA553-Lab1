@@ -95,7 +95,6 @@ class Volvo240Test {
         volvo240.startEngine();
         volvo240.gas(1.0);
         volvo240.turnLeft();
-        System.out.println(volvo240.getCurrentSpeed());
         double initialX = volvo240.getXPos();
         double initialY = volvo240.getYPos();
         volvo240.move();
