@@ -60,7 +60,8 @@ class Saab95Test {
         double amount = 1.0;
         double oldSpeed = saab95.getCurrentSpeed();
         saab95.gas(amount);
-        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * amount, saab95.getEnginePower()));
+        assertEquals(saab95.getCurrentSpeed(),
+                Math.min(oldSpeed + saab95.speedFactor() * amount, saab95.getEnginePower()));
     }
 
     @Test

@@ -53,6 +53,7 @@ public abstract class Car implements Movable {
 
     /**
      * Increases the speed of the car.
+     * 
      * @param amount The amount to speed up by in the range [0,1].
      */
     public void gas(double amount) {
@@ -62,6 +63,7 @@ public abstract class Car implements Movable {
 
     /**
      * Decreases the speed of the car.
+     * 
      * @param amount The amount to slow down by in the range [0,1].
      */
     public void brake(double amount) {
