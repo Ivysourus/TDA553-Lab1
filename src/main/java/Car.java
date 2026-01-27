@@ -6,9 +6,22 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double angle; // Angle of the car
-    protected double xPos; // X coordinate
-    protected double yPos; // X coordinate
+
+    private double angle; // Angle of the car
+    private double xPos; // X coordinate
+    private double yPos; // X coordinate
+
+    public double getXPos() {
+        return xPos;
+    }
+
+    public double getYPos() {
+        return yPos;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
 
     public int getNrDoors() {
         return nrDoors;
@@ -48,14 +61,14 @@ public abstract class Car implements Movable {
         decrementSpeed(amount);
     }
 
-    private void turn(double angle) {
-        this.angle += angle;
-    }
-
     public void move() {
         this.xPos += Math.cos(angle) * currentSpeed;
         this.yPos += Math.sin(angle) * currentSpeed;
     };
+
+    private void turn(double angle) {
+        this.angle += angle;
+    }
 
     public void turnLeft() {
         turn(Math.PI * 0.5);
@@ -64,7 +77,7 @@ public abstract class Car implements Movable {
     public void turnRight() {
         turn(Math.PI * -0.5);
     };
-    
+
     private void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
