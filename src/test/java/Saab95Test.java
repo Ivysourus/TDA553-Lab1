@@ -42,17 +42,19 @@ class Saab95Test {
     @Test
     void checkTurboOn() {
         double oldSpeed = saab95.getCurrentSpeed();
+        double amount = 1;
         saab95.setTurboOn();
-        saab95.gas(1);
-        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 1, saab95.getEnginePower()));
+        saab95.gas(amount);
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.getEnginePower() * 0.01 * 1.3 * amount, saab95.getEnginePower()));
     }
 
     @Test
     void checkTurboOff() {
         double oldSpeed = saab95.getCurrentSpeed();
+        double amount = 1;
         saab95.setTurboOff();
         saab95.gas(1);
-        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 1, saab95.getEnginePower()));
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.getEnginePower() * 0.01 * 1 * amount, saab95.getEnginePower()));
     }
 
     @Test
