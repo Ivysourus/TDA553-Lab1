@@ -51,13 +51,22 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    // TODO fix this method according to lab pm
+
+    /**
+     * Increases the speed of the car.
+     * @param amount The amount to speed up by in the range [0,1].
+     */
     public void gas(double amount) {
+        assert amount >= 0.0 && amount <= 1.0 : "Variable `amount` outside the range [0,1]";
         incrementSpeed(amount);
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Decreases the speed of the car.
+     * @param amount The amount to slow down by in the range [0,1].
+     */
     public void brake(double amount) {
+        assert amount >= 0.0 && amount <= 1.0 : "Variable `amount` outside the range [0,1]";
         decrementSpeed(amount);
     }
 
