@@ -57,15 +57,17 @@ class Saab95Test {
 
     @Test
     void incrementSpeed() {
+        double amount = 1.0;
         double oldSpeed = saab95.getCurrentSpeed();
-        saab95.gas(5);
-        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * 5, saab95.getEnginePower()));
+        saab95.gas(amount);
+        assertEquals(saab95.getCurrentSpeed(), Math.min(oldSpeed + saab95.speedFactor() * amount, saab95.getEnginePower()));
     }
 
     @Test
     void decrementSpeed() {
+        double amount = 1.0;
         double oldSpeed = saab95.getCurrentSpeed();
-        saab95.brake(5);
-        assertEquals(saab95.getCurrentSpeed(), Math.max(oldSpeed - saab95.speedFactor() * 5, 0));
+        saab95.brake(amount);
+        assertEquals(saab95.getCurrentSpeed(), Math.max(oldSpeed - saab95.speedFactor() * amount, 0));
     }
 }

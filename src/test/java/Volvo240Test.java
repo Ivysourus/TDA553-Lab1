@@ -65,6 +65,40 @@ class Volvo240Test {
     }
 
     @Test
+    void gasWithAmountOutsideRange() {
+        assertThrows(AssertionError.class, () -> {
+            volvo240.gas(2.0);
+        });
+        assertThrows(AssertionError.class, () -> {
+            volvo240.gas(-1.0);
+        });
+    }
+
+    @Test
+    void brakeWithAmountOutsideRange() {
+        assertThrows(AssertionError.class, () -> {
+            volvo240.brake(2.0);
+        });
+        assertThrows(AssertionError.class, () -> {
+            volvo240.brake(-1.0);
+        });
+    }
+
+    @Test
+    void enginePowerIsMaxSpeed() {
+        for (int i = 0; i < 100; i++) {
+            volvo240.gas(1);
+        }
+        assertEquals(volvo240.enginePower, volvo240.getCurrentSpeed());
+    }
+
+    @Test
+    void zeroIsMinSpeed() {
+        volvo240.brake(1);
+        assertEquals(0.0, volvo240.getCurrentSpeed());
+    }
+
+    @Test
     void move() {
         volvo240.startEngine();
         volvo240.gas(1.0);
@@ -98,9 +132,5 @@ class Volvo240Test {
         double initialAngle = volvo240.getAngle();
         volvo240.turnRight();
         assertTrue(initialAngle > volvo240.getAngle());
-    }
-
-    @Test
-    void speedFactor() {
     }
 }

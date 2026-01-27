@@ -51,7 +51,6 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-
     /**
      * Increases the speed of the car.
      * @param amount The amount to speed up by in the range [0,1].
