@@ -1,7 +1,11 @@
-public class CanLoadHelperFirstInFirstOut<T> extends CanLoadHelper<T> implements CanLoadOrdered<T> {
-    public void Load(Loadable<T> load) {
-    }
+import java.util.Optional;
 
-    public Loadable<T> Unload() {
+public class CanLoadHelperFirstInFirstOut<T> extends CanLoadHelper<T> implements CanLoadOrdered<T> {
+
+    public Optional<Loadable<T>> Unload() {
+        if (cargo.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(cargo.removeFirst());
     }
 }
