@@ -1,5 +1,7 @@
+import java.util.Optional;
+
 public interface CanLoadOrdered<T> {
     void Load(Loadable<T> load);
 
-    Loadable<T> Unload();
+    Optional<Loadable<T>> Unload();
 }
