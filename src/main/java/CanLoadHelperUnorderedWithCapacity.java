@@ -1,5 +1,8 @@
 public class CanLoadHelperUnorderedWithCapacity<T> extends CanLoadHelper<T> implements CanLoadUnordered<T> {
-    public CanLoadHelperUnorderedWithCapacity() {
+    private int capacity;
+
+    public CanLoadHelperUnorderedWithCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override
