@@ -4,7 +4,7 @@ public abstract class Vehicle implements Movable, Loadable {
     protected double currentSpeed;
     protected String modelName;
     protected Color color;
-    protected Vector2 pos;
+    protected Vector2 pos = Vector2.zero();
 
     private double angle;
 
@@ -36,7 +36,7 @@ public abstract class Vehicle implements Movable, Loadable {
         this.pos = pos.add(new Vector2(
             Math.cos(angle) * currentSpeed,
             Math.sin(angle) * currentSpeed));
-    };
+    }
 
     private void turn(double angle) {
         this.angle += angle;
@@ -44,9 +44,9 @@ public abstract class Vehicle implements Movable, Loadable {
 
     public void turnLeft() {
         turn(Math.PI * 0.5);
-    };
+    }
 
     public void turnRight() {
         turn(Math.PI * -0.5);
-    };
+    }
 }

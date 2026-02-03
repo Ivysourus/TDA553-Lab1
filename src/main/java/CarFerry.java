@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class CarFerry extends EngineVehicle {
-    private int carLanes;
-    private ArrayList<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
+    private final int carLanes;
+    private final ArrayList<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
 
     public CarFerry(int carLanes) {
         color = Color.black;
         enginePower = 100;
         modelName = "Mecklenburg – Vorpommern";
-        laneCanLoadHelpers = new ArrayList<CanLoadHelperFirstInFirstOut<Car>>(carLanes);
+        laneCanLoadHelpers = new ArrayList<>(carLanes);
         this.carLanes = carLanes;
     }
 

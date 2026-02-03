@@ -1,5 +1,6 @@
 public class Vector2 {
-    public double x, y;
+    public final double x;
+    public final double y;
 
     public Vector2(double x, double y) {
         this.x = x;
@@ -9,6 +10,10 @@ public class Vector2 {
     public Vector2(Vector2 another) {
         this.x = another.x;
         this.y = another.y;
+    }
+
+    public static Vector2 zero() {
+        return new Vector2(0.0, 0.0);
     }
 
     public double magnitude() {
