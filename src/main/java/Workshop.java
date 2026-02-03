@@ -1,12 +1,18 @@
-public class Workshop<T> implements CanLoadUnordered<T> {
-    private CanLoadHelperUnorderedWithCapacity<T> canLoadHelper;
+public class Workshop<T extends Loadable> implements CanLoadUnordered<T> {
+    private final CanLoadHelperUnorderedWithCapacity<T> canLoadHelper;
 
     public Workshop(int capacity) {
+        canLoadHelper = new CanLoadHelperUnorderedWithCapacity<>(capacity);
+
+        //If len(workshop) =! capacity:
+            //Workshop.add(car)
     }
 
-    public void Load(Loadable<T> load) {
+    @Override
+    public void load(T load) {
     }
 
-    public void Unload(Loadable<T> load) {
+    @Override
+    public void unload(T load) {
     }
 }
