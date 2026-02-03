@@ -29,21 +29,21 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     }
 
     @Override
-    public void Load(PersonCar load) {
+    public void load(PersonCar load) {
         assert rampDown : "Ramp needs to be down to be able to load cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
         assert load.getPos().distance(this.getPos()) > 20 : "The car you are trying to load is too far away from the Transporter";
         assert maxCarry != canLoadHelper.cargo.size() : "The capacity of the truck is at it's maximum";
         load.setPos(this.getPos());
-        canLoadHelper.Load(load);
+        canLoadHelper.load(load);
     }
 
     @Override
-    public Optional<PersonCar> Unload() {
+    public Optional<PersonCar> unload() {
         assert rampDown : "Ramp needs to be down to be able to unload cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
-        if (canLoadHelper.Unload().isPresent()){
-            PersonCar unloadedCar = canLoadHelper.Unload().get();
+        if (canLoadHelper.unload().isPresent()){
+            PersonCar unloadedCar = canLoadHelper.unload().get();
             unloadedCar.setPos(new Vector2(this.getPos().x, this.getPos().y-20));
             return Optional.of(unloadedCar);
         }

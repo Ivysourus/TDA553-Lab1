@@ -6,11 +6,11 @@ public class CanLoadHelperUnorderedWithCapacity<T extends Loadable> extends CanL
     }
 
     @Override
-    public void Load(T load) {
+    public void load(T load) {
 
     }
 
     @Override
-    public void Unload(T load) {
+    public void unload(T load) {
     }
 }

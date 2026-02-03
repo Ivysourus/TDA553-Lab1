@@ -1,7 +1,7 @@
 import java.util.Optional;
 
 public interface CanLoadOrdered<T extends Loadable> {
-    void Load(T load);
+    void load(T load);
 
-    Optional<T> Unload();
+    Optional<T> unload();
 }

@@ -2,7 +2,7 @@ import java.util.Optional;
 
 public class CanLoadHelperFirstInFirstOut<T extends Loadable> extends CanLoadHelper<T> implements CanLoadOrdered<T> {
     @Override
-    public Optional<T> Unload() {
+    public Optional<T> unload() {
         if (cargo.isEmpty()) {
             return Optional.empty();
         }

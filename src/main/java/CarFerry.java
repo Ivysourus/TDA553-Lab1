@@ -14,16 +14,16 @@ public class CarFerry extends EngineVehicle {
         this.carLanes = carLanes;
     }
 
-    public void Load(Car car, int lane) {
+    public void load(Car car, int lane) {
         assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
         assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
-        laneCanLoadHelpers.get(lane).Load(car);
+        laneCanLoadHelpers.get(lane).load(car);
     }
 
-    public Optional<Car> Unload(int lane) {
+    public Optional<Car> unload(int lane) {
         assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
         assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
-        return laneCanLoadHelpers.get(lane).Unload();
+        return laneCanLoadHelpers.get(lane).unload();
     }
 
     @Override
