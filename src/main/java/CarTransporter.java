@@ -18,42 +18,42 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
 
     public void lowerRamp() {
         assert !rampDown : "Ramp is already down";
-        assert this.getCurrentSpeed() == 0 : "You are currently moving";
+        assert getCurrentSpeed() == 0 : "You are currently moving";
         rampDown = true;
     }
 
     public void raiseRamp() {
         assert rampDown : "Ramp is already up";
-        assert this.getCurrentSpeed() == 0 : "You are currently moving";
+        assert getCurrentSpeed() == 0 : "You are currently moving";
         rampDown = false;
     }
 
     @Override
     public void load(PersonCar load) {
         assert rampDown : "Ramp needs to be down to be able to load cars";
-        assert this.getCurrentSpeed() == 0 : "You are currently moving";
-        assert load.getPos().distance(this.getPos()) > maxLoadDistance : "The car you are trying to load is too far away from the Transporter";
-        load.setPos(this.getPos());
+        assert getCurrentSpeed() == 0 : "You are currently moving";
+        assert load.getPos().distance(pos) > maxLoadDistance : "The car you are trying to load is too far away from the Transporter";
+        load.setPos(pos);
         canLoadHelper.load(load);
     }
 
     @Override
     public Optional<PersonCar> unload() {
         assert rampDown : "Ramp needs to be down to be able to unload cars";
-        assert this.getCurrentSpeed() == 0 : "You are currently moving";
-        if (canLoadHelper.unload().isPresent()){
-            PersonCar unloadedCar = canLoadHelper.unload().get();
-            unloadedCar.setPos(new Vector2(this.getPos().x, this.getPos().y-maxLoadDistance));
-            return Optional.of(unloadedCar);
+        assert getCurrentSpeed() == 0 : "You are currently moving";
+        Optional<PersonCar> unloadedCar = canLoadHelper.unload();
+        if (unloadedCar.isEmpty()) {
+            return unloadedCar;
         }
-        return Optional.empty();
+        unloadedCar.get().setPos(pos.sub(new Vector2(0, -maxLoadDistance)));
+        return unloadedCar;
     }
 
     @Override
     public void move() {
         super.move();
-        for (int i = 0; i < canLoadHelper.cargo.size(); i++){
-            canLoadHelper.cargo.get(i).pos = this.pos;
+        for (var car : canLoadHelper.cargo){
+            car.pos = pos;
         }
     }
 
