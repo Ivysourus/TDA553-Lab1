@@ -49,6 +49,14 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     }
 
     @Override
+    public void move() {
+        super.move();
+        for (int i = 0; i < canLoadHelper.cargo.size(); i++){
+            canLoadHelper.cargo.get(i).pos = this.pos;
+        }
+    }
+
+    @Override
     protected double speedFactor() {
         return enginePower * 0.01;
     }
