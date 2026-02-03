@@ -1,5 +1,5 @@
-public interface Loadable<T> {
-    void setPosition(Vector2 newVector);
+public interface Loadable {
+    void setPosition(Vector2 pos);
 
-    Vector2 getPos();
+    Vector2 getPosition();
 }

@@ -4,8 +4,8 @@ public abstract class Vehicle implements Movable {
     protected double currentSpeed;
     protected String modelName;
     protected Color color;
+    protected Vector2 pos;
 
-    private Vector2 pos;
     private double angle;
 
     public double getCurrentSpeed() {

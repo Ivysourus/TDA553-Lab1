@@ -1,4 +1,4 @@
-public class CanLoadHelperUnorderedWithCapacity<T> extends CanLoadHelper<T> implements CanLoadUnordered<T> {
+public class CanLoadHelperUnorderedWithCapacity<T extends Loadable> extends CanLoadHelper<T> implements CanLoadUnordered<T> {
     private int capacity;
 
     public CanLoadHelperUnorderedWithCapacity(int capacity) {
@@ -6,10 +6,10 @@ public class CanLoadHelperUnorderedWithCapacity<T> extends CanLoadHelper<T> impl
     }
 
     @Override
-    public void Load(Loadable<T> load) {
+    public void Load(T load) {
 
     }
 
-    public void Unload(Loadable<T> load) {
+    public void Unload(T load) {
     }
 }

@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public abstract class CanLoadHelper<T> {
-    protected final ArrayList<Loadable<T>> cargo = new ArrayList<Loadable<T>>();
+public abstract class CanLoadHelper<T extends Loadable> {
+    protected final ArrayList<T> cargo = new ArrayList<T>();
 
-    public void Load(Loadable<T> load) {
+    public void Load(T load) {
         cargo.add(load);
     }
 }

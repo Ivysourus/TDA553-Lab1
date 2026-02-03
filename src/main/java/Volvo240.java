@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Color;
 
 public class Volvo240 extends PersonCar {
     private final static double trimFactor = 1.25; // Engine power of the car

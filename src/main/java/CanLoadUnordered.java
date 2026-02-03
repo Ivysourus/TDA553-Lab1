@@ -1,5 +1,5 @@
-public interface CanLoadUnordered<T> {
-    void Load(Loadable<T> load);
+public interface CanLoadUnordered<T extends Loadable> {
+    void Load(T load);
 
-    void Unload(Loadable<T> load);
+    void Unload(T load);
 }

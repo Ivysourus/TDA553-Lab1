@@ -28,7 +28,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         rampDown = false;
     }
 
-    public void Load(Loadable<PersonCar> load) {
+    public void Load(PersonCar load) {
         assert rampDown : "Ramp needs to be down to be able to load cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
         assert load.getPos().distance(this.getPos()) > 20 : "The car you are trying to load is too far away from the Transporter";
@@ -37,10 +37,10 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         canLoadHelper.Load(load);
     }
 
-    public Optional<Loadable<PersonCar>> Unload() {
+    public Optional<PersonCar> Unload() {
         assert rampDown : "Ramp needs to be down to be able to unload cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
-        Optional<Loadable<PersonCar>> UnloadingCar = canLoadHelper.Unload();
+        Optional<PersonCar> UnloadingCar = canLoadHelper.Unload();
         // TODO this needs to put down the car -20 on Y axis
 
 
