@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Color;
 
 public class Saab95 extends PersonCar {
     private boolean turboOn;

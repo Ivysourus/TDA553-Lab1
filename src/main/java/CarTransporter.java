@@ -1,5 +1,5 @@
 import java.util.Optional;
-import java.awt.*;
+import java.awt.Color;
 
 public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     private CanLoadHelperFirstInLastOut<PersonCar> canLoadHelper;
@@ -28,6 +28,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         rampDown = false;
     }
 
+    @Override
     public void Load(PersonCar load) {
         assert rampDown : "Ramp needs to be down to be able to load cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
@@ -37,6 +38,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         canLoadHelper.Load(load);
     }
 
+    @Override
     public Optional<PersonCar> Unload() {
         assert rampDown : "Ramp needs to be down to be able to unload cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
