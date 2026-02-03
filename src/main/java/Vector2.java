@@ -19,6 +19,10 @@ public class Vector2 {
         return this.div(this.magnitude());
     }
 
+    public double distance(Vector2 other) {
+        return other.sub(this).magnitude();
+    }
+
     public Vector2 add(Vector2 other) {
         return new Vector2(this.x + other.x, this.y + other.y);
     }
