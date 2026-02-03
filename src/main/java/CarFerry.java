@@ -10,17 +10,17 @@ public class CarFerry extends EngineVehicle {
         color = Color.black;
         enginePower = 100;
         modelName = "Mecklenburg – Vorpommern";
-        laneCanLoadHelpers = new ArrayList<CanLoadHelperFirstInFirstOut<PersonCar>>(carLanes);
+        laneCanLoadHelpers = new ArrayList<CanLoadHelperFirstInFirstOut<Car>>(carLanes);
         this.carLanes = carLanes;
     }
 
-    public void Load(PersonCar car, int lane) {
+    public void Load(Car car, int lane) {
         assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
         assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
         laneCanLoadHelpers.get(lane).Load(car);
     }
 
-    public Optional<PersonCar> Unload(int lane) {
+    public Optional<Car> Unload(int lane) {
         assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
         assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
         return laneCanLoadHelpers.get(lane).Unload();
