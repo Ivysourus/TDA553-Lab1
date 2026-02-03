@@ -10,7 +10,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         nrDoors = 2;
         enginePower = 80;
         color = Color.pink;
-        modelName = "Transporter 200";
+        modelName = "Transportmaxxer 5000";
         rampDown = true;
         canLoadHelper = new CanLoadHelperFirstInLastOut<>(3);
         maxLoadDistance = 20.0;
@@ -32,7 +32,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     public void load(PersonCar load) {
         assert rampDown : "Ramp needs to be down to be able to load cars";
         assert getCurrentSpeed() == 0 : "You are currently moving";
-        assert load.getPos().distance(pos) > maxLoadDistance : "The car you are trying to load is too far away from the Transporter";
+        assert load.getPos().distance(pos) < maxLoadDistance : "The car you are trying to load is too far away from the Transporter";
         load.setPos(pos);
         canLoadHelper.load(load);
     }
