@@ -1,8 +1,8 @@
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class Saab95Test {
     private final Saab95 saab95 = new Saab95();

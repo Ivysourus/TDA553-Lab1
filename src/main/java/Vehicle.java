@@ -5,8 +5,7 @@ public abstract class Vehicle implements Movable {
     protected String modelName;
     protected Color color;
 
-    private double xPos;
-    private double yPos;
+    private Vector2 pos;
     private double angle;
 
     public double getCurrentSpeed() {
@@ -17,12 +16,8 @@ public abstract class Vehicle implements Movable {
         return color;
     }
 
-    public double getXPos() {
-        return xPos;
-    }
-
-    public double getYPos() {
-        return yPos;
+    public Vector2 getPos() {
+        return new Vector2(pos);
     }
 
     public double getAngle() {
@@ -34,8 +29,9 @@ public abstract class Vehicle implements Movable {
     }
 
     public void move() {
-        this.xPos += Math.cos(angle) * currentSpeed;
-        this.yPos += Math.sin(angle) * currentSpeed;
+        this.pos = pos.add(new Vector2(
+            Math.cos(angle) * currentSpeed,
+            Math.sin(angle) * currentSpeed));
     };
 
     private void turn(double angle) {

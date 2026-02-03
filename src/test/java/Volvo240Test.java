@@ -95,20 +95,20 @@ class Volvo240Test {
         volvo240.startEngine();
         volvo240.gas(1.0);
         volvo240.turnLeft();
-        double initialX = volvo240.getXPos();
-        double initialY = volvo240.getYPos();
+        Vector2 initial = volvo240.getPos();
         volvo240.move();
-        assertNotEquals(initialX, volvo240.getXPos());
-        assertNotEquals(initialY, volvo240.getYPos());
+        Vector2 after = volvo240.getPos();
+        assertNotEquals(initial.x, after.x);
+        assertNotEquals(initial.y, after.y);
     }
 
     @Test
     void moveWithZeroSpeed() {
-        double initialX = volvo240.getXPos();
-        double initialY = volvo240.getYPos();
+        Vector2 initial = volvo240.getPos();
         volvo240.move();
-        assertEquals(initialX, volvo240.getXPos());
-        assertEquals(initialY, volvo240.getYPos());
+        Vector2 after = volvo240.getPos();
+        assertEquals(initial.x, after.x);
+        assertEquals(initial.y, after.y);
     }
 
     @Test
