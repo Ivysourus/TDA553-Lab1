@@ -9,7 +9,6 @@ public class Saab95 extends PersonCar {
         enginePower = 125;
         turboOn = false;
         modelName = "Saab95";
-        stopEngine();
     }
 
     public void setTurboOn() {
