@@ -40,12 +40,12 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     public Optional<PersonCar> Unload() {
         assert rampDown : "Ramp needs to be down to be able to unload cars";
         assert this.getCurrentSpeed() == 0 : "You are currently moving";
-        Optional<PersonCar> UnloadingCar = canLoadHelper.Unload();
-        // TODO this needs to put down the car -20 on Y axis
-
-
-
-        return UnloadingCar;
+        if (canLoadHelper.Unload().isPresent()){
+            PersonCar unloadedCar = canLoadHelper.Unload().get();
+            unloadedCar.setPosition(new Vector2(this.getPos().x, this.getPos().y-20));
+            return Optional.of(unloadedCar);
+        }
+        return Optional.empty();
     }
 
     @Override
