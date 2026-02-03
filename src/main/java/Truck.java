@@ -6,10 +6,11 @@ public abstract class Truck extends Car {
 
     public void raiseBed(double angle) {
         assert angle >= 0 : "Angle cannot be negative";
-        this.angle = Math.min(this.angle + angle, (7.0/18.0)*Math.PI);
+        this.angle = Math.min(this.angle + angle, (7.0 / 18.0) * Math.PI);
     }
+
     public void lowerBed(double angle) {
         assert angle >= 0 : "Angle cannot be negative";
-        this.angle = Math.min(this.angle - angle, (7.0/18.0)*Math.PI);
+        this.angle = Math.min(this.angle - angle, (7.0 / 18.0) * Math.PI);
     }
 }
