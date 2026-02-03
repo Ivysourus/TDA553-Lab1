@@ -4,11 +4,8 @@ public class CanLoadHelperUnordered<T extends Loadable> extends CanLoadHelper<T>
     }
 
     @Override
-    public void load(T load) {
-
-    }
-
-    @Override
     public void unload(T load) {
+        assert cargo.contains(load) : "Cargo does not contain load";
+        cargo.remove(load);
     }
 }
