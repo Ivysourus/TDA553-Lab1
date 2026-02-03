@@ -1,21 +1,29 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class CarFerry extends EngineVehicle {
     private int carLanes;
-    private ArrayList<CanLoadHelperFirstInFirstOut<PersonCar>> canLoadHelpers;
+    private ArrayList<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
 
     public CarFerry(int carLanes) {
         color = Color.black;
         enginePower = 100;
         modelName = "Mecklenburg – Vorpommern";
-        canLoadHelpers = new ArrayList<CanLoadHelperFirstInFirstOut<PersonCar>>(carLanes);
+        laneCanLoadHelpers = new ArrayList<CanLoadHelperFirstInFirstOut<Car>>(carLanes);
         this.carLanes = carLanes;
     }
 
-    public void Load(PersonCar car, int lane) {
+    public void Load(Car car, int lane) {
         assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
         assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
+        laneCanLoadHelpers.get(lane).Load(car);
+    }
+
+    public Optional<Car> Unload(int lane) {
+        assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
+        assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
+        return laneCanLoadHelpers.get(lane).Unload();
     }
 
     @Override

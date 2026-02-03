@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public abstract class Vehicle implements Movable {
+public abstract class Vehicle implements Movable, Loadable {
     protected double currentSpeed;
     protected String modelName;
     protected Color color;
@@ -26,6 +26,10 @@ public abstract class Vehicle implements Movable {
 
     protected void setColor(Color clr) {
         color = clr;
+    }
+
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
     }
 
     public void move() {
