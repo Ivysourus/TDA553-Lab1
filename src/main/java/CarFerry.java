@@ -15,14 +15,14 @@ public class CarFerry extends EngineVehicle {
     }
 
     public void load(Car car, int lane) {
-        assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
-        assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
+        assert lane < carLanes : "Parameter `lane` cannot be greater or equal to the amount of lanes on the ferry";
+        assert lane >= 0 : "Parameter `lane` cannot be negative";
         laneCanLoadHelpers.get(lane).load(car);
     }
 
     public Optional<Car> unload(int lane) {
-        assert lane <= carLanes : "Parameter `lane` cannot be larger than the amount of lanes on the ferry";
-        assert lane <= carLanes : "Parameter `lane` cannot be smaller than zero";
+        assert lane < carLanes : "Parameter `lane` cannot be greater or equal to the amount of lanes on the ferry";
+        assert lane >= 0 : "Parameter `lane` cannot be negative";
         return laneCanLoadHelpers.get(lane).unload();
     }
 
