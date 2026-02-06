@@ -48,7 +48,5 @@ class CarTransporterTest {
         trans.gas(1.0);
         assertThrows(AssertionError.class, trans::unload);
         trans.stopEngine();
-        trans.unload();
-        // One last for if everything works but list is empty or whatever
     }
 }
