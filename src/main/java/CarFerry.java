@@ -6,12 +6,15 @@ public class CarFerry extends EngineVehicle {
     private final int carLanes;
     private final ArrayList<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
 
-    public CarFerry(int carLanes) {
+    public CarFerry() {
         color = Color.black;
         enginePower = 100;
         modelName = "Mecklenburg – Vorpommern";
+        carLanes = 12;
         laneCanLoadHelpers = new ArrayList<>(carLanes);
-        this.carLanes = carLanes;
+        for (int i = 0; i < carLanes; i++) {
+            laneCanLoadHelpers.add(new CanLoadHelperFirstInFirstOut<>(15));
+        }
     }
 
     public void load(Car car, int lane) {
