@@ -22,20 +22,23 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<EngineVehicle> cars = new ArrayList<>();
-
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
-        //cc.cars.add(new Volvo240());
+        cc.cars.add(new Volvo240());
+        // cc.cars.add(new Scania());
+        // cc.cars.add(new Saab95());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
+
+
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -59,6 +62,57 @@ public class CarController {
         double gas = ((double) amount) / 100;
         for (EngineVehicle car : cars) {
             car.gas(gas);
+        }
+    }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (EngineVehicle car : cars) {
+            car.brake(brake);
+        }
+    }
+
+    void startEngine(){
+        for (EngineVehicle car : cars){
+            car.startEngine();
+        }
+    }
+
+    void stopEngine(){
+        for (EngineVehicle car : cars){
+            car.stopEngine();
+        }
+    }
+
+    void turboOn(){
+        for (EngineVehicle car : cars){
+            if (car instanceof Saab95 saab){
+                saab.setTurboOn();
+            }
+        }
+    }
+
+    void turboOff(){
+        for (EngineVehicle car : cars){
+            if (car instanceof Saab95 saab){
+                saab.setTurboOff();
+            }
+        }
+    }
+
+    void raiseBed(){
+        for (EngineVehicle car: cars){
+            if (car instanceof Scania scania){
+                scania.raiseBed(scania.maxBedAngle);
+            }
+        }
+    }
+
+    void lowerBed(){
+        for (EngineVehicle car: cars){
+            if (car instanceof Scania scania){
+                scania.lowerBed(scania.maxBedAngle);
+            }
         }
     }
 }

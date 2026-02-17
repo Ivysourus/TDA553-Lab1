@@ -45,6 +45,14 @@ public class CarView extends JFrame{
         initComponents(framename);
     }
 
+    public int getMaxX(){
+        return X;
+    }
+
+    public int getMaxY(){
+        return Y;
+    }
+
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
@@ -107,6 +115,56 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
+
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.brake(gasAmount);
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startEngine();
+            }
+        });
+
+        stopButton.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.stopEngine();
+            }
+        });
+
+        turboOnButton.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.turboOn();
+            }
+        });
+
+        turboOffButton.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.turboOff();
+            }
+        });
+
+        liftBedButton.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.raiseBed();
+            }
+        });
+
+        lowerBedButton.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.lowerBed();
+            }
+        });
+
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
