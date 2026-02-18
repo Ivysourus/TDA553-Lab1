@@ -26,7 +26,6 @@ import java.awt.event.ActionListener;
  * each of it's components.
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
-
 public class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
@@ -71,7 +70,6 @@ public class CarView extends JFrame {
     // TODO: Take a good look and make sure you understand how these methods and
     // components work
     private void initComponents(String title) {
-
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
