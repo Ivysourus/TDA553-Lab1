@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 public class Vector2 {
     public final double x;
     public final double y;
@@ -8,24 +10,35 @@ public class Vector2 {
     }
 
     public Vector2(Vector2 another) {
-        x = another.x;
-        y = another.y;
+        this(another.x, another.y);
+    }
+
+    public Vector2(Point point) {
+        this((double) point.x, (double) point.y);
     }
 
     public static Vector2 zero() {
         return new Vector2(0.0, 0.0);
     }
 
+    public double magnitudeSquared() {
+        return x * x + y * y;
+    }
+
     public double magnitude() {
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(magnitudeSquared());
+    }
+
+    public double distance(Vector2 other) {
+        return other.sub(this).magnitude();
     }
 
     public Vector2 normalized() {
         return div(magnitude());
     }
 
-    public double distance(Vector2 other) {
-        return other.sub(this).magnitude();
+    public Vector2 clamp(Vector2 min, Vector2 max) {
+        return new Vector2(Math.clamp(x, min.x, max.x), Math.clamp(y, min.y, max.y));
     }
 
     public Vector2 add(Vector2 other) {

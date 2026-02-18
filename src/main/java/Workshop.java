@@ -7,6 +7,7 @@ public class Workshop<T extends Car> implements CanLoadUnordered<T> {
 
     @Override
     public void load(T load) {
+        load.stopEngine();
         canLoadHelper.load(load);
     }
 

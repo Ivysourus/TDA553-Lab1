@@ -1,8 +1,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import java.awt.Color;
 
-import java.awt.*;
+import org.junit.jupiter.api.Test;
 
 class Volvo240Test {
     private final Volvo240 volvo240 = new Volvo240();

@@ -8,27 +8,31 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-// This panel represents the animated part of the view with the car images.
-
 public class DrawPanel extends JPanel {
     BufferedImage volvoWorkshopImage;
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
 
-    Point volvoWorkshopPoint = new Point(300, 300);
+    Point volvoWorkshopPoint = new Point();
     Point volvoPoint = new Point();
     Point saabPoint = new Point();
     Point scaniaPoint = new Point();
 
-    void moveit(int x, int y, Car car) {
-        if (car instanceof Volvo240) {
+    void moveit(HasPosition hasPos) {
+        Vector2 pos = hasPos.getPos();
+        int x = (int) Math.round(pos.x);
+        int y = (int) Math.round(pos.y);
+        if (hasPos instanceof WorkshopWithPosition) {
+            volvoWorkshopPoint.x = x;
+            volvoWorkshopPoint.y = y;
+        } else if (hasPos instanceof Volvo240) {
             volvoPoint.x = x;
             volvoPoint.y = y;
-        } else if (car instanceof Saab95) {
+        } else if (hasPos instanceof Saab95) {
             saabPoint.x = x;
             saabPoint.y = y;
-        } else if (car instanceof Scania) {
+        } else if (hasPos instanceof Scania) {
             scaniaPoint.x = x;
             scaniaPoint.y = y;
         }

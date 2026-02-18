@@ -19,6 +19,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     ArrayList<Car> cars = new ArrayList<>();
+    WorkshopWithPosition<Volvo240> volvoWorkshop;
 
     public static void main(String[] args) {
         CarController cc = new CarController();
@@ -26,12 +27,16 @@ public class CarController {
         cc.cars.add(new Volvo240());
         cc.cars.add(new Scania());
         cc.cars.add(new Saab95());
+        cc.volvoWorkshop = new WorkshopWithPosition<>(1, new Vector2(300, 0));
 
         for (int i = 0; i < cc.cars.size(); i++) {
-            cc.cars.get(i).setPos(new Vector2(0, i*100));
+            cc.cars.get(i).setPos(new Vector2(0, i * 100));
         }
 
         cc.frame = new CarView("CarSim 1.0", cc);
+
+        // Only need to move the workshop once since it cannot move
+        cc.frame.drawPanel.moveit(cc.volvoWorkshop);
 
         cc.timer.start();
     }
@@ -44,10 +49,24 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPos().x);
-                int y = (int) Math.round(car.getPos().y);
-                frame.drawPanel.moveit(x, y, car);
+                frame.drawPanel.moveit(car);
                 frame.drawPanel.repaint();
+
+                Vector2 pos = car.getPos();
+                Vector2 min = Vector2.zero();
+                Vector2 max = new Vector2(frame.getSize().getWidth(), frame.getSize().getHeight());
+                if (pos.x < min.x || pos.y < min.y || pos.x > max.x || pos.y > max.y) {
+                    car.setPos(pos.clamp(min, max));
+                    car.stopEngine();
+                    car.turnLeft();
+                    car.turnLeft();
+                    car.startEngine();
+                }
+
+                if (car instanceof Volvo240 volvo &&
+                        car.getPos().distance(volvoWorkshop.getPos()) < 30) {
+                    volvoWorkshop.load(volvo);
+                }
             }
         }
     }
