@@ -8,7 +8,6 @@ import java.util.ArrayList;
 * Its responsibilities are to listen to the View and responds in an appropriate manner by
 * modifying the model state and the updating the view.
  */
-
 public class CarController {
     // member fields:
 
@@ -22,7 +21,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<EngineVehicle> cars = new ArrayList<>();
-    //methods:
+    // methods:
 
     public static void main(String[] args) {
         // Instance of this class
@@ -37,13 +36,12 @@ public class CarController {
 
         // Start the timer
         cc.timer.start();
-
-
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+    /*
+     * Each step the TimerListener moves all the cars in the list and tells the
+     * view to update its images. Change this method to your needs.
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (EngineVehicle car : cars) {
@@ -72,45 +70,45 @@ public class CarController {
         }
     }
 
-    void startEngine(){
-        for (EngineVehicle car : cars){
+    void startEngine() {
+        for (EngineVehicle car : cars) {
             car.startEngine();
         }
     }
 
-    void stopEngine(){
-        for (EngineVehicle car : cars){
+    void stopEngine() {
+        for (EngineVehicle car : cars) {
             car.stopEngine();
         }
     }
 
-    void turboOn(){
-        for (EngineVehicle car : cars){
-            if (car instanceof Saab95 saab){
+    void turboOn() {
+        for (EngineVehicle car : cars) {
+            if (car instanceof Saab95 saab) {
                 saab.setTurboOn();
             }
         }
     }
 
-    void turboOff(){
-        for (EngineVehicle car : cars){
-            if (car instanceof Saab95 saab){
+    void turboOff() {
+        for (EngineVehicle car : cars) {
+            if (car instanceof Saab95 saab) {
                 saab.setTurboOff();
             }
         }
     }
 
-    void raiseBed(){
-        for (EngineVehicle car: cars){
-            if (car instanceof Scania scania){
+    void raiseBed() {
+        for (EngineVehicle car : cars) {
+            if (car instanceof Scania scania) {
                 scania.raiseBed(scania.maxBedAngle);
             }
         }
     }
 
-    void lowerBed(){
-        for (EngineVehicle car: cars){
-            if (car instanceof Scania scania){
+    void lowerBed() {
+        for (EngineVehicle car : cars) {
+            if (car instanceof Scania scania) {
                 scania.lowerBed(scania.maxBedAngle);
             }
         }

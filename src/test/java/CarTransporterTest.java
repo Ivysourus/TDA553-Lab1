@@ -30,13 +30,13 @@ class CarTransporterTest {
     @Test
     void loadTest() {
         trans.raiseRamp();
-        assertThrows(AssertionError.class, ()->trans.load(vroom));
+        assertThrows(AssertionError.class, () -> trans.load(vroom));
         trans.lowerRamp();
         trans.gas(1.0);
-        assertThrows(AssertionError.class, ()->trans.load(vroom));
+        assertThrows(AssertionError.class, () -> trans.load(vroom));
         trans.stopEngine();
         vroom.pos = new Vector2(30, 30);
-        assertThrows(AssertionError.class, ()->trans.load(vroom));
+        assertThrows(AssertionError.class, () -> trans.load(vroom));
     }
 
     @Test

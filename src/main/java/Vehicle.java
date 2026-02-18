@@ -34,8 +34,8 @@ public abstract class Vehicle implements Movable, Loadable {
 
     public void move() {
         this.pos = pos.add(new Vector2(
-            Math.cos(angle) * currentSpeed,
-            Math.sin(angle) * currentSpeed));
+                Math.cos(angle) * currentSpeed,
+                Math.sin(angle) * currentSpeed));
     }
 
     private void turn(double angle) {

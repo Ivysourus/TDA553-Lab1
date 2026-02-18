@@ -17,7 +17,7 @@ public class Vector2 {
     }
 
     public double magnitude() {
-        return Math.sqrt(x*x + y*y);
+        return Math.sqrt(x * x + y * y);
     }
 
     public Vector2 normalized() {

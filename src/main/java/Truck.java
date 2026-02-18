@@ -3,6 +3,7 @@ public abstract class Truck extends Car {
      * The angle of the truck bed, from 0-`maxBedAngle` degrees (in radians).
      */
     protected double bedAngle;
+
     /**
      * The max angle of the truck bed (in radians).
      */
