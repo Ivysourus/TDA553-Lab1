@@ -98,7 +98,6 @@ class org.tda553group22.lab3.main.CarView {
 	{field} ~stopButton : javax.swing.JButton
 	{field} ~turboOffButton : javax.swing.JButton
 	{field} ~turboOnButton : javax.swing.JButton
-	{method} -initComponents ( paramString1 : String ) : void
 }
 
 class org.tda553group22.lab3.main.DrawPanel {
