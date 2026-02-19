@@ -8,9 +8,9 @@
 
 # Class Functions and Responsibility
 
-1. Our classes have their very own responsibility sectors if you would call it, as they only focus on the core function they need to fulfil.
-2. There isn't a lot that would need to be changed as they are already split up into multiple classes to make sure they always handle only one function and don't branch out into others fields of service.
-3. Again there isn't a place where we would implement it but on the other hand it's already implemented in a way with our composition helper classes. They are split up into one parent class and 3 subclasses that define the 3 different way to load/unload something from an object instead of us having one class with all 3 different functions inside of it.
+1. Our classes have their very own responsibility sectors if you would call it, as they only focus on the core function they need to fulfil. Apart from the CarView, CarController and DrawPanel classes, not a lot of dividing is possible here.
+2. They would change to limit the amount of functions needed per class and make it more clear what each class is meant for without having to dig through multiple statements and methods that generally don't relate to one another.
+3. It can be implemented in the CarView, DrawPanel and CarController classes, and we have already implemented in a way with our composition helper classes. They are split up into one parent class and 3 subclasses that define the 3 different way to load/unload something from an object instead of us having one class with all 3 different functions inside of it.
 
 # Refactorization Plan
 
