@@ -1,9 +1,10 @@
 package org.tda553group22.lab3.main;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class CanLoadHelper<T extends Loadable> {
-    protected final ArrayList<T> cargo = new ArrayList<>();
+abstract class CanLoadHelper<T extends Loadable> {
+    protected final ListT> cargo = new ArrayList<>();
     protected int capacity;
 
     public void load(T load) {

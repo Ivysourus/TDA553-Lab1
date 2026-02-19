@@ -1,5 +1,7 @@
 package org.tda553group22.lab3.main;
 
+import org.tda553group22.lab3.math.Vector2;
+
 public class WorkshopWithPosition<T extends Car> extends Workshop<T> implements HasPosition {
     private final Vector2 pos;
 

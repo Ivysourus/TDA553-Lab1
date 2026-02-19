@@ -1,8 +1,16 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.ui;
+
+import org.tda553group22.lab3.main.Volvo240;
+import org.tda553group22.lab3.main.Scania;
+import org.tda553group22.lab3.main.Saab95;
+import org.tda553group22.lab3.main.WorkshopWithPosition;
+import org.tda553group22.lab3.main.Car;
+import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Timer;
 
@@ -20,7 +28,7 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    ArrayList<Car> cars = new ArrayList<>();
+    List<Car> cars = new ArrayList<>();
     WorkshopWithPosition<Volvo240> volvoWorkshop;
 
     public static void main(String[] args) {
@@ -56,7 +64,8 @@ public class CarController {
 
                 Vector2 pos = car.getPos();
                 Vector2 min = Vector2.zero();
-                Vector2 max = new Vector2(frame.getSize().getWidth(), frame.getSize().getHeight()).sub(new Vector2(100, 0));
+                Vector2 max = new Vector2(frame.getSize().getWidth(), frame.getSize().getHeight())
+                        .sub(new Vector2(100, 0));
                 Vector2 clampedPos = pos.clamp(min, max);
                 if (!clampedPos.equals(pos)) {
                     car.setPos(clampedPos);

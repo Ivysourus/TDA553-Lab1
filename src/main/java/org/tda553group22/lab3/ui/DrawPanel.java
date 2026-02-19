@@ -1,4 +1,11 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.ui;
+
+import org.tda553group22.lab3.main.WorkshopWithPosition;
+import org.tda553group22.lab3.main.HasPosition;
+import org.tda553group22.lab3.main.Volvo240;
+import org.tda553group22.lab3.main.Saab95;
+import org.tda553group22.lab3.main.Scania;
+import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 import java.awt.Dimension;

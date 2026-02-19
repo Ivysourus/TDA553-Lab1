@@ -1,4 +1,4 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.ui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

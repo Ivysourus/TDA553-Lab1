@@ -1,5 +1,7 @@
 package org.tda553group22.lab3.main;
 
+import org.tda553group22.lab3.math.Vector2;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
