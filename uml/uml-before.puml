@@ -1,47 +1,47 @@
 @startuml
 
-abstract class org.tda553group22.lab1.main.CanLoadHelper {
+abstract class org.tda553group22.lab3.main.CanLoadHelper {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #capacity : int
 	{field} #cargo : java.util.ArrayList
-	{method} +load ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
+	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
-class org.tda553group22.lab1.main.CanLoadHelperFirstInFirstOut {
+class org.tda553group22.lab3.main.CanLoadHelperFirstInFirstOut {
 	{method} +unload () : java.util.Optional
 }
 
 
-class org.tda553group22.lab1.main.CanLoadHelperFirstInLastOut {
+class org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut {
 	{method} +unload () : java.util.Optional
 }
 
 
-class org.tda553group22.lab1.main.CanLoadHelperUnordered {
+class org.tda553group22.lab3.main.CanLoadHelperUnordered {
 	{field} {static} ~$assertionsDisabled : boolean
-	{method} +unload ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
+	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
-interface org.tda553group22.lab1.main.CanLoadOrdered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
+interface org.tda553group22.lab3.main.CanLoadOrdered {
+	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 	{method}  {abstract} +unload () : java.util.Optional
 }
 
 
-interface org.tda553group22.lab1.main.CanLoadUnordered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
-	{method}  {abstract} +unload ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
+interface org.tda553group22.lab3.main.CanLoadUnordered {
+	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method}  {abstract} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
-abstract class org.tda553group22.lab1.main.Car {
+abstract class org.tda553group22.lab3.main.Car {
 	{field} #nrDoors : int
 }
 
 
-class org.tda553group22.lab1.main.CarController {
+class org.tda553group22.lab3.main.CarController {
 	{field} ~cars : java.util.ArrayList
 	{field} -delay : int
 	{field} -timer : javax.swing.Timer
@@ -57,27 +57,27 @@ class org.tda553group22.lab1.main.CarController {
 }
 
 
-class org.tda553group22.lab1.main.CarController$TimerListener {
+class org.tda553group22.lab3.main.CarController$TimerListener {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarFerry {
+class org.tda553group22.lab3.main.CarFerry {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} -carLanes : int
 	{field} -laneCanLoadHelpers : java.util.ArrayList
-	{method} +load ( paramCar1 : org.tda553group22.lab1.main.Car , paramint2 : int ) : void
+	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car , paramint2 : int ) : void
 	{method} #speedFactor () : double
 	{method} +unload ( paramint1 : int ) : java.util.Optional
 }
 
 
-class org.tda553group22.lab1.main.CarTransporter {
+class org.tda553group22.lab3.main.CarTransporter {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} -maxLoadDistance : double
 	{field} -rampDown : boolean
-	{method} +load ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
-	{method} +load ( paramPersonCar1 : org.tda553group22.lab1.main.PersonCar ) : void
+	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method} +load ( paramPersonCar1 : org.tda553group22.lab3.main.PersonCar ) : void
 	{method} +lowerRamp () : void
 	{method} +move () : void
 	{method} +raiseRamp () : void
@@ -86,7 +86,7 @@ class org.tda553group22.lab1.main.CarTransporter {
 }
 
 
-class org.tda553group22.lab1.main.CarView {
+class org.tda553group22.lab3.main.CarView {
 	{field} {static} -X : int
 	{field} {static} -Y : int
 	{field} ~brakeButton : javax.swing.JButton
@@ -108,52 +108,52 @@ class org.tda553group22.lab1.main.CarView {
 }
 
 
-class org.tda553group22.lab1.main.CarView$1 {
+class org.tda553group22.lab3.main.CarView$1 {
 	{method} +stateChanged ( paramChangeEvent1 : javax.swing.event.ChangeEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$2 {
+class org.tda553group22.lab3.main.CarView$2 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$3 {
+class org.tda553group22.lab3.main.CarView$3 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$4 {
+class org.tda553group22.lab3.main.CarView$4 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$5 {
+class org.tda553group22.lab3.main.CarView$5 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$6 {
+class org.tda553group22.lab3.main.CarView$6 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$7 {
+class org.tda553group22.lab3.main.CarView$7 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$8 {
+class org.tda553group22.lab3.main.CarView$8 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.CarView$9 {
+class org.tda553group22.lab3.main.CarView$9 {
 	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
-class org.tda553group22.lab1.main.DrawPanel {
+class org.tda553group22.lab3.main.DrawPanel {
 	{field} ~saabImage : java.awt.image.BufferedImage
 	{field} ~saabPoint : java.awt.Point
 	{field} ~scaniaImage : java.awt.image.BufferedImage
@@ -162,12 +162,12 @@ class org.tda553group22.lab1.main.DrawPanel {
 	{field} ~volvoPoint : java.awt.Point
 	{field} ~volvoWorkshopImage : java.awt.image.BufferedImage
 	{field} ~volvoWorkshopPoint : java.awt.Point
-	{method} ~moveit ( paramHasPosition1 : org.tda553group22.lab1.main.HasPosition ) : void
+	{method} ~moveit ( paramHasPosition1 : org.tda553group22.lab3.main.HasPosition ) : void
 	{method} #paintComponent ( paramGraphics1 : java.awt.Graphics ) : void
 }
 
 
-abstract class org.tda553group22.lab1.main.EngineVehicle {
+abstract class org.tda553group22.lab3.main.EngineVehicle {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #enginePower : double
 	{method} +brake ( paramdouble1 : double ) : void
@@ -180,44 +180,44 @@ abstract class org.tda553group22.lab1.main.EngineVehicle {
 }
 
 
-interface org.tda553group22.lab1.main.HasPosition {
-	{method}  {abstract} +getPos () : org.tda553group22.lab1.main.Vector2
+interface org.tda553group22.lab3.main.HasPosition {
+	{method}  {abstract} +getPos () : org.tda553group22.lab3.main.Vector2
 }
 
 
-interface org.tda553group22.lab1.main.Loadable {
+interface org.tda553group22.lab3.main.Loadable {
 }
 
 
-interface org.tda553group22.lab1.main.Movable {
+interface org.tda553group22.lab3.main.Movable {
 	{method}  {abstract} +move () : void
 	{method}  {abstract} +turnLeft () : void
 	{method}  {abstract} +turnRight () : void
 }
 
 
-abstract class org.tda553group22.lab1.main.PersonCar {
+abstract class org.tda553group22.lab3.main.PersonCar {
 }
 
 
-interface org.tda553group22.lab1.main.Positionable {
-	{method}  {abstract} +setPos ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : void
+interface org.tda553group22.lab3.main.Positionable {
+	{method}  {abstract} +setPos ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : void
 }
 
 
-class org.tda553group22.lab1.main.Saab95 {
+class org.tda553group22.lab3.main.Saab95 {
 	{field} -turboOn : boolean
 	{method} +setTurboOff () : void
 	{method} #speedFactor () : double
 }
 
 
-class org.tda553group22.lab1.main.Scania {
+class org.tda553group22.lab3.main.Scania {
 	{method} #speedFactor () : double
 }
 
 
-abstract class org.tda553group22.lab1.main.Truck {
+abstract class org.tda553group22.lab3.main.Truck {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #bedAngle : double
 	{field} #maxBedAngle : double
@@ -226,26 +226,27 @@ abstract class org.tda553group22.lab1.main.Truck {
 }
 
 
-class org.tda553group22.lab1.main.Vector2 {
+class org.tda553group22.lab3.main.Vector2 {
 	{field} +x : double
 	{field} +y : double
-	{method} +add ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : org.tda553group22.lab1.main.Vector2
-	{method} +clamp ( paramVector21 : org.tda553group22.lab1.main.Vector2 , paramVector22 : org.tda553group22.lab1.main.Vector2 ) : org.tda553group22.lab1.main.Vector2
-	{method} +distance ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : double
-	{method} +div ( paramdouble1 : double ) : org.tda553group22.lab1.main.Vector2
-	{method} +div ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : org.tda553group22.lab1.main.Vector2
-	{method} +inv () : org.tda553group22.lab1.main.Vector2
+	{method} +add ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : org.tda553group22.lab3.main.Vector2
+	{method} +clamp ( paramVector21 : org.tda553group22.lab3.main.Vector2 , paramVector22 : org.tda553group22.lab3.main.Vector2 ) : org.tda553group22.lab3.main.Vector2
+	{method} +distance ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : double
+	{method} +div ( paramdouble1 : double ) : org.tda553group22.lab3.main.Vector2
+	{method} +div ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : org.tda553group22.lab3.main.Vector2
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +inv () : org.tda553group22.lab3.main.Vector2
 	{method} +magnitude () : double
 	{method} +magnitudeSquared () : double
-	{method} +mul ( paramdouble1 : double ) : org.tda553group22.lab1.main.Vector2
-	{method} +mul ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : org.tda553group22.lab1.main.Vector2
-	{method} +normalized () : org.tda553group22.lab1.main.Vector2
-	{method} +sub ( paramVector21 : org.tda553group22.lab1.main.Vector2 ) : org.tda553group22.lab1.main.Vector2
-	{method}  {static} +zero () : org.tda553group22.lab1.main.Vector2
+	{method} +mul ( paramdouble1 : double ) : org.tda553group22.lab3.main.Vector2
+	{method} +mul ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : org.tda553group22.lab3.main.Vector2
+	{method} +normalized () : org.tda553group22.lab3.main.Vector2
+	{method} +sub ( paramVector21 : org.tda553group22.lab3.main.Vector2 ) : org.tda553group22.lab3.main.Vector2
+	{method}  {static} +zero () : org.tda553group22.lab3.main.Vector2
 }
 
 
-abstract class org.tda553group22.lab1.main.Vehicle {
+abstract class org.tda553group22.lab3.main.Vehicle {
 	{field} -angle : double
 	{field} +color : java.awt.Color
 	{field} #currentSpeed : double
@@ -257,67 +258,67 @@ abstract class org.tda553group22.lab1.main.Vehicle {
 }
 
 
-class org.tda553group22.lab1.main.Volvo240 {
+class org.tda553group22.lab3.main.Volvo240 {
 	{field} {static} -trimFactor : double
 	{method} #speedFactor () : double
 }
 
 
-class org.tda553group22.lab1.main.Workshop {
-	{method} +load ( paramCar1 : org.tda553group22.lab1.main.Car ) : void
-	{method} +load ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
-	{method} +unload ( paramCar1 : org.tda553group22.lab1.main.Car ) : void
-	{method} +unload ( paramLoadable1 : org.tda553group22.lab1.main.Loadable ) : void
+class org.tda553group22.lab3.main.Workshop {
+	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car ) : void
+	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method} +unload ( paramCar1 : org.tda553group22.lab3.main.Car ) : void
+	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
-class org.tda553group22.lab1.main.WorkshopWithPosition {
+class org.tda553group22.lab3.main.WorkshopWithPosition {
 }
 
 
 
 
-org.tda553group22.lab1.main.CanLoadHelperFirstInFirstOut --|>  org.tda553group22.lab1.main.CanLoadHelper
-org.tda553group22.lab1.main.CanLoadHelperFirstInFirstOut ..|>  org.tda553group22.lab1.main.CanLoadOrdered
-org.tda553group22.lab1.main.CanLoadHelperFirstInLastOut --|>  org.tda553group22.lab1.main.CanLoadHelper
-org.tda553group22.lab1.main.CanLoadHelperFirstInLastOut ..|>  org.tda553group22.lab1.main.CanLoadOrdered
-org.tda553group22.lab1.main.CanLoadHelperUnordered --|>  org.tda553group22.lab1.main.CanLoadHelper
-org.tda553group22.lab1.main.CanLoadHelperUnordered ..|>  org.tda553group22.lab1.main.CanLoadUnordered
-org.tda553group22.lab1.main.Car --|>  org.tda553group22.lab1.main.EngineVehicle
-org.tda553group22.lab1.main.CarController -->  org.tda553group22.lab1.main.CarView : frame
-org.tda553group22.lab1.main.CarController -->  org.tda553group22.lab1.main.WorkshopWithPosition : volvoWorkshop
-org.tda553group22.lab1.main.CarController$TimerListener -->  org.tda553group22.lab1.main.CarController : this$0
-org.tda553group22.lab1.main.CarFerry --|>  org.tda553group22.lab1.main.EngineVehicle
-org.tda553group22.lab1.main.CarTransporter -->  org.tda553group22.lab1.main.CanLoadHelperFirstInLastOut : canLoadHelper
-org.tda553group22.lab1.main.CarTransporter --|>  org.tda553group22.lab1.main.Car
-org.tda553group22.lab1.main.CarTransporter ..|>  org.tda553group22.lab1.main.CanLoadOrdered
-org.tda553group22.lab1.main.CarView -->  org.tda553group22.lab1.main.CarController : carC
-org.tda553group22.lab1.main.CarView -->  org.tda553group22.lab1.main.DrawPanel : drawPanel
-org.tda553group22.lab1.main.CarView$1 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$2 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$3 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$4 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$5 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$6 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$7 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$8 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.CarView$9 -->  org.tda553group22.lab1.main.CarView : this$0
-org.tda553group22.lab1.main.EngineVehicle --|>  org.tda553group22.lab1.main.Vehicle
-org.tda553group22.lab1.main.Loadable ..|>  org.tda553group22.lab1.main.HasPosition
-org.tda553group22.lab1.main.Loadable ..|>  org.tda553group22.lab1.main.Positionable
-org.tda553group22.lab1.main.PersonCar --|>  org.tda553group22.lab1.main.Car
-org.tda553group22.lab1.main.Saab95 --|>  org.tda553group22.lab1.main.PersonCar
-org.tda553group22.lab1.main.Scania --|>  org.tda553group22.lab1.main.Truck
-org.tda553group22.lab1.main.Truck --|>  org.tda553group22.lab1.main.Car
-org.tda553group22.lab1.main.Vehicle -->  org.tda553group22.lab1.main.Vector2 : pos
-org.tda553group22.lab1.main.Vehicle ..|>  org.tda553group22.lab1.main.Loadable
-org.tda553group22.lab1.main.Vehicle ..|>  org.tda553group22.lab1.main.Movable
-org.tda553group22.lab1.main.Volvo240 --|>  org.tda553group22.lab1.main.PersonCar
-org.tda553group22.lab1.main.Workshop -->  org.tda553group22.lab1.main.CanLoadHelperUnordered : canLoadHelper
-org.tda553group22.lab1.main.Workshop ..|>  org.tda553group22.lab1.main.CanLoadUnordered
-org.tda553group22.lab1.main.WorkshopWithPosition -->  org.tda553group22.lab1.main.Vector2 : pos
-org.tda553group22.lab1.main.WorkshopWithPosition --|>  org.tda553group22.lab1.main.Workshop
-org.tda553group22.lab1.main.WorkshopWithPosition ..|>  org.tda553group22.lab1.main.HasPosition
+org.tda553group22.lab3.main.CanLoadHelperFirstInFirstOut --|>  org.tda553group22.lab3.main.CanLoadHelper
+org.tda553group22.lab3.main.CanLoadHelperFirstInFirstOut ..|>  org.tda553group22.lab3.main.CanLoadOrdered
+org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut --|>  org.tda553group22.lab3.main.CanLoadHelper
+org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut ..|>  org.tda553group22.lab3.main.CanLoadOrdered
+org.tda553group22.lab3.main.CanLoadHelperUnordered --|>  org.tda553group22.lab3.main.CanLoadHelper
+org.tda553group22.lab3.main.CanLoadHelperUnordered ..|>  org.tda553group22.lab3.main.CanLoadUnordered
+org.tda553group22.lab3.main.Car --|>  org.tda553group22.lab3.main.EngineVehicle
+org.tda553group22.lab3.main.CarController -->  org.tda553group22.lab3.main.CarView : frame
+org.tda553group22.lab3.main.CarController -->  org.tda553group22.lab3.main.WorkshopWithPosition : volvoWorkshop
+org.tda553group22.lab3.main.CarController$TimerListener -->  org.tda553group22.lab3.main.CarController : this$0
+org.tda553group22.lab3.main.CarFerry --|>  org.tda553group22.lab3.main.EngineVehicle
+org.tda553group22.lab3.main.CarTransporter -->  org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut : canLoadHelper
+org.tda553group22.lab3.main.CarTransporter --|>  org.tda553group22.lab3.main.Car
+org.tda553group22.lab3.main.CarTransporter ..|>  org.tda553group22.lab3.main.CanLoadOrdered
+org.tda553group22.lab3.main.CarView -->  org.tda553group22.lab3.main.CarController : carC
+org.tda553group22.lab3.main.CarView -->  org.tda553group22.lab3.main.DrawPanel : drawPanel
+org.tda553group22.lab3.main.CarView$1 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$2 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$3 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$4 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$5 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$6 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$7 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$8 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.CarView$9 -->  org.tda553group22.lab3.main.CarView : this$0
+org.tda553group22.lab3.main.EngineVehicle --|>  org.tda553group22.lab3.main.Vehicle
+org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.HasPosition
+org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.Positionable
+org.tda553group22.lab3.main.PersonCar --|>  org.tda553group22.lab3.main.Car
+org.tda553group22.lab3.main.Saab95 --|>  org.tda553group22.lab3.main.PersonCar
+org.tda553group22.lab3.main.Scania --|>  org.tda553group22.lab3.main.Truck
+org.tda553group22.lab3.main.Truck --|>  org.tda553group22.lab3.main.Car
+org.tda553group22.lab3.main.Vehicle -->  org.tda553group22.lab3.main.Vector2 : pos
+org.tda553group22.lab3.main.Vehicle ..|>  org.tda553group22.lab3.main.Loadable
+org.tda553group22.lab3.main.Vehicle ..|>  org.tda553group22.lab3.main.Movable
+org.tda553group22.lab3.main.Volvo240 --|>  org.tda553group22.lab3.main.PersonCar
+org.tda553group22.lab3.main.Workshop -->  org.tda553group22.lab3.main.CanLoadHelperUnordered : canLoadHelper
+org.tda553group22.lab3.main.Workshop ..|>  org.tda553group22.lab3.main.CanLoadUnordered
+org.tda553group22.lab3.main.WorkshopWithPosition -->  org.tda553group22.lab3.main.Vector2 : pos
+org.tda553group22.lab3.main.WorkshopWithPosition --|>  org.tda553group22.lab3.main.Workshop
+org.tda553group22.lab3.main.WorkshopWithPosition ..|>  org.tda553group22.lab3.main.HasPosition
 
 
 @enduml
