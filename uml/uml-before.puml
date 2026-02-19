@@ -180,11 +180,6 @@ abstract class org.tda553group22.lab1.main.EngineVehicle {
 }
 
 
-class org.tda553group22.lab1.main.GenerateUml {
-	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
-}
-
-
 interface org.tda553group22.lab1.main.HasPosition {
 	{method}  {abstract} +getPos () : org.tda553group22.lab1.main.Vector2
 }

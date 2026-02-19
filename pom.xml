@@ -52,7 +52,7 @@
                     <goal>generate</goal>
                 </goals>
                 <configuration>
-                    <outputFilename>testdiagram1.txt</outputFilename>
+                    <outputFilename>generated.puml</outputFilename>
                     <scanPackages>
                         <scanPackage>
                             org.tda553group22.lab1.main
