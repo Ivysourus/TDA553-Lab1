@@ -10,14 +10,22 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.tda553group22.lab3.main.Car;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -27,33 +35,31 @@ import java.awt.event.ActionListener;
  * fires of in
  * each of it's components.
  **/
-public class CarView extends JFrame {
+class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
 
-    CarController carC;
+    private final Map<Integer, DrawPanel> drawPanels = new HashMap<>(); //new DrawPanel(X, Y - 240);
 
-    DrawPanel drawPanel = new DrawPanel(X, Y - 240);
+    private final JPanel controlPanel = new JPanel();
 
-    JPanel controlPanel = new JPanel();
+    private JSpinner gasSpinner = new JSpinner();
+    private int gasAmount = 0;
 
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
+    private final JPanel gasPanel = new JPanel();
+    private final JLabel gasLabel = new JLabel("Amount of gas");
 
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Raise Lift Bed");
-    JButton lowerBedButton = new JButton("Scania Lower Lift Bed");
+    private final JButton gasButton = new JButton("Gas");
+    private final JButton brakeButton = new JButton("Brake");
+    private final JButton turboOnButton = new JButton("Saab Turbo on");
+    private final JButton turboOffButton = new JButton("Saab Turbo off");
+    private final JButton liftBedButton = new JButton("Scania Raise Lift Bed");
+    private final JButton lowerBedButton = new JButton("Scania Lower Lift Bed");
 
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    private final JButton startButton = new JButton("Start all cars");
+    private final JButton stopButton = new JButton("Stop all cars");
 
-    public CarView(String framename, CarController cc) {
-        this.carC = cc;
+    public CarView(String framename) {
         initComponents(framename);
     }
 
@@ -65,12 +71,24 @@ public class CarView extends JFrame {
         return Y;
     }
 
+    public void addPanel(int id, Point pos, BufferedImage image) {
+        DrawPanel panel = new DrawPanel(new Dimension(X, Y - 240), pos, image);
+        this.add(panel);
+        drawPanels.put(id, panel);
+    }
+
+    public void moveById(int id, Point pos) {
+        drawPanels.get(id).setPos(pos);
+    }
+
     private void initComponents(String title) {
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(drawPanel);
+        for (DrawPanel panel : drawPanels.values()) {
+            this.add(panel);
+        }
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, // initial value
                 0, // min
@@ -114,67 +132,64 @@ public class CarView extends JFrame {
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                CarController.instance.gas(gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                CarController.instance.brake(gasAmount);
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startEngine();
+                CarController.instance.startEngine();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopEngine();
+                CarController.instance.stopEngine();
             }
         });
 
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOn();
+                CarController.instance.turboOn();
             }
         });
 
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOff();
+                CarController.instance.turboOff();
             }
         });
 
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.raiseBed();
+                CarController.instance.raiseBed();
             }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.lowerBed();
+                CarController.instance.lowerBed();
             }
         });
 
-        // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
-        // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame
+        // Center the frame on the screen
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        // Make the frame visible
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -6,9 +6,11 @@ import org.tda553group22.lab3.main.Saab95;
 import org.tda553group22.lab3.main.WorkshopWithPosition;
 import org.tda553group22.lab3.main.Car;
 import org.tda553group22.lab3.math.Vector2;
+import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,36 +21,49 @@ import javax.swing.Timer;
 * Its responsibilities are to listen to the View and responds in an appropriate manner by
 * modifying the model state and the updating the view.
  */
-public class CarController {
+final class CarController {
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    private final Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    private CarView frame;
     List<Car> cars = new ArrayList<>();
     WorkshopWithPosition<Volvo240> volvoWorkshop;
 
-    public static void main(String[] args) {
-        CarController cc = new CarController();
+    public static CarController instance = null;
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Scania());
-        cc.cars.add(new Saab95());
-        cc.volvoWorkshop = new WorkshopWithPosition<>(1, new Vector2(300, 0));
+    public CarController(List<Car> cars, WorkshopWithPosition<Volvo240> volvoWorkshop) {
+        if (instance != null) {
+            throw new RuntimeException("An instance of CarController already exists");
+        }
+        instance = this;
 
-        for (int i = 0; i < cc.cars.size(); i++) {
-            cc.cars.get(i).setPos(new Vector2(0, i * 100));
+        this.cars = cars;
+        this.volvoWorkshop = volvoWorkshop;
+
+        for (int i = 0; i < cars.size(); i++) {
+            cars.get(i).setPos(new Vector2(0, i * 100));
         }
 
-        cc.frame = new CarView("CarSim 1.0", cc);
+        frame = new CarView("CarSim 1.0");
 
-        // Only need to move the workshop once since it cannot move
-        cc.frame.drawPanel.moveit(cc.volvoWorkshop);
+        for (Car c : cars) {
+            BufferedImage image = ResourcesHandler.volvoImage; // defualt
+            if (c instanceof Volvo240) {
+                image = ResourcesHandler.volvoImage;
+            } else if (c instanceof Saab95) {
+                image = ResourcesHandler.saabImage;
+            } else if (c instanceof Scania) {
+                image = ResourcesHandler.scaniaImage;
+            }
+            frame.addPanel(c.hashCode(), Vector2AwtExtensions.toPoint(c.getPos()), image);
+        }
 
-        cc.timer.start();
+        frame.addPanel(volvoWorkshop.hashCode(), Vector2AwtExtensions.toPoint(volvoWorkshop.getPos()), ResourcesHandler.volvoWorkshopImage);
+
+        timer.start();
     }
 
     /*
@@ -57,10 +72,10 @@ public class CarController {
      */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
+            for (int i = 0; i < cars.size(); i++) {
+                Car car = cars.get(i);
                 car.move();
-                frame.drawPanel.moveit(car);
-                frame.drawPanel.repaint();
+                frame.moveById(car.hashCode(), Vector2AwtExtensions.toPoint(car.getPos()));
 
                 Vector2 pos = car.getPos();
                 Vector2 min = Vector2.zero();
@@ -128,7 +143,7 @@ public class CarController {
     void raiseBed() {
         for (Car car : cars) {
             if (car instanceof Scania scania) {
-                scania.raiseBed(scania.maxBedAngle);
+                scania.raiseBed(Math.PI / 2);
             }
         }
     }
@@ -136,7 +151,7 @@ public class CarController {
     void lowerBed() {
         for (Car car : cars) {
             if (car instanceof Scania scania) {
-                scania.lowerBed(scania.maxBedAngle);
+                scania.lowerBed(Math.PI / 2);
             }
         }
     }
