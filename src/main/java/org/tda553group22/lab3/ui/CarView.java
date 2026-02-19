@@ -22,9 +22,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,6 +41,8 @@ class CarView extends JFrame {
 
     private final JPanel controlPanel = new JPanel();
 
+    private MainPanel mainPanel;
+
     private JSpinner gasSpinner = new JSpinner();
     private int gasAmount = 0;
 
@@ -60,7 +60,8 @@ class CarView extends JFrame {
     private final JButton stopButton = new JButton("Stop all cars");
 
     public CarView(String framename) {
-        initComponents(framename);
+        mainPanel = new MainPanel(new Dimension(X, Y - 240));
+        this.add(mainPanel);
     }
 
     public int getMaxX() {
@@ -72,8 +73,7 @@ class CarView extends JFrame {
     }
 
     public void addPanel(int id, Point pos, BufferedImage image) {
-        DrawPanel panel = new DrawPanel(new Dimension(X, Y - 240), pos, image);
-        this.add(panel);
+        DrawPanel panel = new DrawPanel(new Dimension(image.getWidth(), image.getHeight()), pos, image);
         drawPanels.put(id, panel);
     }
 
@@ -81,13 +81,13 @@ class CarView extends JFrame {
         drawPanels.get(id).setPos(pos);
     }
 
-    private void initComponents(String title) {
+    public void initComponents(String title) {
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         for (DrawPanel panel : drawPanels.values()) {
-            this.add(panel);
+            mainPanel.add(panel);
         }
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, // initial value

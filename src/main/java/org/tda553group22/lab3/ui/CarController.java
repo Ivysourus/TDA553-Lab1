@@ -61,7 +61,10 @@ final class CarController {
             frame.addPanel(c.hashCode(), Vector2AwtExtensions.toPoint(c.getPos()), image);
         }
 
-        frame.addPanel(volvoWorkshop.hashCode(), Vector2AwtExtensions.toPoint(volvoWorkshop.getPos()), ResourcesHandler.volvoWorkshopImage);
+        frame.addPanel(volvoWorkshop.hashCode(), Vector2AwtExtensions.toPoint(volvoWorkshop.getPos()),
+                ResourcesHandler.volvoWorkshopImage);
+
+        frame.initComponents("CarSim 1.0");
 
         timer.start();
     }
@@ -75,7 +78,6 @@ final class CarController {
             for (int i = 0; i < cars.size(); i++) {
                 Car car = cars.get(i);
                 car.move();
-                frame.moveById(car.hashCode(), Vector2AwtExtensions.toPoint(car.getPos()));
 
                 Vector2 pos = car.getPos();
                 Vector2 min = Vector2.zero();
@@ -94,6 +96,8 @@ final class CarController {
                         car.getPos().distance(volvoWorkshop.getPos()) < 30) {
                     volvoWorkshop.load(volvo);
                 }
+
+                frame.moveById(car.hashCode(), Vector2AwtExtensions.toPoint(car.getPos()));
             }
         }
     }

@@ -57,6 +57,15 @@
                         <scanPackage>
                             org.tda553group22.lab3.main
                         </scanPackage>
+                        <scanPackage>
+                            org.tda553group22.lab3.ui
+                        </scanPackage>
+                        <scanPackage>
+                            org.tda553group22.lab3.math
+                        </scanPackage>
+                        <scanPackage>
+                            org.tda553group22.lab3.mathawtextensions
+                        </scanPackage>
                     </scanPackages>
                 </configuration>
             </plugin>
