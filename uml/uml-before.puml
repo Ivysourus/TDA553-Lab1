@@ -45,10 +45,10 @@ class org.tda553group22.lab3.main.CarController {
 	{field} ~cars : java.util.ArrayList
 	{field} -delay : int
 	{field} -timer : javax.swing.Timer
+    {method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
 	{method} ~brake ( paramint1 : int ) : void
 	{method} ~gas ( paramint1 : int ) : void
 	{method} ~lowerBed () : void
-	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
 	{method} ~raiseBed () : void
 	{method} ~startEngine () : void
 	{method} ~stopEngine () : void
@@ -57,18 +57,14 @@ class org.tda553group22.lab3.main.CarController {
 }
 
 
-class org.tda553group22.lab3.main.CarController$TimerListener {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
 
 class org.tda553group22.lab3.main.CarFerry {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} -carLanes : int
 	{field} -laneCanLoadHelpers : java.util.ArrayList
 	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car , paramint2 : int ) : void
-	{method} #speedFactor () : double
 	{method} +unload ( paramint1 : int ) : java.util.Optional
+	{method} #speedFactor () : double
 }
 
 
@@ -78,11 +74,11 @@ class org.tda553group22.lab3.main.CarTransporter {
 	{field} -rampDown : boolean
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
 	{method} +load ( paramPersonCar1 : org.tda553group22.lab3.main.PersonCar ) : void
+	{method} +unload () : java.util.Optional
+	{method} +raiseRamp () : void
 	{method} +lowerRamp () : void
 	{method} +move () : void
-	{method} +raiseRamp () : void
 	{method} #speedFactor () : double
-	{method} +unload () : java.util.Optional
 }
 
 
@@ -102,56 +98,8 @@ class org.tda553group22.lab3.main.CarView {
 	{field} ~stopButton : javax.swing.JButton
 	{field} ~turboOffButton : javax.swing.JButton
 	{field} ~turboOnButton : javax.swing.JButton
-	{method} +getMaxX () : int
-	{method} +getMaxY () : int
 	{method} -initComponents ( paramString1 : String ) : void
 }
-
-
-class org.tda553group22.lab3.main.CarView$1 {
-	{method} +stateChanged ( paramChangeEvent1 : javax.swing.event.ChangeEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$2 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$3 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$4 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$5 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$6 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$7 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$8 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.main.CarView$9 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
 
 class org.tda553group22.lab3.main.DrawPanel {
 	{field} ~saabImage : java.awt.image.BufferedImage
@@ -170,13 +118,13 @@ class org.tda553group22.lab3.main.DrawPanel {
 abstract class org.tda553group22.lab3.main.EngineVehicle {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #enginePower : double
-	{method} +brake ( paramdouble1 : double ) : void
-	{method} -decrementSpeed ( paramdouble1 : double ) : void
-	{method} +gas ( paramdouble1 : double ) : void
-	{method} -incrementSpeed ( paramdouble1 : double ) : void
-	{method}  {abstract} #speedFactor () : double
 	{method} +startEngine () : void
-	{method} +stopEngine () : void
+    {method} +stopEngine () : void
+	{method} +gas ( paramdouble1 : double ) : void
+	{method} +brake ( paramdouble1 : double ) : void
+	   {method} -incrementSpeed ( paramdouble1 : double ) : void
+	{method} -decrementSpeed ( paramdouble1 : double ) : void
+	{method}  {abstract} #speedFactor () : double
 }
 
 
@@ -251,8 +199,8 @@ abstract class org.tda553group22.lab3.main.Vehicle {
 	{field} +color : java.awt.Color
 	{field} #currentSpeed : double
 	{field} #modelName : String
-	{method} +move () : void
 	{method} -turn ( paramdouble1 : double ) : void
+	{method} +move () : void
 	{method} +turnLeft () : void
 	{method} +turnRight () : void
 }
@@ -287,22 +235,12 @@ org.tda553group22.lab3.main.CanLoadHelperUnordered ..|>  org.tda553group22.lab3.
 org.tda553group22.lab3.main.Car --|>  org.tda553group22.lab3.main.EngineVehicle
 org.tda553group22.lab3.main.CarController -->  org.tda553group22.lab3.main.CarView : frame
 org.tda553group22.lab3.main.CarController -->  org.tda553group22.lab3.main.WorkshopWithPosition : volvoWorkshop
-org.tda553group22.lab3.main.CarController$TimerListener -->  org.tda553group22.lab3.main.CarController : this$0
 org.tda553group22.lab3.main.CarFerry --|>  org.tda553group22.lab3.main.EngineVehicle
 org.tda553group22.lab3.main.CarTransporter -->  org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut : canLoadHelper
 org.tda553group22.lab3.main.CarTransporter --|>  org.tda553group22.lab3.main.Car
 org.tda553group22.lab3.main.CarTransporter ..|>  org.tda553group22.lab3.main.CanLoadOrdered
 org.tda553group22.lab3.main.CarView -->  org.tda553group22.lab3.main.CarController : carC
 org.tda553group22.lab3.main.CarView -->  org.tda553group22.lab3.main.DrawPanel : drawPanel
-org.tda553group22.lab3.main.CarView$1 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$2 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$3 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$4 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$5 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$6 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$7 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$8 -->  org.tda553group22.lab3.main.CarView : this$0
-org.tda553group22.lab3.main.CarView$9 -->  org.tda553group22.lab3.main.CarView : this$0
 org.tda553group22.lab3.main.EngineVehicle --|>  org.tda553group22.lab3.main.Vehicle
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.HasPosition
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.Positionable

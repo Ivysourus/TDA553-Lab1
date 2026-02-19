@@ -57,14 +57,6 @@ public class CarView extends JFrame {
         initComponents(framename);
     }
 
-    public int getMaxX() {
-        return X;
-    }
-
-    public int getMaxY() {
-        return Y;
-    }
-
     private void initComponents(String title) {
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
