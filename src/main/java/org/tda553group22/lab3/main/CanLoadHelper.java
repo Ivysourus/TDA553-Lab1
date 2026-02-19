@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class CanLoadHelper<T extends Loadable> {
-    protected final ListT> cargo = new ArrayList<>();
+    protected final List<T> cargo = new ArrayList<>();
     protected int capacity;
 
     public void load(T load) {
