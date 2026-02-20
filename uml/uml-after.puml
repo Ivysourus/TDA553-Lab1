@@ -44,8 +44,8 @@ abstract class org.tda553group22.lab3.main.Car {
 class org.tda553group22.lab3.main.CarFerry {
 	{field} -carLanes : int
 	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car , paramint2 : int ) : void
-	{method} #speedFactor () : double
 	{method} +unload ( paramint1 : int ) : java.util.Optional
+	{method} #speedFactor () : double
 }
 
 
@@ -58,21 +58,21 @@ class org.tda553group22.lab3.main.CarTransporter {
 	{method} +lowerRamp () : void
 	{method} +move () : void
 	{method} +raiseRamp () : void
-	{method} #speedFactor () : double
 	{method} +unload () : java.util.Optional
+	{method} #speedFactor () : double
 }
 
 
 abstract class org.tda553group22.lab3.main.EngineVehicle {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #enginePower : double
-	{method} +brake ( paramdouble1 : double ) : void
-	{method} -decrementSpeed ( paramdouble1 : double ) : void
-	{method} +gas ( paramdouble1 : double ) : void
-	{method} -incrementSpeed ( paramdouble1 : double ) : void
-	{method}  {abstract} #speedFactor () : double
 	{method} +startEngine () : void
-	{method} +stopEngine () : void
+    {method} +stopEngine () : void
+	{method} +gas ( paramdouble1 : double ) : void
+	{method} +brake ( paramdouble1 : double ) : void
+	{method} -incrementSpeed ( paramdouble1 : double ) : void
+	{method} -decrementSpeed ( paramdouble1 : double ) : void
+	{method}  {abstract} #speedFactor () : double
 }
 
 
@@ -128,9 +128,9 @@ abstract class org.tda553group22.lab3.main.Vehicle {
 	{field} #currentSpeed : double
 	{field} #modelName : String
 	{method} +move () : void
-	{method} -turn ( paramdouble1 : double ) : void
 	{method} +turnLeft () : void
 	{method} +turnRight () : void
+	{method} -turn ( paramdouble1 : double ) : void
 }
 
 
@@ -221,51 +221,6 @@ class org.tda553group22.lab3.ui.CarView {
 }
 
 
-class org.tda553group22.lab3.ui.CarView$1 {
-	{method} +stateChanged ( paramChangeEvent1 : javax.swing.event.ChangeEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$2 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$3 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$4 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$5 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$6 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$7 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$8 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
-class org.tda553group22.lab3.ui.CarView$9 {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
 class org.tda553group22.lab3.ui.DrawPanel {
 	{field} -image : java.awt.image.BufferedImage
 	{field} -pos : java.awt.Point
@@ -332,15 +287,6 @@ org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarContro
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView : frame
 org.tda553group22.lab3.ui.CarController$TimerListener -->  org.tda553group22.lab3.ui.CarController : this$0
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.MainPanel : mainPanel
-org.tda553group22.lab3.ui.CarView$1 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$2 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$3 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$4 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$5 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$6 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$7 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$8 -->  org.tda553group22.lab3.ui.CarView : this$0
-org.tda553group22.lab3.ui.CarView$9 -->  org.tda553group22.lab3.ui.CarView : this$0
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
 
 
