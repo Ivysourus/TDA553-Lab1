@@ -25,11 +25,11 @@ import java.util.Map;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller
- * in it's state.
+ * It initializes with being center on the screen and attaching its controller
+ * in its state.
  * It communicates with the Controller by calling methods of it when an action
  * fires of in
- * each of it's components.
+ * each of its components.
  **/
 class CarView extends JFrame {
     private static final int X = 800;
@@ -57,7 +57,7 @@ class CarView extends JFrame {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    public CarView(String framename) {
+    public CarView(String frameName) {
         mainPanel = new MainPanel(new Dimension(X, Y - 240));
         this.add(mainPanel);
     }
