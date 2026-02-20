@@ -4,7 +4,7 @@ abstract class org.tda553group22.lab3.main.CanLoadHelper {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #capacity : int
 	{field} #cargo : java.util.List
-	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method} +load ( load : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
@@ -20,19 +20,19 @@ class org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut {
 
 class org.tda553group22.lab3.main.CanLoadHelperUnordered {
 	{field} {static} ~$assertionsDisabled : boolean
-	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method} +unload ( load : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
 interface org.tda553group22.lab3.main.CanLoadOrdered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method}  {abstract} +load ( load : org.tda553group22.lab3.main.Loadable ) : void
 	{method}  {abstract} +unload () : java.util.Optional
 }
 
 
 interface org.tda553group22.lab3.main.CanLoadUnordered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
-	{method}  {abstract} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method}  {abstract} +load ( load : org.tda553group22.lab3.main.Loadable ) : void
+	{method}  {abstract} +unload ( load : org.tda553group22.lab3.main.Loadable ) : void
 }
 
 
@@ -43,8 +43,8 @@ abstract class org.tda553group22.lab3.main.Car {
 
 class org.tda553group22.lab3.main.CarFerry {
 	{field} -carLanes : int
-	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car , paramint2 : int ) : void
-	{method} +unload ( paramint1 : int ) : java.util.Optional
+	{method} +load ( load : org.tda553group22.lab3.main.Car , lane : int ) : void
+	{method} +unload ( lane : int ) : java.util.Optional
 	{method} #speedFactor () : double
 }
 
@@ -53,8 +53,7 @@ class org.tda553group22.lab3.main.CarTransporter {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} -maxLoadDistance : double
 	{field} -rampDown : boolean
-	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
-	{method} +load ( paramPersonCar1 : org.tda553group22.lab3.main.PersonCar ) : void
+	{method} +load ( load : org.tda553group22.lab3.main.PersonCar ) : void
 	{method} +lowerRamp () : void
 	{method} +move () : void
 	{method} +raiseRamp () : void
@@ -68,10 +67,10 @@ abstract class org.tda553group22.lab3.main.EngineVehicle {
 	{field} #enginePower : double
 	{method} +startEngine () : void
     {method} +stopEngine () : void
-	{method} +gas ( paramdouble1 : double ) : void
-	{method} +brake ( paramdouble1 : double ) : void
-	{method} -incrementSpeed ( paramdouble1 : double ) : void
-	{method} -decrementSpeed ( paramdouble1 : double ) : void
+	{method} +gas ( amount : double ) : void
+	{method} +brake ( amount : double ) : void
+	{method} -incrementSpeed ( amount : double ) : void
+	{method} -decrementSpeed ( amount : double ) : void
 	{method}  {abstract} #speedFactor () : double
 }
 
@@ -97,7 +96,7 @@ abstract class org.tda553group22.lab3.main.PersonCar {
 
 
 interface org.tda553group22.lab3.main.Positionable {
-	{method}  {abstract} +setPos ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : void
+	{method}  {abstract} +setPos ( pos : org.tda553group22.lab3.math.Vector2 ) : void
 }
 
 
@@ -117,8 +116,8 @@ abstract class org.tda553group22.lab3.main.Truck {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #bedAngle : double
 	{field} #maxBedAngle : double
-	{method} +lowerBed ( paramdouble1 : double ) : void
-	{method} +raiseBed ( paramdouble1 : double ) : void
+	{method} +lowerBed ( angle : double ) : void
+	{method} +raiseBed ( angle : double ) : void
 }
 
 
@@ -130,7 +129,7 @@ abstract class org.tda553group22.lab3.main.Vehicle {
 	{method} +move () : void
 	{method} +turnLeft () : void
 	{method} +turnRight () : void
-	{method} -turn ( paramdouble1 : double ) : void
+	{method} -turn ( angle : double ) : void
 }
 
 
@@ -141,10 +140,8 @@ class org.tda553group22.lab3.main.Volvo240 {
 
 
 class org.tda553group22.lab3.main.Workshop {
-	{method} +load ( paramCar1 : org.tda553group22.lab3.main.Car ) : void
-	{method} +load ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
-	{method} +unload ( paramCar1 : org.tda553group22.lab3.main.Car ) : void
-	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.main.Loadable ) : void
+	{method} +load ( load : org.tda553group22.lab3.main.Car ) : void
+	{method} +unload ( load : org.tda553group22.lab3.main.Car ) : void
 }
 
 
@@ -155,33 +152,33 @@ class org.tda553group22.lab3.main.WorkshopWithPosition {
 class org.tda553group22.lab3.math.Vector2 {
 	{field} +x : double
 	{field} +y : double
-	{method} +add ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
-	{method} +clamp ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramVector22 : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
-	{method} +distance ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : double
-	{method} +div ( paramdouble1 : double ) : org.tda553group22.lab3.math.Vector2
-	{method} +div ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
-	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +add ( other : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
+	{method} +clamp ( min : org.tda553group22.lab3.math.Vector2 , max : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
+	{method} +distance ( other : org.tda553group22.lab3.math.Vector2 ) : double
+	{method} +div ( scalar : double ) : org.tda553group22.lab3.math.Vector2
+	{method} +div ( other : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
+	{method} +equals ( o : Object ) : boolean
 	{method} +inv () : org.tda553group22.lab3.math.Vector2
 	{method} +magnitude () : double
 	{method} +magnitudeSquared () : double
-	{method} +mul ( paramdouble1 : double ) : org.tda553group22.lab3.math.Vector2
-	{method} +mul ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
+	{method} +mul ( scalar : double ) : org.tda553group22.lab3.math.Vector2
+	{method} +mul ( other : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
 	{method} +normalized () : org.tda553group22.lab3.math.Vector2
-	{method} +sub ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
+	{method} +sub ( other : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.math.Vector2
 	{method}  {static} +zero () : org.tda553group22.lab3.math.Vector2
 }
 
 
 class org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions {
-	{method}  {static} +toPoint ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : java.awt.Point
+	{method}  {static} +toPoint ( vector : org.tda553group22.lab3.math.Vector2 ) : java.awt.Point
 }
 
 
 class org.tda553group22.lab3.ui.CarController {
 	{field} -delay : int
 	{field} -timer : javax.swing.Timer
-	{method} ~brake ( paramint1 : int ) : void
-	{method} ~gas ( paramint1 : int ) : void
+	{method} ~brake ( amount : int ) : void
+	{method} ~gas ( amount : int ) : void
 	{method} ~lowerBed () : void
 	{method} ~raiseBed () : void
 	{method} ~startEngine () : void
@@ -191,56 +188,28 @@ class org.tda553group22.lab3.ui.CarController {
 }
 
 
-class org.tda553group22.lab3.ui.CarController$TimerListener {
-	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
-}
-
-
 class org.tda553group22.lab3.ui.CarView {
 	{field} {static} -X : int
 	{field} {static} -Y : int
-	{field} -brakeButton : javax.swing.JButton
+	{field} -drawPanels : ArrayList<org.tda553group22.lab3.ui.DrawPanel>
 	{field} -controlPanel : javax.swing.JPanel
-	{field} -drawPanels : java.util.Map
-	{field} -gasAmount : int
-	{field} -gasButton : javax.swing.JButton
-	{field} -gasLabel : javax.swing.JLabel
-	{field} -gasPanel : javax.swing.JPanel
-	{field} -gasSpinner : javax.swing.JSpinner
-	{field} -liftBedButton : javax.swing.JButton
-	{field} -lowerBedButton : javax.swing.JButton
-	{field} -startButton : javax.swing.JButton
-	{field} -stopButton : javax.swing.JButton
-	{field} -turboOffButton : javax.swing.JButton
-	{field} -turboOnButton : javax.swing.JButton
-	{method} +addPanel ( paramint1 : int , paramPoint2 : java.awt.Point , paramBufferedImage3 : java.awt.image.BufferedImage ) : void
+	{method} +addPanel ( id : int , pos : java.awt.Point , image : java.awt.image.BufferedImage ) : void
 	{method} +getMaxX () : int
 	{method} +getMaxY () : int
-	{method} +initComponents ( paramString1 : String ) : void
-	{method} +moveById ( paramint1 : int , paramPoint2 : java.awt.Point ) : void
+	{method} +initComponents ( filename : String ) : void
+	{method} +moveById ( id : int , pos : java.awt.Point ) : void
 }
 
 
 class org.tda553group22.lab3.ui.DrawPanel {
 	{field} -image : java.awt.image.BufferedImage
 	{field} -pos : java.awt.Point
-	{method} #paintComponent ( paramGraphics1 : java.awt.Graphics ) : void
-}
-
-
-class org.tda553group22.lab3.ui.IdentifiedList {
-	{field} -counter : int
-	{field} -keys : java.util.List
-	{field} -objects : java.util.List
+	{method} #paintComponent ( g : java.awt.Graphics ) : void
 }
 
 
 class org.tda553group22.lab3.ui.Main {
-	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
-}
-
-
-class org.tda553group22.lab3.ui.MainPanel {
+	{method}  {static} +main ( args;1 : [Ljava.lang.String; ) : void
 }
 
 
@@ -265,6 +234,7 @@ org.tda553group22.lab3.main.CarFerry --|>  org.tda553group22.lab3.main.EngineVeh
 org.tda553group22.lab3.main.CarTransporter -->  org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut : canLoadHelper
 org.tda553group22.lab3.main.CarTransporter --|>  org.tda553group22.lab3.main.Car
 org.tda553group22.lab3.main.CarTransporter ..|>  org.tda553group22.lab3.main.CanLoadOrdered
+org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar
 org.tda553group22.lab3.main.EngineVehicle --|>  org.tda553group22.lab3.main.Vehicle
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.HasPosition
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.Positionable
@@ -285,8 +255,7 @@ org.tda553group22.lab3.ui.CarController "1" o-- "0..*"  org.tda553group22.lab3.m
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.main.WorkshopWithPosition : volvoWorkshop
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarController : instance
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView : frame
-org.tda553group22.lab3.ui.CarController$TimerListener -->  org.tda553group22.lab3.ui.CarController : this$0
-org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.MainPanel : mainPanel
+org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : drawPanels
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
 
 
