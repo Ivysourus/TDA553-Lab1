@@ -149,7 +149,7 @@ class org.tda553group22.lab3.main.Workshop {
 
 
 class org.tda553group22.lab3.main.WorkshopWithPosition {
-    {field} -pos : org.tda553group22.lab3.ui.Vector2
+	{field} -pos : org.tda553group22.lab3.ui.Vector2
 	{method} +getPos () : org.tda553group22.lab3.ui.Vector2
 }
 
