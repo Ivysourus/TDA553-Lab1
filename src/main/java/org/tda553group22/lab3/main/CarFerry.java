@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class CarFerry extends EngineVehicle {
     private final int carLanes;
-    private final List<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
+    private final ArrayList<CanLoadHelperFirstInFirstOut<Car>> laneCanLoadHelpers;
 
     public CarFerry() {
         color = Color.black;
