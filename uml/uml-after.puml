@@ -234,7 +234,6 @@ org.tda553group22.lab3.main.CarFerry --|>  org.tda553group22.lab3.main.EngineVeh
 org.tda553group22.lab3.main.CarTransporter -->  org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut : canLoadHelper
 org.tda553group22.lab3.main.CarTransporter --|>  org.tda553group22.lab3.main.Car
 org.tda553group22.lab3.main.CarTransporter ..|>  org.tda553group22.lab3.main.CanLoadOrdered
-org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar
 org.tda553group22.lab3.main.EngineVehicle --|>  org.tda553group22.lab3.main.Vehicle
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.HasPosition
 org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.Positionable
@@ -257,6 +256,8 @@ org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarContro
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView : frame
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : drawPanels
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
+
+org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
 
 
 @enduml
