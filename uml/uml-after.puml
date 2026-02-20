@@ -149,6 +149,8 @@ class org.tda553group22.lab3.main.Workshop {
 
 
 class org.tda553group22.lab3.main.WorkshopWithPosition {
+    {field} -pos : org.tda553group22.lab3.ui.Vector2
+	{method} +getPos () : org.tda553group22.lab3.ui.Vector2
 }
 
 
@@ -268,6 +270,12 @@ org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.mathawtexten
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.CarController : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Volvo240 : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Saab95 : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Scania : use
+org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.WorkshopWithPosition : use
 
 org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
 org.tda553group22.lab3.main.CarFerry ..>  org.tda553group22.lab3.main.Car : use
