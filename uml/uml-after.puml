@@ -143,6 +143,7 @@ class org.tda553group22.lab3.main.Volvo240 {
 
 
 class org.tda553group22.lab3.main.Workshop {
+    {field} -canLoadHelper : CanLoadHelperUnordered
 	{method} +load ( load : org.tda553group22.lab3.main.Car ) : void
 	{method} +unload ( load : org.tda553group22.lab3.main.Car ) : void
 }
