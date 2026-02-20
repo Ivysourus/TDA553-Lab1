@@ -191,7 +191,7 @@ class org.tda553group22.lab3.ui.CarController {
 class org.tda553group22.lab3.ui.CarView {
 	{field} {static} -X : int
 	{field} {static} -Y : int
-	{field} -drawPanels : ArrayList<org.tda553group22.lab3.ui.DrawPanel>
+	{field} -drawPanels : Map<Integer, org.tda553group22.lab3.ui.DrawPanel>
 	{field} -controlPanel : javax.swing.JPanel
 	{method} +addPanel ( id : int , pos : java.awt.Point , image : java.awt.image.BufferedImage ) : void
 	{method} +getMaxX () : int
@@ -258,6 +258,14 @@ org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : dra
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
 
 org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Car : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Volvo240 : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Saab95 : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Scania : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.CarController : use
 
 
 @enduml
