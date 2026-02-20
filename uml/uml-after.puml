@@ -277,8 +277,4 @@ org.tda553group22.lab3.main.Positionable ..>  org.tda553group22.lab3.math.Vector
 org.tda553group22.lab3.main.HasPosition ..>  org.tda553group22.lab3.math.Vector2 : use
 
 
-
->>>>>>> 9977a1252ee2b8ead56cd2ca385077de44926b67
-
-
 @enduml
