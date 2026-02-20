@@ -1,4 +1,5 @@
 @startuml
+
 abstract class org.tda553group22.lab3.main.CanLoadHelper {
 	{field} {static} ~$assertionsDisabled : boolean
 	{field} #capacity : int
