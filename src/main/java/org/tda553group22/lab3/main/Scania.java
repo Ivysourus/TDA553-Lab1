@@ -13,6 +13,10 @@ public class Scania extends Truck {
 
     @Override
     protected double speedFactor() {
-        return enginePower * 0.01;
+        double factor = 1.0;
+        if (bedAngle > 0.0) {
+            factor = 0.0;
+        }
+        return enginePower * 0.01 * factor;
     }
 }
