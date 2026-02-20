@@ -10,8 +10,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.tda553group22.lab3.main.Car;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
