@@ -95,6 +95,10 @@ interface org.tda553group22.lab3.main.HasPosition {
 }
 
 
+interface org.tda553group22.lab3.main.PositionFunctions {
+}
+
+
 interface org.tda553group22.lab3.main.Loadable {
 }
 
@@ -160,9 +164,74 @@ class org.tda553group22.lab3.main.Workshop {
 }
 
 
+class org.tda553group22.lab3.main.CarFactory {
+	{method} {static} +createVolvo240 () : org.tda553group22.lab3.main.Car
+	{method} {static} +createSaab95 () : org.tda553group22.lab3.main.Car
+	{method} {static} +createScania () : org.tda553group22.lab3.main.Car
+}
+
+
+class org.tda553group22.lab3.main.CanLoadUnorderedFactory {
+	{method} {static} +createVolvoWorkshop ( capacity : int, pos : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.main.CanLoadUnordered<org.tda553group22.lab3.main.Volvo240>
+}
+
+
 class org.tda553group22.lab3.main.WorkshopWithPosition {
-	{field} -pos : org.tda553group22.lab3.ui.Vector2
+	{field} -workshop : org.tda553group22.lab3.main.Workshop
+	{field} -pos : org.tda553group22.lab3.math.Vector2
+	{method} +load ( load : org.tda553group22.lab3.main.Car ) : void
+	{method} +unload ( load : org.tda553group22.lab3.main.Car ) : void
 	{method} +getPos () : org.tda553group22.lab3.ui.Vector2
+	{method} +setPos () : org.tda553group22.lab3.ui.Vector2
+}
+
+
+interface org.tda553group22.lab3.ui.HasSprite {
+	{method} +getSprite () : java.awt.image.BufferedImage
+}
+
+
+interface org.tda553group22.lab3.ui.IGameObject<T> {
+	{method} +getInner () : T
+}
+
+
+class org.tda553group22.lab3.ui.GameObject<T extends org.tda553group22.lab3.main.PositionFunctions, org.tda553group22.lab3.main.HasSprite> {
+	{field} -inner : T
+	{method} +getInner () : T
+	{method} +getSprite () : java.awt.image.BufferedImage
+	{method} +getPos () : org.tda553group22.lab3.math.Vector2
+	{method} +setPos ( pos : org.tda553group22.lab3.math.Vector2 ) : void
+}
+
+
+interface org.tda553group22.lab3.main.HasTurbo {
+	{method} +setTurboOn () : void
+	{method} +setTurboOff () : void
+}
+
+
+interface org.tda553group22.lab3.main.HasTruckBed {
+	{method} +lowerBed () : void
+	{method} +raiseBed () : void
+}
+
+
+class org.tda553group22.lab3.ui.IGameObjectFactory {
+	{method} {static} +createVolvoWorkshop ( pos : org.tda553group22.lab3.math.Vector2, capacity : int ) : org.tda553group22.lab3.ui.IGameObject<CanLoadUnordered>
+	{method} {static} +createVolvo240 ( pos : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.ui.IGameObject<Car>
+	{method} {static} +createSaab95 ( pos : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.ui.IGameObject<Car>
+	{method} {static} +createScania ( pos : org.tda553group22.lab3.math.Vector2 ) : org.tda553group22.lab3.ui.IGameObject<Car>
+}
+
+
+class org.tda553group22.lab3.ui.GameObjectWrapWithSprite<T extends org.tda553group22.lab3.main.PositionFunctions> {
+	{field} -inner : T
+	{field} -image : java.awt.image.BufferedImage
+	{method} +getInner () : T
+	{method} +getSprite () : java.awt.image.BufferedImage
+	{method} +getPos () : org.tda553group22.lab3.math.Vector2
+	{method} +setPos ( pos : org.tda553group22.lab3.math.Vector2 ) : void
 }
 
 
@@ -194,6 +263,8 @@ class org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions {
 class org.tda553group22.lab3.ui.CarController {
 	{field} -delay : int
 	{field} -timer : javax.swing.Timer
+	{field} -cars : List<IGameObject<Car>>
+	{field} -workshops : List<IGameObject<CanLoadUnordered>>
 	{method} ~brake ( amount : int ) : void
 	{method} ~gas ( amount : int ) : void
 	{method} ~lowerBed () : void
@@ -206,13 +277,11 @@ class org.tda553group22.lab3.ui.CarController {
 
 
 class org.tda553group22.lab3.ui.CarView {
-	{field} {static} -X : int
-	{field} {static} -Y : int
+	{field} {static} -size : org.tda553group22.lab3.math.Vector2
 	{field} -drawPanels : Map<Integer, org.tda553group22.lab3.ui.DrawPanel>
 	{field} -controlPanel : javax.swing.JPanel
 	{method} +addPanel ( id : int , pos : java.awt.Point , image : java.awt.image.BufferedImage ) : void
-	{method} +getMaxX () : int
-	{method} +getMaxY () : int
+	{method} +getSize () : org.tda553group22.lab3.math.Vector2
 	{method} +initComponents ( filename : String ) : void
 	{method} +moveById ( id : int , pos : java.awt.Point ) : void
 }
@@ -222,11 +291,13 @@ class org.tda553group22.lab3.ui.DrawPanel {
 	{field} -image : java.awt.image.BufferedImage
 	{field} -pos : java.awt.Point
 	{method} #paintComponent ( g : java.awt.Graphics ) : void
+	{method} +getPos () : org.tda553group22.lab3.ui.Vector2
+	{method} +setPos () : org.tda553group22.lab3.ui.Vector2
 }
 
 
 class org.tda553group22.lab3.ui.Main {
-	{method}  {static} +main ( args;1 : [Ljava.lang.String; ) : void
+	{method} {static} +main ( args;1 : [Ljava.lang.String; ) : void
 }
 
 
@@ -252,12 +323,15 @@ org.tda553group22.lab3.main.CarTransporter --*  org.tda553group22.lab3.main.CanL
 org.tda553group22.lab3.main.CarTransporter --|>  org.tda553group22.lab3.main.Car
 org.tda553group22.lab3.main.CarTransporter ..|>  org.tda553group22.lab3.main.CanLoadOrdered
 org.tda553group22.lab3.main.EngineVehicle --|>  org.tda553group22.lab3.main.Vehicle
-org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.HasPosition
-org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.Positionable
+org.tda553group22.lab3.main.PositionFunctions ..|>  org.tda553group22.lab3.main.HasPosition
+org.tda553group22.lab3.main.PositionFunctions ..|>  org.tda553group22.lab3.main.Positionable
+org.tda553group22.lab3.main.Loadable ..|>  org.tda553group22.lab3.main.PositionFunctions
 org.tda553group22.lab3.main.PersonCar --|>  org.tda553group22.lab3.main.Car
 org.tda553group22.lab3.main.Saab95 --|>  org.tda553group22.lab3.main.PersonCar
+org.tda553group22.lab3.main.Saab95 ..|>  org.tda553group22.lab3.main.HasTurbo
 org.tda553group22.lab3.main.Scania --|>  org.tda553group22.lab3.main.Truck
 org.tda553group22.lab3.main.Truck --|>  org.tda553group22.lab3.main.Car
+org.tda553group22.lab3.main.Truck ..|>  org.tda553group22.lab3.main.HasTruckBed
 org.tda553group22.lab3.main.Vehicle -->  org.tda553group22.lab3.math.Vector2 : pos
 org.tda553group22.lab3.main.Vehicle ..|>  org.tda553group22.lab3.main.Loadable
 org.tda553group22.lab3.main.Vehicle ..|>  org.tda553group22.lab3.main.Movable
@@ -265,29 +339,26 @@ org.tda553group22.lab3.main.Volvo240 --|>  org.tda553group22.lab3.main.PersonCar
 org.tda553group22.lab3.main.Workshop --*  org.tda553group22.lab3.main.CanLoadHelperUnordered : canLoadHelper
 org.tda553group22.lab3.main.Workshop ..|>  org.tda553group22.lab3.main.CanLoadUnordered
 org.tda553group22.lab3.main.WorkshopWithPosition -->  org.tda553group22.lab3.math.Vector2 : pos
-org.tda553group22.lab3.main.WorkshopWithPosition --|>  org.tda553group22.lab3.main.Workshop
-org.tda553group22.lab3.main.WorkshopWithPosition ..|>  org.tda553group22.lab3.main.HasPosition
-org.tda553group22.lab3.ui.CarController "1" o-- "0..*"  org.tda553group22.lab3.main.Car : cars
+org.tda553group22.lab3.main.WorkshopWithPosition -->  org.tda553group22.lab3.main.Workshop
+org.tda553group22.lab3.main.WorkshopWithPosition ..|>  org.tda553group22.lab3.main.PositionFunctions
+org.tda553group22.lab3.main.WorkshopWithPosition ..|>  org.tda553group22.lab3.main.CanLoadUnordered
+org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.IGameObject : cars
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.main.WorkshopWithPosition : volvoWorkshop
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarController : instance
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView : frame
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : drawPanels
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
+org.tda553group22.lab3.ui.DrawPanel ..|>  org.tda553group22.lab3.main.PositionFunctions
 
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Car : use
-org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Volvo240 : use
-org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Saab95 : use
-org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Scania : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.IGameObject : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.CanLoadUnordered : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions : use
-org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.math.Vector2 : use
-org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Volvo240 : use
-org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Saab95 : use
-org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.Scania : use
-org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.main.WorkshopWithPosition : use
+org.tda553group22.lab3.ui.IGameObjectFactory ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
 
 org.tda553group22.lab3.ui.CarController ..>  java.awt.image.BufferedImage : use
 org.tda553group22.lab3.ui.CarController ..>  javax.swing.Timer : use
@@ -295,7 +366,6 @@ org.tda553group22.lab3.ui.CarController ..>  java.awt.Point : use
 org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions ..>  java.awt.Point : use
 org.tda553group22.lab3.ui.CarView --|>  javax.swing.JFrame
 org.tda553group22.lab3.ui.CarView ..>  java.awt.Point : use
-org.tda553group22.lab3.ui.DrawPanel ..>  java.awt.Point : use
 org.tda553group22.lab3.ui.DrawPanel --|>  javax.swing.JPanel
 org.tda553group22.lab3.ui.DrawPanel -->  java.awt.image.BufferedImage : image
 org.tda553group22.lab3.ui.DrawPanel -->  java.awt.Point : pos
@@ -310,5 +380,31 @@ org.tda553group22.lab3.main.CanLoadHelperUnordered ..>  org.tda553group22.lab3.m
 org.tda553group22.lab3.main.Positionable ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.main.HasPosition ..>  org.tda553group22.lab3.math.Vector2 : use
 
+org.tda553group22.lab3.main.CarFactory ..>  org.tda553group22.lab3.main.Volvo240 : use
+org.tda553group22.lab3.main.CarFactory ..>  org.tda553group22.lab3.main.Saab95 : use
+org.tda553group22.lab3.main.CarFactory ..>  org.tda553group22.lab3.main.Scania : use
+org.tda553group22.lab3.main.CanLoadUnorderedFactory ..> org.tda553group22.lab3.main.CanLoadUnordered : use
+org.tda553group22.lab3.main.CanLoadUnorderedFactory ..> org.tda553group22.lab3.main.WorkshopWithPosition : use
+org.tda553group22.lab3.main.CanLoadUnorderedFactory ..> org.tda553group22.lab3.math.Vector2 : use
+
+org.tda553group22.lab3.ui.GameObject ..|>  org.tda553group22.lab3.ui.IGameObject
+org.tda553group22.lab3.ui.GameObject ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.GameObject ..>  org.tda553group22.lab3.main.PositionFunctions : use
+org.tda553group22.lab3.ui.GameObject ..>  org.tda553group22.lab3.ui.HasSprite : use
+org.tda553group22.lab3.ui.GameObjectWrapWithSprite ..|>  org.tda553group22.lab3.ui.IGameObject
+org.tda553group22.lab3.ui.GameObjectWrapWithSprite ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.GameObjectWrapWithSprite ..>  org.tda553group22.lab3.main.PositionFunctions : use
+org.tda553group22.lab3.ui.IGameObject ..|> org.tda553group22.lab3.main.PositionFunctions
+org.tda553group22.lab3.ui.IGameObject ..|> org.tda553group22.lab3.ui.HasSprite
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.ui.IGameObject
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.ui.GameObjectWrapWithSprite
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.ui.GameObject
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.main.CarFactory
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.main.CanLoadUnorderedFactory
+org.tda553group22.lab3.ui.IGameObjectFactory ..> org.tda553group22.lab3.main.Loadable
+org.tda553group22.lab3.ui.Main ..> org.tda553group22.lab3.ui.IGameObjectFactory
+
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.HasTurbo
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.HasTruckBed
 
 @enduml

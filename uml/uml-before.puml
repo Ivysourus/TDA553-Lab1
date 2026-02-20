@@ -281,10 +281,7 @@ org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Car :
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Volvo240 : use
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Saab95 : use
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Scania : use
-org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Vector2AwtExtensions : use
-org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.ResourcesHandler : use
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Vector2 : use
-org.tda553group22.lab3.main.CarView ..>  org.tda553group22.lab3.main.CarController : use
 
 org.tda553group22.lab3.main.DrawPanel ..>  org.tda553group22.lab3.main.Volvo240 : use
 org.tda553group22.lab3.main.DrawPanel ..>  org.tda553group22.lab3.main.Saab95 : use
