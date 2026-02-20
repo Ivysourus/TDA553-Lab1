@@ -262,10 +262,9 @@ class org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions {
 
 
 class org.tda553group22.lab3.ui.CarController {
+	{field} {static} +instance : org.tda553group22.lab3.ui.CarController
 	{field} -delay : int
 	{field} -timer : javax.swing.Timer
-	{field} -cars : List<IGameObject<Car>>
-	{field} -workshops : List<IGameObject<CanLoadUnordered>>
 	{method} ~brake ( amount : int ) : void
 	{method} ~gas ( amount : int ) : void
 	{method} ~lowerBed () : void
@@ -274,6 +273,13 @@ class org.tda553group22.lab3.ui.CarController {
 	{method} ~stopEngine () : void
 	{method} ~turboOff () : void
 	{method} ~turboOn () : void
+}
+
+
+class org.tda553group22.lab3.ui.CarModel {
+	{field} {static} +instance : org.tda553group22.lab3.ui.CarController
+	{field} -cars : List<IGameObject<Car>>
+	{field} -workshops : List<IGameObject<CanLoadUnordered>>
 }
 
 
@@ -303,6 +309,7 @@ class org.tda553group22.lab3.ui.Main {
 
 
 class org.tda553group22.lab3.ui.ResourcesHandler {
+	{field} {static} +instance : org.tda553group22.lab3.ui.CarController
 	{field} {static} ~saabImage : java.awt.image.BufferedImage
 	{field} {static} ~scaniaImage : java.awt.image.BufferedImage
 	{field} {static} ~volvoImage : java.awt.image.BufferedImage
@@ -356,6 +363,8 @@ org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.IGameObje
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.CanLoadUnordered : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.CarModel : use
+org.tda553group22.lab3.ui.CarModel ..>  org.tda553group22.lab3.ui.CarView : use
 org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.math.Vector2 : use
@@ -370,6 +379,9 @@ org.tda553group22.lab3.ui.CarView ..>  java.awt.Point : use
 org.tda553group22.lab3.ui.DrawPanel --|>  javax.swing.JPanel
 org.tda553group22.lab3.ui.DrawPanel -->  java.awt.image.BufferedImage : image
 org.tda553group22.lab3.ui.DrawPanel -->  java.awt.Point : pos
+
+org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.CarView : instance
+org.tda553group22.lab3.ui.CarModel -->  org.tda553group22.lab3.ui.CarModel : instance
 
 org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
 org.tda553group22.lab3.main.CarFerry ..>  org.tda553group22.lab3.main.Car : use

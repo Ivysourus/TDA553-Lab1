@@ -14,6 +14,7 @@
 - Move Vector2 into new package `math`.
 - Add a new class `Vector2AwtExtensions` in a new package `mathawtextensions`. This class has the function `toPoint` to convert Vector2 to a awt Point. This is in a separate package since this doesn't make sense to include unless you are using awt. We don't want users of our packages to include more than they need.
 - Pull out resources into a new singleton class `ResourcesHandler`. CarController selects the images and adds them using a function call on CarView.
+- CarView becomes a singleton
 - Each DrawPanel only holds one image and one position and we instead use multiple instances of this class in a list in CarView.
 - CarView then stores multiple DrawPanel inside a Map.
 - CarView gets two new functions `addPanel` and `moveById` which add and move panels using an id. Selecting the id is handeled by CarController and stored alongside its cars and workshops to allow it to update the correct one.
@@ -26,6 +27,7 @@
 - Create the new classes `GameObjectWrapWithSprite` and `GameObject` that wraps other objects into the IGameObject interface.
 - Create a new `IGameObjectFactory` that creates cars and workshops with a sprite added. It is solely responsible for selecting the sprite for the game objects.
 - CarController now has a list of `IGameObject<Car>` and `IGameObject<CanLoadUnordered>`.
+- Add a new class `CarModel` that holds the cars and workshops. This follows MVC principle. CarController gets user input from CarView and updates CarModel. CarModel then updates CarView. Thus removing the two-way dependency we had before.
 
 ### Implementing in a team
 One member would begin with separating everything into separate packages. You would then decide on a API between the packages. Then you could delegate out the modification of the packages to different teams. You would have occational meetings and testing to make sure your teams are aligned.
