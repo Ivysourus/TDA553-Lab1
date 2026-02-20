@@ -1,5 +1,21 @@
 @startuml
 
+class java.awt.image.BufferedImage {
+}
+
+class java.awt.Point {
+}
+
+class javax.swing.Timer {
+}
+
+class javax.swing.JFrame {
+}
+
+class javax.swing.JPanel {
+	{method} #paintComponent ( g : java.awt.Graphics ) : void
+}
+
 abstract class org.tda553group22.lab3.main.CanLoadHelper {
 	{field} #capacity : int
 	{field} #cargo : java.util.ArrayList
