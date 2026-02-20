@@ -251,6 +251,16 @@ org.tda553group22.lab3.main.WorkshopWithPosition -->  org.tda553group22.lab3.mai
 org.tda553group22.lab3.main.WorkshopWithPosition --|>  org.tda553group22.lab3.main.Workshop
 org.tda553group22.lab3.main.WorkshopWithPosition ..|>  org.tda553group22.lab3.main.HasPosition
 
+org.tda553group22.lab3.main.CarController ..>  java.awt.image.BufferedImage : use
+org.tda553group22.lab3.main.CarController ..>  javax.swing.Timer : use
+org.tda553group22.lab3.main.CarController ..>  java.awt.Point : use
+org.tda553group22.lab3.main.CarView --|>  javax.swing.JFrame
+org.tda553group22.lab3.main.CarView ..>  java.awt.Point : use
+org.tda553group22.lab3.main.DrawPanel ..>  java.awt.Point : use
+org.tda553group22.lab3.main.DrawPanel --|>  javax.swing.JPanel
+org.tda553group22.lab3.main.DrawPanel -->  java.awt.image.BufferedImage
+org.tda553group22.lab3.main.DrawPanel -->  java.awt.Point : pos
+
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Car : use
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Volvo240 : use
 org.tda553group22.lab3.main.CarController ..>  org.tda553group22.lab3.main.Saab95 : use
