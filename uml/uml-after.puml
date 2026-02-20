@@ -1,7 +1,6 @@
 @startuml
 
 abstract class org.tda553group22.lab3.main.CanLoadHelper {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #capacity : int
 	{field} #cargo : java.util.List
 	{method} +load ( load : org.tda553group22.lab3.main.Loadable ) : void
@@ -19,7 +18,6 @@ class org.tda553group22.lab3.main.CanLoadHelperFirstInLastOut {
 
 
 class org.tda553group22.lab3.main.CanLoadHelperUnordered {
-	{field} {static} ~$assertionsDisabled : boolean
 	{method} +unload ( load : org.tda553group22.lab3.main.Loadable ) : void
 }
 
@@ -52,7 +50,6 @@ class org.tda553group22.lab3.main.CarFerry {
 
 
 class org.tda553group22.lab3.main.CarTransporter {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} -canLoadHelper : CanLoadHelperFirstInLastOut<PersonCar>
 	{field} -maxLoadDistance : double
 	{field} -rampDown : boolean
@@ -66,7 +63,6 @@ class org.tda553group22.lab3.main.CarTransporter {
 
 
 abstract class org.tda553group22.lab3.main.EngineVehicle {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #enginePower : double
 	{method} +startEngine () : void
     {method} +stopEngine () : void
@@ -116,7 +112,6 @@ class org.tda553group22.lab3.main.Scania {
 
 
 abstract class org.tda553group22.lab3.main.Truck {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #bedAngle : double
 	{field} #maxBedAngle : double
 	{method} +lowerBed ( angle : double ) : void
