@@ -258,6 +258,17 @@ org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : dra
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
 
 org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
+org.tda553group22.lab3.main.CarFerry ..>  org.tda553group22.lab3.main.Car : use
+org.tda553group22.lab3.main.Workshop ..>  org.tda553group22.lab3.main.Car : use
+org.tda553group22.lab3.main.CanLoadHelper ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadOrdered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadUnordered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadHelperUnordered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.Positionable ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.main.HasPosition ..>  org.tda553group22.lab3.math.Vector2 : use
+
+
+
 
 
 @enduml
