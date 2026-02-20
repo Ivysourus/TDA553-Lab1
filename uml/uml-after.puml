@@ -257,7 +257,6 @@ org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView :
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : drawPanels
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
 
-org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Car : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Volvo240 : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.main.Saab95 : use
@@ -266,6 +265,20 @@ org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.mathawtexten
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.CarController : use
+
+org.tda553group22.lab3.main.CarTransporter ..>  org.tda553group22.lab3.main.PersonCar : use
+org.tda553group22.lab3.main.CarFerry ..>  org.tda553group22.lab3.main.Car : use
+org.tda553group22.lab3.main.Workshop ..>  org.tda553group22.lab3.main.Car : use
+org.tda553group22.lab3.main.CanLoadHelper ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadOrdered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadUnordered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.CanLoadHelperUnordered ..>  org.tda553group22.lab3.main.Loadable : use
+org.tda553group22.lab3.main.Positionable ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.main.HasPosition ..>  org.tda553group22.lab3.math.Vector2 : use
+
+
+
+>>>>>>> 9977a1252ee2b8ead56cd2ca385077de44926b67
 
 
 @enduml
