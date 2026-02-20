@@ -15,6 +15,17 @@
 - Add a new class `Vector2AwtExtensions` in a new package `mathawtextensions`. This class has the function `toPoint` to convert Vector2 to a awt Point. This is in a separate package since this doesn't make sense to include unless you are using awt. We don't want users of our packages to include more than they need.
 - Pull out resources into a new singleton class `ResourcesHandler`. CarController selects the images and adds them using a function call on CarView.
 - Each DrawPanel only holds one image and one position and we instead use multiple instances of this class in a list in CarView.
+- CarView then stores multiple DrawPanel inside a Map.
+- CarView gets two new functions `addPanel` and `moveById` which add and move panels using an id. Selecting the id is handeled by CarController and stored alongside its cars and workshops to allow it to update the correct one.
 - Make CarController a singleton so CarView can access it without composing it.
 - Pull out the entry point into a new class `Main` (Single Responsibility Principle).
-- 
+- Create a new class `CarFactory` that instantitates the internal car classes such as Volvo240 (which we can now make package private). This helps decrese coupling between the main and ui packages.
+- Create a new class `CanLoadUnorderedFactory` for the same reasons as CarFactory that creates workshops.
+- Create a new interface `PositionFunctions` the extends HasPosition and Positionable.
+- Create a new interface `IGameObject` that implments the new interface `HasSprite` and PositionFunctions and has the function `getInner`.
+- Create the new classes `GameObjectWrapWithSprite` and `GameObject` that wraps other objects into the IGameObject interface.
+- Create a new `IGameObjectFactory` that creates cars and workshops with a sprite added. It is solely responsible for selecting the sprite for the game objects.
+- CarController now has a list of `IGameObject<Car>` and `IGameObject<CanLoadUnordered>`.
+
+### Implementing in a team
+One member would begin with separating everything into separate packages. You would then decide on a API between the packages. Then you could delegate out the modification of the packages to different teams. You would have occational meetings and testing to make sure your teams are aligned.

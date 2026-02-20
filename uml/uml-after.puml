@@ -121,6 +121,7 @@ interface org.tda553group22.lab3.main.Positionable {
 
 class org.tda553group22.lab3.main.Saab95 {
 	{field} -turboOn : boolean
+	{method} +setTurboOn () : void
 	{method} +setTurboOff () : void
 	{method} #speedFactor () : double
 }
@@ -212,8 +213,8 @@ interface org.tda553group22.lab3.main.HasTurbo {
 
 
 interface org.tda553group22.lab3.main.HasTruckBed {
-	{method} +lowerBed () : void
-	{method} +raiseBed () : void
+	{method} +lowerBed ( angle : double ) : void
+	{method} +raiseBed ( angle : double ) : void
 }
 
 
