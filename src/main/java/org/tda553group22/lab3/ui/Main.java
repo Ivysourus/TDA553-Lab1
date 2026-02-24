@@ -12,9 +12,9 @@ import org.tda553group22.lab3.math.Vector2;
 class Main {
     public static void main(String[] args) {
         ArrayList<Car> cars = new ArrayList<>();
-        cars.add(new Volvo240());
-        cars.add(new Scania());
-        cars.add(new Saab95());
+        cars.add(new Volvo240(new Vector2(0, 0)));
+        cars.add(new Scania(new Vector2(0, 100)));
+        cars.add(new Saab95(new Vector2(0, 200)));
 
         WorkshopWithPosition<Volvo240> workshop = new WorkshopWithPosition<>(1, new Vector2(300, 0));
 

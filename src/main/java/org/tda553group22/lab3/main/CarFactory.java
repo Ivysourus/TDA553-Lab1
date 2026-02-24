@@ -1,15 +1,17 @@
 package org.tda553group22.lab3.main;
 
-public class CarFactory {
-    public Car createVolvo240() {
-        return new Volvo240();
+import org.tda553group22.lab3.math.Vector2;
+
+public final class CarFactory {
+    public static Car createVolvo240(Vector2 pos) {
+        return new Volvo240(pos);
     }
 
-    public Car createSaab95() {
-        return new Saab95();
+    public static Car createSaab95(Vector2 pos) {
+        return new Saab95(pos);
     }
 
-    public Car createScania() {
-        return new Scania();
+    public static Car createScania(Vector2 pos) {
+        return new Scania(pos);
     }
 }

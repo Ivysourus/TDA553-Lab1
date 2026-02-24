@@ -1,4 +1,4 @@
 package org.tda553group22.lab3.main;
 
-interface PositionFunctions extends HasPosition, Positionable {
+public interface PositionFunctions extends HasPosition, Positionable {
 }

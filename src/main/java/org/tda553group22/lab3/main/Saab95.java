@@ -1,16 +1,19 @@
 package org.tda553group22.lab3.main;
 
+import org.tda553group22.lab3.math.Vector2;
+
 import java.awt.Color;
 
 public class Saab95 extends PersonCar {
     private boolean turboOn;
 
-    public Saab95() {
+    public Saab95(Vector2 pos) {
         nrDoors = 2;
         color = Color.red;
         enginePower = 125;
         turboOn = false;
         modelName = "Saab95";
+        this.pos = pos;
     }
 
     public void setTurboOn() {

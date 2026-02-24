@@ -43,10 +43,6 @@ final class CarController {
         this.cars = cars;
         this.volvoWorkshop = volvoWorkshop;
 
-        for (int i = 0; i < cars.size(); i++) {
-            cars.get(i).setPos(new Vector2(0, i * 100));
-        }
-
         frame = new CarView("CarSim 1.0");
 
         for (Car c : cars) {

@@ -1,16 +1,15 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.ui;
 
+import org.tda553group22.lab3.main.PositionFunctions;
 import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.image.BufferedImage;
 
-class GameObjectWrapWithSprite<T extends PositionFunctions> implements GameObject<T> {
+class GameObjectWrapWithInner<T extends HasSprite & PositionFunctions> implements GameObject<T> {
     private final T inner;
-    private final BufferedImage sprite;
 
-    public GameObjectWrapWithSprite(T inner, BufferedImage sprite) {
+    public GameObjectWrapWithInner(T inner) {
         this.inner = inner;
-        this.sprite = sprite;
     }
 
     public T getInner() {
@@ -18,7 +17,7 @@ class GameObjectWrapWithSprite<T extends PositionFunctions> implements GameObjec
     }
 
     public BufferedImage getSprite() {
-        return sprite;
+        return inner.getSprite();
     }
 
     public Vector2 getPos() {

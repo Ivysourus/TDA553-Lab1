@@ -3,9 +3,10 @@ package org.tda553group22.lab3.main;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.tda553group22.lab3.math.Vector2;
 
 class ScaniaTest {
-    private final Scania scania = new Scania();
+    private final Scania scania = new Scania(new Vector2(0, 0));
 
     @Test
     void raiseBedAtZero() {
