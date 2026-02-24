@@ -2,7 +2,7 @@ package org.tda553group22.lab3.main;
 
 import java.util.Optional;
 
-public class CanLoadHelperFirstInLastOut<T extends Loadable> extends CanLoadHelper<T> implements CanLoadOrdered<T> {
+class CanLoadHelperFirstInLastOut<T extends Loadable> extends CanLoadHelper<T> implements CanLoadOrdered<T> {
     public CanLoadHelperFirstInLastOut(int capacity) {
         this.capacity = capacity;
     }

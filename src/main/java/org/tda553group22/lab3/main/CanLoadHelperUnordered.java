@@ -1,6 +1,6 @@
 package org.tda553group22.lab3.main;
 
-public class CanLoadHelperUnordered<T extends Loadable> extends CanLoadHelper<T> implements CanLoadUnordered<T> {
+class CanLoadHelperUnordered<T extends Loadable> extends CanLoadHelper<T> implements CanLoadUnordered<T> {
     public CanLoadHelperUnordered(int capacity) {
         this.capacity = capacity;
     }
