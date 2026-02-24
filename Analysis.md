@@ -34,6 +34,6 @@ One member would begin with separating everything into separate packages. You wo
 
 ## Lab 4
 ### Task 2
-- From the start the model and the controller bleeded together. The CarController held references to cars. CarController also needed to modify DrawPanel.
+- From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel.
 - We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view.
 - TODO: New UML
