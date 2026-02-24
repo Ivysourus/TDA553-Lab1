@@ -5,11 +5,11 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.image.BufferedImage;
 
-class GameObjectWrapWithSprite<T extends PositionFunctions> implements GameObject<T> {
+class GameObjectWrapWithInnerAndSprite<T extends PositionFunctions> implements GameObject<T> {
     private final T inner;
     private final BufferedImage sprite;
 
-    public GameObjectWrapWithSprite(T inner, BufferedImage sprite) {
+    public GameObjectWrapWithInnerAndSprite(T inner, BufferedImage sprite) {
         this.inner = inner;
         this.sprite = sprite;
     }
