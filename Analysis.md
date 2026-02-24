@@ -31,3 +31,9 @@
 
 ### Implementing in a team
 One member would begin with separating everything into separate packages. You would then decide on a API between the packages. Then you could delegate out the modification of the packages to different teams. You would have occational meetings and testing to make sure your teams are aligned.
+
+## Lab 4
+### Task 2
+- From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel.
+- We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view.
+- TODO: New UML
