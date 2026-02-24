@@ -23,10 +23,10 @@
 - Create a new class `CarFactory` that instantitates the internal car classes such as Volvo240 (which we can now make package private). This helps decrese coupling between the main and ui packages.
 - Create a new class `CanLoadUnorderedFactory` for the same reasons as CarFactory that creates workshops.
 - Create a new interface `PositionFunctions` the extends HasPosition and Positionable.
-- Create a new interface `IGameObject` that implments the new interface `HasSprite` and PositionFunctions and has the function `getInner`.
-- Create the new classes `GameObjectWrapWithSprite` and `GameObject` that wraps other objects into the IGameObject interface.
-- Create a new `IGameObjectFactory` that creates cars and workshops with a sprite added. It is solely responsible for selecting the sprite for the game objects.
-- CarController now has a list of `IGameObject<Car>` and `IGameObject<CanLoadUnordered>`.
+- Create a new interface `GameObject` that implments the new interface `HasSprite` and PositionFunctions and has the function `getInner`.
+- Create the new classes `GameObjectWrapWithSprite` and `GameObjectWrapWithInner` that wraps other objects into the IGameObject interface.
+- Create a new `GameObjectFactory` that creates cars and workshops with a sprite added. It is solely responsible for selecting the sprite for the game objects.
+- CarController now has a list of `GameObject<Car>` and `GameObject<CanLoadUnordered>`.
 - Add a new class `CarModel` that holds the cars and workshops. This follows MVC principle. CarController gets user input from CarView and updates CarModel. CarModel then updates CarView. Thus removing the two-way dependency we had before.
 
 ### Implementing in a team
