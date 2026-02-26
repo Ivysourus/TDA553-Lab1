@@ -1,23 +1,21 @@
 package org.tda553group22.lab3.ui;
 
-import java.util.ArrayList;
-
-import org.tda553group22.lab3.core.Car;
-import org.tda553group22.lab3.core.CarFactory;
-import org.tda553group22.lab3.core.Volvo240;
-import org.tda553group22.lab3.core.Workshop;
 import org.tda553group22.lab3.math.Vector2;
+import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
+import org.tda553group22.lab3.ui.model.Model;
 
 class Main {
     public static void main(String[] args) {
-        ArrayList<Car> cars = new ArrayList<>();
-        cars.add(CarFactory.createVolvo240(new Vector2(0, 0)));
-        cars.add(CarFactory.createSaab95(new Vector2(0, 100)));
-        cars.add(CarFactory.createScania(new Vector2(0, 200)));
+        Vector2 boundsMin = new Vector2(0, 0);
+        Vector2 boundsExtents = new Vector2(1000, 800);
+        Vector2 boundsMax = boundsMin.add(boundsExtents);
 
-        Workshop<Volvo240> workshop = new Workshop<>(new Vector2(300, 0),1);
+        Model model = new Model(boundsMin, boundsMax);
+        CarController carController = new CarController("CarSim 1.0", Vector2AwtExtensions.toDimension(boundsExtents), model);
 
-        // Init singleton
-        new CarController(cars, workshop);
+        carController.addVolvo240(new Vector2(0, 0));
+        carController.addSaab95(new Vector2(0, 100));
+        carController.addScania(new Vector2(0, 200));
+        carController.addVolvoWorkshop(new Vector2(500, 0), 1);
     }
 }

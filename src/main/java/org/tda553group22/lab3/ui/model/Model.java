@@ -1,35 +1,28 @@
 package org.tda553group22.lab3.ui.model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.tda553group22.lab3.core.CanLoadUnordered;
 import org.tda553group22.lab3.core.Car;
+import org.tda553group22.lab3.core.Workshop;
+import org.tda553group22.lab3.core.Loadable;
+import org.tda553group22.lab3.core.TruckBedFunctions;
+import org.tda553group22.lab3.core.TurboFunctions;
 import org.tda553group22.lab3.math.Vector2;
 
 public class Model {
     private Vector2 boundsMin;
     private Vector2 boundsMax;
     private List<Car> cars = new ArrayList<>();
-    private List<Workshop> workshops = new ArrayList<>();
-    private List<Observer> observers = new ArrayList<>();
+    private List<Workshop<? extends Loadable>> workshops = new ArrayList<>();
+    private Map<Integer, MoveObserver> moveObservers = new HashMap<>();
+    private List<UpdateObserver> updateObservers = new ArrayList<>();
 
     public Model(Vector2 boundsMin, Vector2 boundsMax) {
         this.boundsMin = boundsMin;
         this.boundsMax = boundsMax;
-    }
-
-    public Model(Vector2 boundsMin, Vector2 boundsMax, List<Observer> observers) {
-        this(boundsMin, boundsMax);
-        this.observers = observers;
-    }
-
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
     }
 
     public void update() {
@@ -46,17 +39,99 @@ public class Model {
                 car.startEngine();
             }
 
-            for (CanLoadUnordered workshop)
-            if (car.getPos().distance()
-                    car.getPos().distance(volvoWorkshop.getPos()) < 30) {
-                volvoWorkshop.load(volvo);
+            for (Workshop<? extends Loadable> workshop : workshops) {
+                if (workshop.canAccept(car) && workshop.isWithinRange(car.getPos())) {
+                    ((Workshop<Loadable>) workshop).load(car);
+                }
             }
 
-            frame.moveById(car.hashCode(), Vector2AwtExtensions.toPoint(car.getPos()));
+            moveObservers.get(car.hashCode()).actOnMove(car.getPos(), car.getAngle());
         }
 
-        for (Observer observer : observers) {
-            observer.actOnMove(, angle);
+        for (Workshop<? extends Loadable> workshop : workshops) {
+            moveObservers.get(workshop.hashCode()).actOnMove(workshop.getPos(), 0);
+        }
+
+        for (UpdateObserver observer : updateObservers) {
+            observer.actOnUpdate();
+        }
+    }
+
+    public void addCar(Car car) {
+        cars.add(car);
+    }
+
+    public void addWorkshop(Workshop<? extends Loadable> workshop) {
+        workshops.add(workshop);
+    }
+
+    public void addObservedCar(Car car, MoveObserver observer) {
+        cars.add(car);
+        moveObservers.put(car.hashCode(), observer);
+    }
+
+    public void addObservedWorkshop(Workshop<? extends Loadable> workshop, MoveObserver observer) {
+        workshops.add(workshop);
+        moveObservers.put(workshop.hashCode(), observer);
+    }
+
+    public void addUpdateObserver(UpdateObserver observer) {
+        updateObservers.add(observer);
+    }
+
+    public void gasAllCars(double amount) {
+        for (Car car : cars) {
+            car.gas(amount);
+        }
+    }
+
+    public void brakeAllCars(double amount) {
+        for (Car car : cars) {
+            car.brake(amount);
+        }
+    }
+
+    public void startAllEngines() {
+        for (Car car : cars) {
+            car.startEngine();
+        }
+    }
+
+    public void stopAllEngines() {
+        for (Car car : cars) {
+            car.stopEngine();
+        }
+    }
+
+    public void setTurboOnAllCars() {
+        for (Car car : cars) {
+            if (car instanceof TurboFunctions turbo) {
+                turbo.setTurboOn();
+            }
+        }
+    }
+
+    public void setTurboOffAllCars() {
+        for (Car car : cars) {
+            if (car instanceof TurboFunctions turbo) {
+                turbo.setTurboOff();
+            }
+        }
+    }
+
+    public void raiseBedAllCars() {
+        for (Car car : cars) {
+            if (car instanceof TruckBedFunctions truckBed) {
+                truckBed.raiseBed(Math.PI / 2);
+            }
+        }
+    }
+
+    public void lowerBedAllCars() {
+        for (Car car : cars) {
+            if (car instanceof TruckBedFunctions truckBed) {
+                truckBed.lowerBed(Math.PI / 2);
+            }
         }
     }
 }

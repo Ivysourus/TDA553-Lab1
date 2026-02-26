@@ -15,10 +15,6 @@ public final class Vector2 {
         this(another.x, another.y);
     }
 
-    public Vector2(Point point) {
-        this((double) point.x, (double) point.y);
-    }
-
     public static Vector2 zero() {
         return new Vector2(0.0, 0.0);
     }
@@ -76,5 +72,10 @@ public final class Vector2 {
         return (o instanceof Vector2 other) &&
                 x == other.x &&
                 y == other.y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Vector2 : (%(,.2f, %(,.2f)", x, y);
     }
 }

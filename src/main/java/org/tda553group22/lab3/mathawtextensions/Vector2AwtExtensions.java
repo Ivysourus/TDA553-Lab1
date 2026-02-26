@@ -1,5 +1,6 @@
 package org.tda553group22.lab3.mathawtextensions;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 import org.tda553group22.lab3.math.Vector2;
@@ -11,5 +12,13 @@ public final class Vector2AwtExtensions {
 
     public static Vector2 fromPoint(Point point) {
         return new Vector2((double) point.x, (double) point.y);
+    }
+
+    public static Vector2 fromDimension(Dimension dimension) {
+        return new Vector2(dimension.getWidth(), dimension.getHeight());
+    }
+
+    public static Dimension toDimension(Vector2 vector) {
+        return new Dimension((int) Math.round(vector.x), (int) Math.round(vector.y));
     }
 }

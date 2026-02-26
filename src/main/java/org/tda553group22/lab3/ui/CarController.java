@@ -1,18 +1,17 @@
 package org.tda553group22.lab3.ui;
 
-import org.tda553group22.lab3.core.Volvo240;
-import org.tda553group22.lab3.core.Scania;
-import org.tda553group22.lab3.core.Saab95;
-import org.tda553group22.lab3.core.WorkshopWithPosition;
+import org.tda553group22.lab3.core.Workshop;
+import org.tda553group22.lab3.core.WorkshopFactory;
 import org.tda553group22.lab3.core.Car;
+import org.tda553group22.lab3.core.CarFactory;
+import org.tda553group22.lab3.core.Loadable;
 import org.tda553group22.lab3.math.Vector2;
-import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
+import org.tda553group22.lab3.ui.model.Model;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Timer;
 
@@ -28,131 +27,90 @@ final class CarController {
     // each step between delays.
     private final Timer timer = new Timer(delay, new TimerListener());
 
-    private CarView frame;
-    List<Car> cars = new ArrayList<>();
-    WorkshopWithPosition<Volvo240> volvoWorkshop;
+    private final Model model;
+    private final CarView view;
 
-    public static CarController instance = null;
+    public static CarController instance;
 
-    public CarController(List<Car> cars, WorkshopWithPosition<Volvo240> volvoWorkshop) {
+    public CarController(String title, Dimension size, Model model) {
         if (instance != null) {
             throw new RuntimeException("An instance of CarController already exists");
         }
         instance = this;
 
-        this.cars = cars;
-        this.volvoWorkshop = volvoWorkshop;
+        this.model = model;
+        view = new CarView(title, size);
 
-        frame = new CarView("CarSim 1.0");
-
-        for (Car c : cars) {
-            BufferedImage image = ResourcesHandler.volvoImage; // defualt
-            if (c instanceof Volvo240) {
-                image = ResourcesHandler.volvoImage;
-            } else if (c instanceof Saab95) {
-                image = ResourcesHandler.saabImage;
-            } else if (c instanceof Scania) {
-                image = ResourcesHandler.scaniaImage;
-            }
-            frame.addPanel(c.hashCode(), Vector2AwtExtensions.toPoint(c.getPos()), image);
-        }
-
-        frame.addPanel(volvoWorkshop.hashCode(), Vector2AwtExtensions.toPoint(volvoWorkshop.getPos()),
-                ResourcesHandler.volvoWorkshopImage);
-
-        frame.initComponents("CarSim 1.0");
+        model.addUpdateObserver(view);
 
         timer.start();
     }
 
-    /*
-     * Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < cars.size(); i++) {
-                Car car = cars.get(i);
-                car.move();
-
-                Vector2 pos = car.getPos();
-                Vector2 min = Vector2.zero();
-                Vector2 max = new Vector2(frame.getSize().getWidth(), frame.getSize().getHeight())
-                        .sub(new Vector2(100, 0));
-                Vector2 clampedPos = pos.clamp(min, max);
-                if (!clampedPos.equals(pos)) {
-                    car.setPos(clampedPos);
-                    car.stopEngine();
-                    car.turnLeft();
-                    car.turnLeft();
-                    car.startEngine();
-                }
-
-                if (car instanceof Volvo240 volvo &&
-                        car.getPos().distance(volvoWorkshop.getPos()) < 30) {
-                    volvoWorkshop.load(volvo);
-                }
-
-                frame.moveById(car.hashCode(), Vector2AwtExtensions.toPoint(car.getPos()));
-            }
+            model.update();
         }
     }
 
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.gas(gas);
-        }
+    public void addVolvo240(Vector2 pos) {
+        this.addCar(CarFactory.createVolvo240(pos), ResourcesHandler.volvoImage);
     }
 
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.brake(brake);
-        }
+    public void addSaab95(Vector2 pos) {
+        this.addCar(CarFactory.createSaab95(pos), ResourcesHandler.saabImage);
     }
 
-    void startEngine() {
-        for (Car car : cars) {
-            car.startEngine();
-        }
+    public void addScania(Vector2 pos) {
+        this.addCar(CarFactory.createScania(pos), ResourcesHandler.scaniaImage);
     }
 
-    void stopEngine() {
-        for (Car car : cars) {
-            car.stopEngine();
-        }
+    public void addVolvoWorkshop(Vector2 pos, int capacity) {
+        this.addWorkshop(WorkshopFactory.createVolvoWorkshop(pos, capacity), ResourcesHandler.volvoWorkshopImage);
     }
 
-    void turboOn() {
-        for (Car car : cars) {
-            if (car instanceof Saab95 saab) {
-                saab.setTurboOn();
-            }
-        }
+    private void addCar(Car car, BufferedImage image) {
+        Sprite sprite = new Sprite(car.getPos(), car.getAngle(), image);
+        view.addSprite(sprite);
+        model.addObservedCar(car, sprite);
     }
 
-    void turboOff() {
-        for (Car car : cars) {
-            if (car instanceof Saab95 saab) {
-                saab.setTurboOff();
-            }
-        }
+    private void addWorkshop(Workshop<? extends Loadable> workshop, BufferedImage image) {
+        Sprite sprite = new Sprite(workshop.getPos(), 0, image);
+        view.addSprite(sprite);
+        model.addObservedWorkshop(workshop, sprite);
     }
 
-    void raiseBed() {
-        for (Car car : cars) {
-            if (car instanceof Scania scania) {
-                scania.raiseBed(Math.PI / 2);
-            }
-        }
+    public void gasAllCars(int amount) {
+        double adjAmount = ((double) amount) / 100;
+        model.gasAllCars(adjAmount);
     }
 
-    void lowerBed() {
-        for (Car car : cars) {
-            if (car instanceof Scania scania) {
-                scania.lowerBed(Math.PI / 2);
-            }
-        }
+    public void brakeAllCars(int amount) {
+        double adjAmount = ((double) amount) / 100;
+        model.brakeAllCars(adjAmount);
+    }
+
+    public void startAllEngines() {
+        model.startAllEngines();
+    }
+
+    public void stopAllEngines() {
+        model.stopAllEngines();
+    }
+
+    public void setTurboOnAllCars() {
+        model.setTurboOnAllCars();
+    }
+
+    public void setTurboOffAllCars() {
+        model.setTurboOffAllCars();
+    }
+
+    public void raiseBedAllCars() {
+        model.raiseBedAllCars();
+    }
+
+    public void lowerBedAllCars() {
+        model.lowerBedAllCars();
     }
 }

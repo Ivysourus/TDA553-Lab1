@@ -4,13 +4,28 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-public abstract class Vehicle implements Movable, Loadable {
+public abstract class Vehicle implements Loadable, HasAngle {
     protected double currentSpeed;
     protected String modelName;
     protected Color color;
     protected Vector2 pos = Vector2.zero();
 
     private double angle;
+
+    @Override
+    public Vector2 getPos() {
+        return new Vector2(pos);
+    }
+
+    @Override
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
+    }
+
+    @Override
+    public double getAngle() {
+        return angle;
+    }
 
     public double getCurrentSpeed() {
         return currentSpeed;
@@ -20,20 +35,9 @@ public abstract class Vehicle implements Movable, Loadable {
         return color;
     }
 
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
-
-    public double getAngle() {
-        return angle;
-    }
 
     protected void setColor(Color clr) {
         color = clr;
-    }
-
-    public void setPos(Vector2 pos) {
-        this.pos = pos;
     }
 
     public void move() {

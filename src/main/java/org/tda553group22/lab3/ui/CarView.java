@@ -10,39 +10,27 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.tda553group22.lab3.ui.model.UpdateObserver;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching its controller
- * in its state.
- * It communicates with the Controller by calling methods of it when an action
- * fires of in
- * each of its components.
- **/
-class CarView extends JFrame {
-    private static final int X = 800;
-    private static final int Y = 800;
+class CarView extends JFrame implements UpdateObserver {
+    private final List<Sprite> sprites = new ArrayList<>(); // new DrawPanel(X, Y - 240);
 
-    private final Map<Integer, DrawPanel> drawPanels = new HashMap<>(); //new DrawPanel(X, Y - 240);
+    private final int preferredSizeX;
+    private final int preferredSizeY;
 
+    private final JPanel drawPanel = new JPanel();
     private final JPanel controlPanel = new JPanel();
-
-    private MainPanel mainPanel;
-
-    private JSpinner gasSpinner = new JSpinner();
-    private int gasAmount = 0;
 
     private final JPanel gasPanel = new JPanel();
     private final JLabel gasLabel = new JLabel("Amount of gas");
@@ -60,41 +48,63 @@ class CarView extends JFrame {
     private final JButton addCarRandomButton = new JButton("Adds random car");
     private final JButton removeCarRandomButton = new JButton("Removes random car");
 
-    public CarView(String frameName) {
-        mainPanel = new MainPanel(new Dimension(X, Y - 240));
-        this.add(mainPanel);
-    }
+    private JSpinner gasSpinner;
+    private int gasAmount = 0;
 
-    public int getMaxX() {
-        return X;
-    }
+    public CarView(String title, Dimension size) {
+        this.preferredSizeX = (int) Math.round(size.getWidth());
+        this.preferredSizeY = (int) Math.round(size.getHeight());
 
-    public int getMaxY() {
-        return Y;
-    }
-
-    public void addPanel(int id, Point pos, BufferedImage image) {
-        DrawPanel panel = new DrawPanel(new Dimension(image.getWidth(), image.getHeight()), pos, image);
-        drawPanels.put(id, panel);
-    }
-
-    public void moveById(int id, Point pos) {
-        drawPanels.get(id).setPos(pos);
-    }
-
-    public void initComponents(String title) {
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X, Y));
+        this.setPreferredSize(size);
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        for (DrawPanel panel : drawPanels.values()) {
-            mainPanel.add(panel);
-        }
+        this.initComponents();
+    }
 
-        SpinnerModel spinnerModel = new SpinnerNumberModel(0, // initial value
-                0, // min
+    @Override
+    public void actOnUpdate() {
+        this.repaint();
+    }
+
+    public void addSprite(Sprite sprite) {
+        sprites.add(sprite);
+        drawPanel.add(sprite);
+
+        this.pack();
+        this.repaint();
+    }
+
+
+    private void initComponents() {
+        this.initDrawPanel();
+        this.initGasPanel();
+        this.initControlPanel();
+        this.initButtons();
+
+        this.pack();
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        // Center the frame on the screen
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        this.setVisible(true);
+        // Make sure the frame exits when "x" is pressed
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void initDrawPanel() {
+        drawPanel.setDoubleBuffered(true);
+        drawPanel.setPreferredSize(new Dimension(this.preferredSizeX, this.preferredSizeY - 240));
+        drawPanel.setBackground(Color.white);
+        this.add(drawPanel);
+    }
+
+    private void initGasPanel() {
+        SpinnerModel spinnerModel = new SpinnerNumberModel(
+                0,   // initial value
+                0,   // min
                 100, // max
-                1);// step
+                1);  // step
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -107,7 +117,9 @@ class CarView extends JFrame {
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 
         this.add(gasPanel);
+    }
 
+    private void initControlPanel() {
         controlPanel.setLayout(new GridLayout(2, 4));
 
         controlPanel.add(gasButton, 0);
@@ -116,107 +128,101 @@ class CarView extends JFrame {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X / 2) + 4, 200));
-        this.add(controlPanel);
+        controlPanel.setPreferredSize(new Dimension((this.preferredSizeX / 2) + 4, 200));
         controlPanel.setBackground(Color.CYAN);
 
+        this.add(controlPanel);
+    }
+
+    private void initButtons() {
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        startButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
         this.add(startButton);
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        stopButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
         this.add(stopButton);
 
         addCarRandomButton.setBackground(Color.cyan);
         addCarRandomButton.setForeground(Color.blue);
-        addCarRandomButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        addCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
         this.add(addCarRandomButton);
 
         removeCarRandomButton.setBackground(Color.cyan);
         removeCarRandomButton.setForeground(Color.blue);
-        removeCarRandomButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        removeCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
         this.add(removeCarRandomButton);
 
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.gas(gasAmount);
+                CarController.instance.gasAllCars(gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.brake(gasAmount);
+                CarController.instance.brakeAllCars(gasAmount);
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.startEngine();
+                CarController.instance.startAllEngines();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.stopEngine();
+                CarController.instance.stopAllEngines();
             }
         });
 
         addCarRandomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.addCarRandom();
+                // CarController.instance.addCarRandom();
             }
         });
 
         removeCarRandomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.removeCarRandom();
+                // CarController.instance.removeCarRandom();
             }
         });
 
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.turboOn();
+                CarController.instance.setTurboOnAllCars();
             }
         });
 
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.turboOff();
+                CarController.instance.setTurboOffAllCars();
             }
         });
 
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.raiseBed();
+                CarController.instance.raiseBedAllCars();
             }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarController.instance.lowerBed();
+                CarController.instance.lowerBedAllCars();
             }
         });
-
-        this.pack();
-
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame on the screen
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        this.setVisible(true);
-        // Make sure the frame exits when "x" is pressed
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

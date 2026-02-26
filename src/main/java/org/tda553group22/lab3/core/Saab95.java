@@ -4,7 +4,7 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-class Saab95 extends PersonCar {
+class Saab95 extends PersonCar implements TurboFunctions {
     private boolean turboOn;
 
     public Saab95(Vector2 pos) {
@@ -16,10 +16,12 @@ class Saab95 extends PersonCar {
         this.pos = pos;
     }
 
+    @Override
     public void setTurboOn() {
         turboOn = true;
     }
 
+    @Override
     public void setTurboOff() {
         turboOn = false;
     }
