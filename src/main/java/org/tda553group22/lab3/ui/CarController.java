@@ -3,7 +3,7 @@ package org.tda553group22.lab3.ui;
 import org.tda553group22.lab3.core.Volvo240;
 import org.tda553group22.lab3.core.Scania;
 import org.tda553group22.lab3.core.Saab95;
-import org.tda553group22.lab3.core.WorkshopWithPosition;
+import org.tda553group22.lab3.core.Workshop;
 import org.tda553group22.lab3.core.Car;
 import org.tda553group22.lab3.math.Vector2;
 import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
@@ -30,11 +30,11 @@ final class CarController {
 
     private CarView frame;
     List<Car> cars = new ArrayList<>();
-    WorkshopWithPosition<Volvo240> volvoWorkshop;
+    Workshop<Volvo240> volvoWorkshop;
 
     public static CarController instance = null;
 
-    public CarController(List<Car> cars, WorkshopWithPosition<Volvo240> volvoWorkshop) {
+    public CarController(List<Car> cars, Workshop<Volvo240> volvoWorkshop) {
         if (instance != null) {
             throw new RuntimeException("An instance of CarController already exists");
         }
