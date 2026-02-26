@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.tda553group22.lab3.math.Vector2;
 
 class ScaniaTest {
-    private final Scania scania = new Scania(new Vector2(0, 0));
+    private final Scania scania = new Scania();
 
     @Test
     void raiseBedAtZero() {
