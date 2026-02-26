@@ -2,7 +2,7 @@ package org.tda553group22.lab3.core;
 
 import org.tda553group22.lab3.math.Vector2;
 
-public class Workshop<T extends Car> implements CanLoadUnordered<T>, PositionFunctions {
+class Workshop<T extends Car> implements CanLoadUnordered<T>, PositionFunctions {
     private Vector2 pos;
     private final CanLoadHelperUnordered<T> canLoadHelper;
 

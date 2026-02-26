@@ -4,7 +4,7 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-public class Volvo240 extends PersonCar {
+class Volvo240 extends PersonCar {
     private final static double trimFactor = 1.25; // Engine power of the car
 
     public Volvo240() {
