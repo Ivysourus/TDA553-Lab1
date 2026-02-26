@@ -1,10 +1,10 @@
 package org.tda553group22.lab3.ui;
 
-import org.tda553group22.lab3.main.CanLoadUnordered;
-import org.tda553group22.lab3.main.Car;
+import org.tda553group22.lab3.core.CanLoadUnordered;
+import org.tda553group22.lab3.core.Car;
 import org.tda553group22.lab3.math.Vector2;
-import org.tda553group22.lab3.main.CarFactory;
-import org.tda553group22.lab3.main.CanLoadUnorderedFactory;
+import org.tda553group22.lab3.core.CarFactory;
+import org.tda553group22.lab3.core.CanLoadUnorderedFactory;
 
 public class GameObjectFactory {
     public GameObject<CanLoadUnordered<? extends Car>> createVolvoWorkshop(int capacity, Vector2 pos) {

@@ -1,6 +1,6 @@
 package org.tda553group22.lab3.ui;
 
-import org.tda553group22.lab3.main.PositionFunctions;
+import org.tda553group22.lab3.core.PositionFunctions;
 import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.image.BufferedImage;

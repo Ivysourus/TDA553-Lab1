@@ -1,4 +1,4 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.core;
 
 public class Workshop<T extends Car> implements CanLoadUnordered<T> {
     private final CanLoadHelperUnordered<T> canLoadHelper;

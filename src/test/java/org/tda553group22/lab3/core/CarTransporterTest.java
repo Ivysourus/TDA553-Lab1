@@ -1,10 +1,8 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.core;
 
 import org.tda553group22.lab3.math.Vector2;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

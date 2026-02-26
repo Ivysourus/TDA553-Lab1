@@ -2,11 +2,11 @@ package org.tda553group22.lab3.ui;
 
 import java.util.ArrayList;
 
-import org.tda553group22.lab3.main.Car;
-import org.tda553group22.lab3.main.Saab95;
-import org.tda553group22.lab3.main.Scania;
-import org.tda553group22.lab3.main.Volvo240;
-import org.tda553group22.lab3.main.WorkshopWithPosition;
+import org.tda553group22.lab3.core.Car;
+import org.tda553group22.lab3.core.Saab95;
+import org.tda553group22.lab3.core.Scania;
+import org.tda553group22.lab3.core.Volvo240;
+import org.tda553group22.lab3.core.WorkshopWithPosition;
 import org.tda553group22.lab3.math.Vector2;
 
 class Main {
