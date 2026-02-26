@@ -186,14 +186,14 @@ class CarView extends JFrame implements UpdateObserver {
         addCarRandomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // CarController.instance.addCarRandom();
+                CarController.instance.addCarRandom();
             }
         });
 
         removeCarRandomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // CarController.instance.removeCarRandom();
+                CarController.instance.removeCarRandom();
             }
         });
 

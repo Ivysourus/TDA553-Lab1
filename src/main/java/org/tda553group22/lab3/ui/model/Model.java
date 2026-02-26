@@ -79,6 +79,23 @@ public class Model {
         updateObservers.add(observer);
     }
 
+    public int getCarCount() {
+        return cars.size();
+    }
+
+    public Vector2 getBoundsMin() {
+        return boundsMin;
+    }
+
+    public Vector2 getBoundsMax() {
+        return boundsMax;
+    }
+
+    public void removeCar(int index) {
+        moveObservers.get(cars.get(index).hashCode()).actOnRemove();
+        cars.remove(index);
+    }
+
     public void gasAllCars(double amount) {
         for (Car car : cars) {
             car.gas(amount);

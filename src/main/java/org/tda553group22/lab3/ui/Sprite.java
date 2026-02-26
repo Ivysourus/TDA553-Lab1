@@ -61,6 +61,10 @@ class Sprite extends JPanel implements PositionFunctions, AngleFunctions, HasIma
     public void actOnMove(Vector2 pos, double angle) {
         this.setPos(pos);
         this.setAngle(angle);
-        this.repaint();
+    }
+
+    @Override
+    public void actOnRemove() {
+        this.setVisible(false);
     }
 }

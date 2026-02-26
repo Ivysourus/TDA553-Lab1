@@ -114,28 +114,32 @@ final class CarController {
         model.lowerBedAllCars();
     }
 
-    void addCarRandom() {
-        if (cars.size() < 10) {
-            int roll = (int)(Math.random() * 4);
-            switch (roll) {
-                case 0:
-                    cars.add(CarFactory.createVolvo240(Vector2.zero()));
-                    break;
-                case 1:
-                    cars.add(CarFactory.createScania(Vector2.zero()));
-                    break;
-                case 2:
-                    cars.add(CarFactory.createSaab95(Vector2.zero()));
-                    break;
-            }
+    public void addCarRandom() {
+        if (model.getCarCount() > 10) {
+            return;
+        }
+
+        Vector2 pos = Vector2.randRange(model.getBoundsMin(), model.getBoundsMax());
+
+        int roll = (int)(Math.random() * 4);
+        switch (roll) {
+            case 0:
+                this.addVolvo240(pos);
+                break;
+            case 1:
+                this.addSaab95(pos);
+                break;
+            case 2:
+                this.addScania(pos);
+                break;
         }
     }
 
-    void removeCarRandom() {
-        if (!cars.isEmpty()) {
-            int size = cars.size();
-            int randomNum = (int)(Math.random() * (size+1));
-            cars.remove(randomNum);
+    public void removeCarRandom() {
+        int carCount = model.getCarCount();
+        if (carCount != 0) {
+            int randomIndex = (int)(Math.random() * carCount);
+            model.removeCar(randomIndex);
         }
     }
 }
