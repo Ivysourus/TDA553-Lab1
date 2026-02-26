@@ -113,4 +113,29 @@ final class CarController {
     public void lowerBedAllCars() {
         model.lowerBedAllCars();
     }
+
+    void addCarRandom() {
+        if (cars.size() < 10) {
+            int roll = (int)(Math.random() * 4);
+            switch (roll) {
+                case 0:
+                    cars.add(CarFactory.createVolvo240(Vector2.zero()));
+                    break;
+                case 1:
+                    cars.add(CarFactory.createScania(Vector2.zero()));
+                    break;
+                case 2:
+                    cars.add(CarFactory.createSaab95(Vector2.zero()));
+                    break;
+            }
+        }
+    }
+
+    void removeCarRandom() {
+        if (!cars.isEmpty()) {
+            int size = cars.size();
+            int randomNum = (int)(Math.random() * (size+1));
+            cars.remove(randomNum);
+        }
+    }
 }
