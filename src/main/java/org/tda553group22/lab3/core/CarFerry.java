@@ -1,7 +1,6 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.core;
 
 import java.awt.Color;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Optional;
 

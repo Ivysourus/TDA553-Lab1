@@ -1,4 +1,4 @@
-package org.tda553group22.lab3.main;
+package org.tda553group22.lab3.core;
 
 public abstract class EngineVehicle extends Vehicle {
     protected double enginePower;
