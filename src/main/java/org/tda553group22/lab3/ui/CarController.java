@@ -46,7 +46,7 @@ final class CarController {
         frame = new CarView("CarSim 1.0");
 
         for (Car c : cars) {
-            BufferedImage image = ResourcesHandler.volvoImage; // defualt
+            BufferedImage image = ResourcesHandler.volvoImage; // default
             if (c instanceof Volvo240) {
                 image = ResourcesHandler.volvoImage;
             } else if (c instanceof Saab95) {
