@@ -7,11 +7,12 @@ import java.awt.Color;
 class Volvo240 extends PersonCar {
     private final static double trimFactor = 1.25; // Engine power of the car
 
-    public Volvo240() {
+    public Volvo240(Vector2 pos) {
         nrDoors = 4;
         color = Color.black;
         enginePower = 100;
         modelName = "Volvo240";
+        this.pos = pos;
     }
 
     @Override
