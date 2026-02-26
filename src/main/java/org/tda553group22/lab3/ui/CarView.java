@@ -57,6 +57,9 @@ class CarView extends JFrame {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
+    private final JButton addCarRandomButton = new JButton("Adds random car");
+    private final JButton removeCarRandomButton = new JButton("Removes random car");
+
     public CarView(String frameName) {
         mainPanel = new MainPanel(new Dimension(X, Y - 240));
         this.add(mainPanel);
@@ -127,6 +130,16 @@ class CarView extends JFrame {
         stopButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
         this.add(stopButton);
 
+        addCarRandomButton.setBackground(Color.cyan);
+        addCarRandomButton.setForeground(Color.blue);
+        addCarRandomButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        this.add(addCarRandomButton);
+
+        removeCarRandomButton.setBackground(Color.cyan);
+        removeCarRandomButton.setForeground(Color.blue);
+        removeCarRandomButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        this.add(removeCarRandomButton);
+
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,6 +165,20 @@ class CarView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CarController.instance.stopEngine();
+            }
+        });
+
+        addCarRandomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarController.instance.addCarRandom();
+            }
+        });
+
+        removeCarRandomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarController.instance.removeCarRandom();
             }
         });
 

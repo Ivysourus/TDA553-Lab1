@@ -1,10 +1,7 @@
 package org.tda553group22.lab3.ui;
 
-import org.tda553group22.lab3.core.Volvo240;
-import org.tda553group22.lab3.core.Scania;
-import org.tda553group22.lab3.core.Saab95;
+import org.tda553group22.lab3.core.*;
 import org.tda553group22.lab3.core.WorkshopWithPosition;
-import org.tda553group22.lab3.core.Car;
 import org.tda553group22.lab3.math.Vector2;
 import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
 
@@ -153,6 +150,31 @@ final class CarController {
             if (car instanceof Scania scania) {
                 scania.lowerBed(Math.PI / 2);
             }
+        }
+    }
+
+    void addCarRandom() {
+        if (cars.size() < 10) {
+            int roll = (int)(Math.random() * 4);
+            switch (roll) {
+                case 0:
+                    cars.add(CarFactory.createVolvo240(Vector2.zero()));
+                    break;
+                case 1:
+                    cars.add(CarFactory.createScania(Vector2.zero()));
+                    break;
+                case 2:
+                    cars.add(CarFactory.createSaab95(Vector2.zero()));
+                    break;
+            }
+        }
+    }
+
+    void removeCarRandom() {
+        if (!cars.isEmpty()) {
+            int size = cars.size();
+            int randomNum = (int)(Math.random() * (size+1));
+            cars.remove(randomNum);
         }
     }
 }
