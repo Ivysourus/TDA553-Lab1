@@ -9,7 +9,7 @@ import java.awt.Color;
 import org.junit.jupiter.api.Test;
 
 class Volvo240Test {
-    private final Volvo240 volvo240 = new Volvo240(new Vector2(0, 0));
+    private final Volvo240 volvo240 = new Volvo240();
 
     @Test
     void getNrDoors() {

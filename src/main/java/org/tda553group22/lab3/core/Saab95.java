@@ -7,13 +7,12 @@ import java.awt.Color;
 public class Saab95 extends PersonCar {
     private boolean turboOn;
 
-    public Saab95(Vector2 pos) {
+    public Saab95() {
         nrDoors = 2;
         color = Color.red;
         enginePower = 125;
         turboOn = false;
         modelName = "Saab95";
-        this.pos = pos;
     }
 
     public void setTurboOn() {
