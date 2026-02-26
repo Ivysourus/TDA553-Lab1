@@ -4,7 +4,7 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-public class Scania extends Truck {
+class Scania extends Truck {
     public Scania(Vector2 pos) {
         nrDoors = 2;
         color = Color.white;

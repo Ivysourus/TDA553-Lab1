@@ -4,7 +4,7 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-public class Saab95 extends PersonCar {
+class Saab95 extends PersonCar {
     private boolean turboOn;
 
     public Saab95(Vector2 pos) {

@@ -10,7 +10,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     private final double maxLoadDistance;
     private boolean rampDown;
 
-    public CarTransporter() {
+    public CarTransporter(Vector2 pos) {
         nrDoors = 2;
         enginePower = 80;
         color = Color.pink;
@@ -18,6 +18,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         rampDown = true;
         canLoadHelper = new CanLoadHelperFirstInLastOut<>(3);
         maxLoadDistance = 20.0;
+        this.pos = pos;
     }
 
     public void lowerRamp() {

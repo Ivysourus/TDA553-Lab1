@@ -2,7 +2,7 @@ package org.tda553group22.lab3.math;
 
 import java.awt.Point;
 
-public class Vector2 {
+public final class Vector2 {
     public final double x;
     public final double y;
 

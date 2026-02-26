@@ -1,20 +1,6 @@
 package org.tda553group22.lab3.core;
 
-public class Workshop<T extends Car> implements CanLoadUnordered<T> {
-    private final CanLoadHelperUnordered<T> canLoadHelper;
+import org.tda553group22.lab3.math.Vector2;
 
-    public Workshop(int capacity) {
-        canLoadHelper = new CanLoadHelperUnordered<>(capacity);
-    }
-
-    @Override
-    public void load(T load) {
-        load.stopEngine();
-        canLoadHelper.load(load);
-    }
-
-    @Override
-    public void unload(T load) {
-        canLoadHelper.unload(load);
-    }
+public interface Workshop<T extends Loadable> extends CanLoadUnordered<T>, PositionFunctions {
 }
