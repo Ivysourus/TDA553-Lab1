@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.tda553group22.lab3.math.Vector2;
 
 class Saab95Test {
-    private final Saab95 saab95 = new Saab95();
+    private final Saab95 saab95 = new Saab95(new Vector2(0, 0));
 
     @Test
     void getNrDoors() {

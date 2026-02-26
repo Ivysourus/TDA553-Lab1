@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTransporterTest {
-    private final CarTransporter trans = new CarTransporter();
-    private final PersonCar vroom = new Volvo240();
+    private final CarTransporter trans = new CarTransporter(new Vector2(0, 0));
+    private final PersonCar vroom = new Volvo240(new Vector2(0, 0));
 
     @Test
     void lowerRampTest() {
