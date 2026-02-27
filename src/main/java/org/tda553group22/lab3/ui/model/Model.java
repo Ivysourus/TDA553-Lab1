@@ -66,12 +66,12 @@ public class Model {
     }
 
     public void addObservedCar(Car car, MoveObserver observer) {
-        cars.add(car);
+        addCar(car);
         moveObservers.put(car.hashCode(), observer);
     }
 
     public void addObservedWorkshop(Workshop<? extends Loadable> workshop, MoveObserver observer) {
-        workshops.add(workshop);
+        addWorkshop(workshop);
         moveObservers.put(workshop.hashCode(), observer);
     }
 
