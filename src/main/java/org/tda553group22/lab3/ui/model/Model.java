@@ -13,12 +13,12 @@ import org.tda553group22.lab3.core.TurboFunctions;
 import org.tda553group22.lab3.math.Vector2;
 
 public class Model {
-    private Vector2 boundsMin;
-    private Vector2 boundsMax;
-    private List<Car> cars = new ArrayList<>();
-    private List<Workshop<? extends Loadable>> workshops = new ArrayList<>();
-    private Map<Integer, MoveObserver> moveObservers = new HashMap<>();
-    private List<UpdateObserver> updateObservers = new ArrayList<>();
+    private final Vector2 boundsMin;
+    private final Vector2 boundsMax;
+    private final List<Car> cars = new ArrayList<>();
+    private final List<Workshop<? extends Loadable>> workshops = new ArrayList<>();
+    private final Map<Integer, MoveObserver> moveObservers = new HashMap<>();
+    private final List<UpdateObserver> updateObservers = new ArrayList<>();
 
     public Model(Vector2 boundsMin, Vector2 boundsMax) {
         this.boundsMin = boundsMin;

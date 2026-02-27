@@ -15,17 +15,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 
-/*
-* This class represents the Controller part in the MVC pattern.
-* Its responsibilities are to listen to the View and responds in an appropriate manner by
-* modifying the model state and the updating the view.
- */
 final class CarController {
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    private final Timer timer = new Timer(delay, new TimerListener());
 
     private final Model model;
     private final CarView view;
@@ -43,6 +33,9 @@ final class CarController {
 
         model.addUpdateObserver(view);
 
+        // The delay (ms) corresponds to 20 updates a sec (hz)
+        int delay = 50;
+        Timer timer = new Timer(delay, new TimerListener());
         timer.start();
     }
 

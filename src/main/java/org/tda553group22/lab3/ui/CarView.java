@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class CarView extends JFrame implements UpdateObserver {
-    private final List<Sprite> sprites = new ArrayList<>(); // new DrawPanel(X, Y - 240);
-
     private final int preferredSizeX;
     private final int preferredSizeY;
 
@@ -48,7 +46,6 @@ class CarView extends JFrame implements UpdateObserver {
     private final JButton addCarRandomButton = new JButton("Adds random car");
     private final JButton removeCarRandomButton = new JButton("Removes random car");
 
-    private JSpinner gasSpinner;
     private int gasAmount = 0;
 
     public CarView(String title, Dimension size) {
@@ -68,7 +65,6 @@ class CarView extends JFrame implements UpdateObserver {
     }
 
     public void addSprite(Sprite sprite) {
-        sprites.add(sprite);
         drawPanel.add(sprite);
 
         this.pack();
@@ -105,12 +101,8 @@ class CarView extends JFrame implements UpdateObserver {
                 0,   // min
                 100, // max
                 1);  // step
-        gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
+        JSpinner gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner) e.getSource()).getValue());
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -155,74 +147,24 @@ class CarView extends JFrame implements UpdateObserver {
         removeCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
         this.add(removeCarRandomButton);
 
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.gasAllCars(gasAmount);
-            }
-        });
+        gasButton.addActionListener(_ -> CarController.instance.gasAllCars(gasAmount));
 
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.brakeAllCars(gasAmount);
-            }
-        });
+        brakeButton.addActionListener(_ -> CarController.instance.brakeAllCars(gasAmount));
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.startAllEngines();
-            }
-        });
+        startButton.addActionListener(_ -> CarController.instance.startAllEngines());
 
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.stopAllEngines();
-            }
-        });
+        stopButton.addActionListener(_ -> CarController.instance.stopAllEngines());
 
-        addCarRandomButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.addCarRandom();
-            }
-        });
+        addCarRandomButton.addActionListener(_ -> CarController.instance.addCarRandom());
 
-        removeCarRandomButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.removeCarRandom();
-            }
-        });
+        removeCarRandomButton.addActionListener(_ -> CarController.instance.removeCarRandom());
 
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.setTurboOnAllCars();
-            }
-        });
+        turboOnButton.addActionListener(_ -> CarController.instance.setTurboOnAllCars());
 
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.setTurboOffAllCars();
-            }
-        });
+        turboOffButton.addActionListener(_ -> CarController.instance.setTurboOffAllCars());
 
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.raiseBedAllCars();
-            }
-        });
+        liftBedButton.addActionListener(_ -> CarController.instance.raiseBedAllCars());
 
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CarController.instance.lowerBedAllCars();
-            }
-        });
+        lowerBedButton.addActionListener(_ -> CarController.instance.lowerBedAllCars());
     }
 }

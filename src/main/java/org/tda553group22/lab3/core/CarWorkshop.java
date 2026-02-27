@@ -6,7 +6,7 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
     private Vector2 pos;
     private final CanLoadHelperUnordered<T> canLoadHelper;
     private final Class<T> supportedType;
-    private static double range = 30;
+    private static final double range = 30;
 
     public CarWorkshop(Vector2 pos, int capacity, Class<T> supportedType) {
         this.pos = pos;
