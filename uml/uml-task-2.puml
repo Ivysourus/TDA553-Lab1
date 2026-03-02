@@ -331,6 +331,7 @@ class org.tda553group22.lab3.ui.Sprite {
 
 class org.tda553group22.lab3.ui.model.Model {
 	{field} -moveObservers : java.util.Map
+	{field} -updateObservers : java.util.List
 	{method} +addCar ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
 	{method} +addObservedCar ( paramCar1 : org.tda553group22.lab3.core.Car , paramMoveObserver2 : org.tda553group22.lab3.ui.model.MoveObserver ) : void
 	{method} +addObservedWorkshop ( paramWorkshop1 : org.tda553group22.lab3.core.Workshop , paramMoveObserver2 : org.tda553group22.lab3.ui.model.MoveObserver ) : void
@@ -436,6 +437,8 @@ org.tda553group22.lab3.core.CarWorkshop ..> org.tda553group22.lab3.core.Workshop
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.Car : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.CarFactory : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.WorkshopFactory : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarView : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.model.Model : use
