@@ -8,7 +8,7 @@ class Main {
     public static void main(String[] args) {
         Vector2 boundsMin = new Vector2(0, 0);
         Vector2 boundsExtents = new Vector2(1000, 800);
-        Vector2 boundsMax = boundsMin.add(boundsExtents);
+        Vector2 boundsMax = boundsMin.add(new Vector2(boundsExtents.x - 110, boundsExtents.y)); // -110 for the size of images.
 
         Model model = new Model(boundsMin, boundsMax);
         CarController carController = new CarController("CarSim 1.0", Vector2AwtExtensions.toDimension(boundsExtents), model);
