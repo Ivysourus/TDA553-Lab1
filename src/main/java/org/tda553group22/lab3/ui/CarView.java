@@ -84,7 +84,7 @@ class CarView extends JFrame implements UpdateObserver {
 
     private void initDrawPanel() {
         drawPanel.setDoubleBuffered(true);
-        drawPanel.setPreferredSize(new Dimension(this.preferredSizeX, this.preferredSizeY - 240));
+        drawPanel.setPreferredSize(new Dimension(this.preferredSizeX, this.preferredSizeY - 290));
         drawPanel.setBackground(Color.white);
         this.add(drawPanel);
     }
@@ -133,12 +133,12 @@ class CarView extends JFrame implements UpdateObserver {
 
         addCarRandomButton.setBackground(Color.cyan);
         addCarRandomButton.setForeground(Color.blue);
-        addCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
+        addCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 2 - 20, 50));
         this.add(addCarRandomButton);
 
         removeCarRandomButton.setBackground(Color.cyan);
         removeCarRandomButton.setForeground(Color.blue);
-        removeCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 5 - 15, 200));
+        removeCarRandomButton.setPreferredSize(new Dimension(this.preferredSizeX / 2 - 20, 50));
         this.add(removeCarRandomButton);
 
         gasButton.addActionListener(_ -> CarController.instance.gasAllCars(gasAmount));
