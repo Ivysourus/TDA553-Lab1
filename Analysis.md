@@ -40,6 +40,14 @@ One member would begin with separating everything into separate packages. You wo
 - Fixes made: CarView now holds a new class `Sprite` that holds only an image, position and angle. The Spite class implements a new `MoveObserver` interface that is stored in Model and is notified each time a car moves. The CarView class implements a new `UpdateObserver` interface that is stored in Model and is notified when all MoveObservers have been notified.
 - ![](uml/rendered/uml-task-2.svg)
 
+## More design patterns
+- Observer
+    - Already used in Model. We used it to implement MVC in a correct way. With it we're able to remove a dependency from Model to CarView.
+- Factory Method
+    - Already used for creating cars and workshops. We used it to follow dependency inverstion priciple by making the internal implementation details of the different cars package private so external users have to depend on the factory and the higher up class Car.
+- State
+    - Could use it to make the cars state machine more robust.
+
 ## Design Threads
 
 - Where do we use design patterns so far, intentional or unintentional? What did it accomplish?
