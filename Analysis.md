@@ -37,8 +37,8 @@ One member would begin with separating everything into separate packages. You wo
 ## Model-View-Controller
 - From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel so it accessed CarView directly. CarController was not thin enough. It did a bunch of the logic that was supposed to be in a model.
 - We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController, and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view. We tried to make a design using a GameObject interface but we scrapped while we were trying to implement it. We realised that the GameObject interface had a major problem. If we wanted to use it with a model the model would have to handle references to sprites. The model should be able to be used without sprites at all.
-- Fixes made: CarView now holds a new class `Sprite` that holds only an image, position and angle. The Spite class implements a new `MoveObserver` interface that is stored in Model and is updated through that.
-- TODO: New UML
+- Fixes made: CarView now holds a new class `Sprite` that holds only an image, position and angle. The Spite class implements a new `MoveObserver` interface that is stored in Model and is notified each time a car moves. The CarView class implements a new `UpdateObserver` interface that is stored in Model and is notified when all MoveObservers have been notified.
+- ![](uml/rendered/uml-task-2.svg)
 
 ## Design Threads
 
