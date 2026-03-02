@@ -12,6 +12,7 @@ class Scania extends Truck {
         enginePower = 100;
         maxBedAngle = (7.0 / 18.0) * Math.PI;
         this.pos = pos;
+        state = new EngineVehicleStopped();
     }
 
     @Override

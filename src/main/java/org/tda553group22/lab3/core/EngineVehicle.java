@@ -2,44 +2,37 @@ package org.tda553group22.lab3.core;
 
 public abstract class EngineVehicle extends Vehicle {
     protected double enginePower;
+    protected EngineVehicleState state;
+
+    public void setState(EngineVehicleState state){
+        this.state = state;
+    }
 
     public double getEnginePower() {
         return enginePower;
     }
 
     public void startEngine() {
-        currentSpeed = 0.1;
+        state.startEngine(this);
     }
 
     public void stopEngine() {
-        currentSpeed = 0;
+        state.stopEngine(this);
     }
 
-    /**
-     * Increases the speed of the vehicle.
-     * 
-     * @param amount The amount to speed up by in the range [0,1].
-     */
     public void gas(double amount) {
-        assert amount >= 0.0 && amount <= 1.0 : "Variable `amount` outside the range [0,1]";
-        incrementSpeed(amount);
+        state.gas(this, amount);
     }
 
-    /**
-     * Decreases the speed of the vehicle.
-     * 
-     * @param amount The amount to slow down by in the range [0,1].
-     */
     public void brake(double amount) {
-        assert amount >= 0.0 && amount <= 1.0 : "Variable `amount` outside the range [0,1]";
-        decrementSpeed(amount);
+        state.brake(this, amount);
     }
 
-    private void incrementSpeed(double amount) {
+    void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
-    private void decrementSpeed(double amount) {
+    void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 

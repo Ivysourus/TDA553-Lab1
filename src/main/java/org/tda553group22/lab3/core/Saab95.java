@@ -14,6 +14,7 @@ class Saab95 extends PersonCar implements TurboFunctions {
         turboOn = false;
         modelName = "Saab95";
         this.pos = pos;
+        state = new EngineVehicleStopped();
     }
 
     @Override
