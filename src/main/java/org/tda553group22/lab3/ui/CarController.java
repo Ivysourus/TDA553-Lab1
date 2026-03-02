@@ -8,7 +8,6 @@ import org.tda553group22.lab3.core.Loadable;
 import org.tda553group22.lab3.math.Vector2;
 import org.tda553group22.lab3.ui.model.Model;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,20 +15,19 @@ import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
 final class CarController {
-
     private final Model model;
     private final CarView view;
 
     public static CarController instance;
 
-    public CarController(String title, Dimension size, Model model) {
+    public CarController(Model model, CarView view) {
         if (instance != null) {
             throw new RuntimeException("An instance of CarController already exists");
         }
         instance = this;
 
         this.model = model;
-        view = new CarView(title, size);
+        this.view = view;
 
         model.addUpdateObserver(view);
 

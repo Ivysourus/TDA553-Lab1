@@ -4,7 +4,7 @@ import org.tda553group22.lab3.math.Vector2;
 
 import java.awt.Color;
 
-public abstract class Vehicle implements Loadable, HasAngle {
+public abstract class Vehicle implements Loadable, HasAngle, Movable {
     protected double currentSpeed;
     protected String modelName;
     protected Color color;
