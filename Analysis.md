@@ -24,10 +24,10 @@
 - Create a new class `CanLoadUnorderedFactory` for the same reasons as CarFactory that creates workshops.
 - Create a new interface `PositionFunctions` the extends HasPosition and Positionable.
 - Create a new interface `GameObject` that implements the new interface `HasSprite` and PositionFunctions and has the function `getInner`.
-- Create the new classes `GameObjectWrapWithSprite` and `GameObjectWrapWithInner` that wraps other objects into the IGameObject interface.
+- Create the new classes `GameObjectWrapWithSprite` and `GameObjectWrapWithInner` that wraps other objects into the GameObject interface.
 - Create a new `GameObjectFactory` that creates cars and workshops with a sprite added. It is solely responsible for selecting the sprite for the game objects.
 - CarController now has a list of `GameObject<Car>` and `GameObject<CanLoadUnordered>`.
-- Add a new class `CarModel` that holds the cars and workshops. This follows MVC principle. CarController gets user input from CarView and updates CarModel. CarModel then updates CarView. Thus removing the two-way dependency we had before.
+- Add a new class `Model` that holds the cars and workshops. This follows MVC principle. CarController gets user input from CarView and updates CarModel. CarModel then updates CarView. Thus removing the two-way dependency we had before.
 
 ## Implementing in a team
 One member would begin with separating everything into separate packages. You would then decide on an API between the packages. Then you could delegate out the modification of the packages to different teams. You would have occasional meetings and testing to make sure your teams are aligned.
@@ -35,12 +35,20 @@ One member would begin with separating everything into separate packages. You wo
 # Analysis Lab 4
 
 ## Model-View-Controller
-- From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel.
-- We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController, and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view.
-- TODO: New UML
+- From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel so it accessed CarView directly. CarController was not thin enough. It did a bunch of the logic that was supposed to be in a model.
+- We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController, and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view. We tried to make a design using a GameObject interface but we scrapped while we were trying to implement it. We realised that the GameObject interface had a major problem. If we wanted to use it with a model the model would have to handle references to sprites. The model should be able to be used without sprites at all.
+- Fixes made: CarView now holds a new class `Sprite` that holds only an image, position and angle. The Spite class implements a new `MoveObserver` interface that is stored in Model and is notified each time a car moves. The CarView class implements a new `UpdateObserver` interface that is stored in Model and is notified when all MoveObservers have been notified.
+- ![](uml/rendered/uml-task-2.svg)
+
+## More design patterns
+- Observer
+    - Already used in Model. We used it to implement MVC in a correct way. With it we're able to remove a dependency from Model to CarView.
+- Factory Method
+    - Already used for creating cars and workshops. We used it to follow dependency inverstion priciple by making the internal implementation details of the different cars package private so external users have to depend on the factory and the higher up class Car.
+- State
+    - Could use it to make the cars state machine more robust.
 
 ## Design Threads
-
 - Where do we use design patterns so far, intentional or unintentional? What did it accomplish?
 - Where is there room to add more design patterns, what design issues could we fix with them and if not why would we not benefit form it.
 - TODO: Update Design with the identified changes

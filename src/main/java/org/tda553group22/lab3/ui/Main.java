@@ -11,7 +11,8 @@ class Main {
         Vector2 boundsMax = boundsMin.add(new Vector2(boundsExtents.x - 110, boundsExtents.y)); // -110 for the size of images.
 
         Model model = new Model(boundsMin, boundsMax);
-        CarController carController = new CarController("CarSim 1.0", Vector2AwtExtensions.toDimension(boundsExtents), model);
+        CarView view = new CarView("CarSim", Vector2AwtExtensions.toDimension(boundsExtents));
+        CarController carController = new CarController(model, view);
 
         carController.addVolvo240(new Vector2(0, 0));
         carController.addSaab95(new Vector2(0, 100));
