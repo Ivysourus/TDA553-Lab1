@@ -49,7 +49,6 @@ One member would begin with separating everything into separate packages. You wo
     - Could use it to make the cars state machine more robust.
 
 ## Design Threads
-
 - Where do we use design patterns so far, intentional or unintentional? What did it accomplish?
 - Where is there room to add more design patterns, what design issues could we fix with them and if not why would we not benefit form it.
 - TODO: Update Design with the identified changes
