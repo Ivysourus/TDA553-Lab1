@@ -1,7 +1,6 @@
 package org.tda553group22.lab3.ui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -23,7 +22,6 @@ class ControlPanel extends JPanel {
 
     public ControlPanel() {
         this.setLayout(new GridLayout(2, 5));
-        // this.setBackground(Color.CYAN);
 
         this.add(gasButton, 0);
         this.add(turboOnButton, 1);
