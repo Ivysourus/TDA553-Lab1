@@ -1,13 +1,14 @@
-# Analysis Lab 3
-## Dependencies
+# Analysis
+## Lab 3
+### Dependencies
 - There are a lot of highly needed dependencies, especially those that we have with the hierarchy of our different car classes, since they all have a lot of common factors such as position, speed and more. Then there is the dependencies we need through composition, specifically the LoadHelper classes that help to simplify the loading/unloading process with the objects that possess such attributes.
 
-## Class Functions and Responsibility
+### Class Functions and Responsibility
 - Our classes have their very own responsibility sectors if you would call it, as they only focus on the core function they need to fulfil. Apart from the CarView, CarController and DrawPanel classes, not a lot of dividing is possible here.
 - They would change to limit the amount of functions needed per class and make it more clear what each class is meant for without having to dig through multiple statements and methods that generally don't relate to one another.
 - It can be implemented in the CarView, DrawPanel and CarController classes, and we have already implemented in a way with our composition helper classes. They are split up into one parent class and 3 subclasses that define the 3 different way to load/unload something from an object instead of us having one class with all 3 different functions inside of it.
 
-## Refactorization Plan
+### Refactorization Plan
 - Make everything as private as possible.
 - Make all variables final by default.
 - Move CarController, CarView and DrawPanel into new package `ui`.
@@ -29,26 +30,22 @@
 - CarController now has a list of `GameObject<Car>` and `GameObject<CanLoadUnordered>`.
 - Add a new class `Model` that holds the cars and workshops. This follows MVC principle. CarController gets user input from CarView and updates CarModel. CarModel then updates CarView. Thus removing the two-way dependency we had before.
 
-## Implementing in a team
+### Implementing in a team
 One member would begin with separating everything into separate packages. You would then decide on an API between the packages. Then you could delegate out the modification of the packages to different teams. You would have occasional meetings and testing to make sure your teams are aligned.
 
-# Analysis Lab 4
-
-## Model-View-Controller
+## Lab 4
+### Model-View-Controller
 - From the start, the model and the controller bled together. The CarController held references to cars. CarController also needed to modify DrawPanel so it accessed CarView directly. CarController was not thin enough. It did a bunch of the logic that was supposed to be in a model.
 - We added methods to manipulate DrawPanel in CarView to remove the dependency of DrawPanel from CarController, and we can now make drawPanel private in CarView. We did not have any planned way to communicate state changes from the model to the view. We tried to make a design using a GameObject interface but we scrapped while we were trying to implement it. We realised that the GameObject interface had a major problem. If we wanted to use it with a model the model would have to handle references to sprites. The model should be able to be used without sprites at all.
 - Fixes made: CarView now holds a new class `Sprite` that holds only an image, position and angle. The Spite class implements a new `MoveObserver` interface that is stored in Model and is notified each time a car moves. The CarView class implements a new `UpdateObserver` interface that is stored in Model and is notified when all MoveObservers have been notified.
 - ![](uml/rendered/uml-task-2.svg)
 
-## More design patterns
+### More design patterns
 - Observer
     - Already used in Model. We used it to implement MVC in a correct way. With it we're able to remove a dependency from Model to CarView.
 - Factory Method
     - Already used for creating cars and workshops. We used it to follow dependency inverstion priciple by making the internal implementation details of the different cars package private so external users have to depend on the factory and the higher up class Car.
 - State
     - Could use it to make the cars state machine more robust.
-
-## Design Threads
-- Where do we use design patterns so far, intentional or unintentional? What did it accomplish?
-- Where is there room to add more design patterns, what design issues could we fix with them and if not why would we not benefit form it.
-- TODO: Update Design with the identified changes
+- Composite
+    - Would be used if there existed a Vehicle that could load itself.
