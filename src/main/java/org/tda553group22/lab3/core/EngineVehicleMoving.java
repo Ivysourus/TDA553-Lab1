@@ -16,7 +16,7 @@ class EngineVehicleMoving implements EngineVehicleState {
     @Override
     public void stopEngine() {
         engineVehicle.currentSpeed = 0;
-        engineVehicle.setState(new EngineVehicleStopped(engineVehicle));
+        engineVehicle.setEngineVehicleState(new EngineVehicleStopped(engineVehicle));
     }
 
     /**
@@ -40,7 +40,7 @@ class EngineVehicleMoving implements EngineVehicleState {
         assert amount >= 0.0 && amount <= 1.0 : "Variable `amount` outside the range [0,1]";
         engineVehicle.decrementSpeed(amount);
         if (engineVehicle.getCurrentSpeed() == 0) {
-            engineVehicle.setState(new EngineVehicleStopped(engineVehicle));
+            engineVehicle.setEngineVehicleState(new EngineVehicleStopped(engineVehicle));
         }
     }
 

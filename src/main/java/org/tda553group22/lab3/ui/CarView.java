@@ -8,8 +8,6 @@ import org.tda553group22.lab3.ui.model.UpdateObserver;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 class CarView extends JFrame implements UpdateObserver {
     private final int boundsX;

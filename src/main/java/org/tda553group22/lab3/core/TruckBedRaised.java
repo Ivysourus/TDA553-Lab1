@@ -1,9 +1,9 @@
 package org.tda553group22.lab3.core;
 
-class TruckBedFullyRaised implements TruckBedState {
+class TruckBedRaised implements TruckBedState {
     private final Truck truck;
 
-    public TruckBedFullyRaised(Truck truck) {
+    public TruckBedRaised(Truck truck) {
         this.truck = truck;
     }
 
@@ -18,8 +18,8 @@ class TruckBedFullyRaised implements TruckBedState {
             return;
         }
         truck.bedAngle = Math.max(0, truck.bedAngle - angle);
-        truck.setTruckBedState(new TruckBedPartiallyLowered(truck));
-        truck.setState(new EngineVehicleLoaded(truck));
+        truck.setTruckBedState(new TruckBedInBetween(truck));
+        truck.setEngineVehicleState(new EngineVehicleLocked(truck));
     }
 
     @Override

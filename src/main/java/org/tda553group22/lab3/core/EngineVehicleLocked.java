@@ -1,9 +1,9 @@
 package org.tda553group22.lab3.core;
 
-class EngineVehicleLoaded implements EngineVehicleState {
+class EngineVehicleLocked implements EngineVehicleState {
     private final EngineVehicle engineVehicle;
 
-    public EngineVehicleLoaded(EngineVehicle engineVehicle) {
+    public EngineVehicleLocked(EngineVehicle engineVehicle) {
         this.engineVehicle = engineVehicle;
     }
 

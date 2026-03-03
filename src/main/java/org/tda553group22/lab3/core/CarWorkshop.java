@@ -46,7 +46,7 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
         }
 
         load.stopEngine();
-        load.setState(new EngineVehicleLoaded(load));
+        load.setEngineVehicleState(new EngineVehicleLocked(load));
         canLoadHelper.load(load);
 
         Timer timer = new Timer(serviceTimeMs, new TimerListener<T>(load, this));
@@ -57,7 +57,7 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
     @Override
     public void unload(T load) {
         servicedCars.add(load.hashCode());
-        load.setState(new EngineVehicleStopped(load));
+        load.setEngineVehicleState(new EngineVehicleStopped(load));
         canLoadHelper.unload(load);
     }
 

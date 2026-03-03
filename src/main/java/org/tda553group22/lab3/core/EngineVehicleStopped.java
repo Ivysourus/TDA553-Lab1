@@ -10,7 +10,7 @@ class EngineVehicleStopped implements EngineVehicleState {
     @Override
     public void startEngine() {
         engineVehicle.currentSpeed = 0.1;
-        engineVehicle.setState(new EngineVehicleMoving(engineVehicle));
+        engineVehicle.setEngineVehicleState(new EngineVehicleMoving(engineVehicle));
     }
 
     @Override

@@ -1,9 +1,9 @@
 package org.tda553group22.lab3.core;
 
-class TruckBedPartiallyLowered implements TruckBedState {
+class TruckBedInBetween implements TruckBedState {
     private final Truck truck;
 
-    public TruckBedPartiallyLowered(Truck truck) {
+    public TruckBedInBetween(Truck truck) {
         this.truck = truck;
     }
 
@@ -12,8 +12,8 @@ class TruckBedPartiallyLowered implements TruckBedState {
         assert angle > 0 : "Angle cannot be negative or zero";
         truck.bedAngle = Math.min(truck.bedAngle + angle, truck.maxBedAngle);
         if (truck.bedAngle == truck.maxBedAngle) {
-            truck.setTruckBedState(new TruckBedFullyRaised(truck));
-            truck.setState(new EngineVehicleStopped(truck));
+            truck.setTruckBedState(new TruckBedRaised(truck));
+            truck.setEngineVehicleState(new EngineVehicleStopped(truck));
         }
     }
 
@@ -22,7 +22,7 @@ class TruckBedPartiallyLowered implements TruckBedState {
         assert angle > 0 : "Angle cannot be negative or zero";
         truck.bedAngle = Math.max(0, truck.bedAngle - angle);
         if (truck.bedAngle == 0) {
-            truck.setTruckBedState(new TruckBedFullyLowered(truck));
+            truck.setTruckBedState(new TruckBedLowered(truck));
         }
     }
 

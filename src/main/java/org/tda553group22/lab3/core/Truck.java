@@ -1,7 +1,7 @@
 package org.tda553group22.lab3.core;
 
 public abstract class Truck extends Car implements TruckBedFunctions {
-    private TruckBedState truckBedState = new TruckBedFullyRaised(this);
+    private TruckBedState truckBedState = new TruckBedRaised(this);
 
     /**
      * The angle of the truck bed, from 0-`maxBedAngle` degrees (in radians).
