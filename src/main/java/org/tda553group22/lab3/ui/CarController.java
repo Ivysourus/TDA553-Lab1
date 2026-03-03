@@ -39,6 +39,7 @@ final class CarController {
     }
 
     private class TimerListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             model.update(delay);
         }

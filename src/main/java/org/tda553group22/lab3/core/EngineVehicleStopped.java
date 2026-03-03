@@ -1,24 +1,36 @@
 package org.tda553group22.lab3.core;
 
-public class EngineVehicleStopped implements EngineVehicleState {
-    @Override
-    public void startEngine(EngineVehicle vehicle){
-        vehicle.currentSpeed = 0.1;
-        vehicle.state = new EngineVehicleMoving();
+class EngineVehicleStopped implements EngineVehicleState {
+    private final EngineVehicle engineVehicle;
+
+    public EngineVehicleStopped(EngineVehicle engineVehicle) {
+        this.engineVehicle = engineVehicle;
     }
 
     @Override
-    public void stopEngine(EngineVehicle vehicle){
-        // Do nothing
+    public void startEngine() {
+        engineVehicle.currentSpeed = 0.1;
+        engineVehicle.setState(new EngineVehicleMoving(engineVehicle));
     }
 
     @Override
-    public void gas(EngineVehicle vehicle, double amount){
-        // Do nothing
+    public void stopEngine() {
     }
 
     @Override
-    public void brake(EngineVehicle vehicle, double amount){
-        // Do nothing
+    public void gas(double amount) {
+    }
+
+    @Override
+    public void brake(double amount) {
+    }
+
+    @Override
+    public void move() {
+    }
+
+    @Override
+    public int getEngineVehicleHashCode() {
+        return engineVehicle.hashCode();
     }
 }

@@ -1,11 +1,15 @@
 package org.tda553group22.lab3.core;
 
-public interface EngineVehicleState {
-    void startEngine(EngineVehicle vehicle);
+interface EngineVehicleState {
+    void startEngine();
 
-    void stopEngine(EngineVehicle vehicle);
+    void stopEngine();
 
-    void gas(EngineVehicle vehicle, double amount);
+    void gas(double amount);
 
-    void brake(EngineVehicle vehicle, double amount);
+    void brake(double amount);
+
+    void move();
+
+    int getEngineVehicleHashCode();
 }

@@ -1,23 +1,34 @@
 package org.tda553group22.lab3.core;
 
-public class EngineVehicleLoaded implements EngineVehicleState {
-    @Override
-    public void startEngine(EngineVehicle vehicle){
-        // Do nothing
+class EngineVehicleLoaded implements EngineVehicleState {
+    private final EngineVehicle engineVehicle;
+
+    public EngineVehicleLoaded(EngineVehicle engineVehicle) {
+        this.engineVehicle = engineVehicle;
     }
 
     @Override
-    public void stopEngine(EngineVehicle vehicle){
-        // Do nothing
+    public void startEngine() {
     }
 
     @Override
-    public void gas(EngineVehicle vehicle, double amount){
-        // Do nothing
+    public void stopEngine() {
     }
 
     @Override
-    public void brake(EngineVehicle vehicle, double amount){
-       // Do nothing
+    public void gas(double amount) {
+    }
+
+    @Override
+    public void brake(double amount) {
+    }
+
+    @Override
+    public void move() {
+    }
+
+    @Override
+    public int getEngineVehicleHashCode() {
+        return engineVehicle.hashCode();
     }
 }

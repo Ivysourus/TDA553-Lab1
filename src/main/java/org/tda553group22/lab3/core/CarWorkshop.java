@@ -2,18 +2,19 @@ package org.tda553group22.lab3.core;
 
 import org.tda553group22.lab3.math.Vector2;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 class CarWorkshop<T extends Car> implements Workshop<T> {
-    private final ArrayList<int> fixedCars = new ArrayList<>();
+    private final ArrayList<Integer> servicedCars = new ArrayList<>();
     private Vector2 pos;
     private final CanLoadHelperUnordered<T> canLoadHelper;
     private final Class<T> supportedType;
     private static final double range = 30;
-    private static final int serviceTimeMs = 10000;
+    private static final int serviceTimeMs = 5000;
 
     public CarWorkshop(Vector2 pos, int capacity, Class<T> supportedType) {
         this.pos = pos;
@@ -27,8 +28,8 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
     }
 
     @Override
-    public boolean isWithinRange(Vector2 pos) {
-        return WorkshopWithinRangeHelper.isWithinRange(this.pos, pos, range);
+    public boolean withinRange(Vector2 pos) {
+        return WorkshopWithinRangeHelper.withinRange(this.pos, pos, range);
     }
 
     @Override
@@ -38,21 +39,23 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
 
     @Override
     public void load(T load) {
-        if (!fixedCars.contains(load.hashCode())){
-            load.stopEngine();
-            load.state = new EngineVehicleLoaded();
-            canLoadHelper.load(load);
+        if (servicedCars.contains(load.hashCode())) {
+            return;
         }
 
-        Timer timer = new Timer(serviceTimeMs, new TimerListener(load, this));
+        load.stopEngine();
+        load.setState(new EngineVehicleLoaded(load));
+        canLoadHelper.load(load);
+
+        Timer timer = new Timer(serviceTimeMs, new TimerListener<T>(load, this));
         timer.setRepeats(false);
         timer.start();
     }
 
     @Override
     public void unload(T load) {
-        fixedCars.add(load.hashCode());
-        load.state = new EngineVehicleStopped();
+        servicedCars.add(load.hashCode());
+        load.setState(new EngineVehicleStopped(load));
         canLoadHelper.unload(load);
     }
 
@@ -66,18 +69,18 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
         this.pos = pos;
     }
 
-    private static class TimerListener implements ActionListener {
-        private final Car car;
-        private final Workshop<Car> workshop;
+    private static class TimerListener<T extends Car> implements ActionListener {
+        private final T load;
+        private final Workshop<T> workshop;
 
-        public TimerListener(Car car, Workshop<? extends Car> workshop) {
-            this.car = car;
-            this.workshop = (Workshop<Car>) workshop;
+        public TimerListener(T load, Workshop<T> workshop) {
+            this.load = load;
+            this.workshop = workshop;
         }
 
         @Override
-        public void actionPerformed(ActionEvent e){
-            workshop.unload(car);
+        public void actionPerformed(ActionEvent e) {
+            workshop.unload(load);
         }
     }
 }

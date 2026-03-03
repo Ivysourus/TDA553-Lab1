@@ -42,7 +42,7 @@ public class Model {
             }
 
             for (Workshop<? extends Loadable> workshop : workshops) {
-                if (workshop.canAccept(car) && workshop.isWithinRange(car.getPos())) {
+                if (workshop.canAccept(car) && workshop.withinRange(car.getPos())) {
                     ((Workshop<Loadable>) workshop).load(car);
                 }
             }

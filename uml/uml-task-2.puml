@@ -15,7 +15,6 @@ interface org.tda553group22.lab3.core.Angleable {
 
 
 abstract class org.tda553group22.lab3.core.CanLoadHelper {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #capacity : int
 	{field} #cargo : java.util.List
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
@@ -33,7 +32,6 @@ class org.tda553group22.lab3.core.CanLoadHelperFirstInLastOut {
 
 
 class org.tda553group22.lab3.core.CanLoadHelperUnordered {
-	{field} {static} ~$assertionsDisabled : boolean
 	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 }
 
@@ -63,7 +61,6 @@ class org.tda553group22.lab3.core.CarFactory {
 
 
 class org.tda553group22.lab3.core.CarFerry {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} -carLanes : int
 	{field} -laneCanLoadHelpers : java.util.ArrayList
 	{method} +load ( paramCar1 : org.tda553group22.lab3.core.Car , paramint2 : int ) : void
@@ -73,7 +70,6 @@ class org.tda553group22.lab3.core.CarFerry {
 
 
 class org.tda553group22.lab3.core.CarTransporter {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} -maxLoadDistance : double
 	{field} -rampDown : boolean
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
@@ -90,7 +86,7 @@ class org.tda553group22.lab3.core.CarWorkshop {
 	{field} {static} -range : double
 	{field} -supportedType : Class
 	{method} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
-	{method} +isWithinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
+	{method} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
 	{method} +load ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method} +unload ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
@@ -99,7 +95,6 @@ class org.tda553group22.lab3.core.CarWorkshop {
 
 
 abstract class org.tda553group22.lab3.core.EngineVehicle {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #enginePower : double
 	{method} +brake ( paramdouble1 : double ) : void
 	{method} -decrementSpeed ( paramdouble1 : double ) : void
@@ -158,7 +153,6 @@ class org.tda553group22.lab3.core.Scania {
 
 
 abstract class org.tda553group22.lab3.core.Truck {
-	{field} {static} ~$assertionsDisabled : boolean
 	{field} #bedAngle : double
 	{field} #maxBedAngle : double
 	{method} +lowerBed ( paramdouble1 : double ) : void
@@ -200,7 +194,7 @@ class org.tda553group22.lab3.core.Volvo240 {
 interface org.tda553group22.lab3.core.Workshop {
 	{method}  {abstract} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method}  {abstract} +getRange () : double
-	{method}  {abstract} +isWithinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
+	{method}  {abstract} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
 }
 
 
@@ -210,7 +204,7 @@ class org.tda553group22.lab3.core.WorkshopFactory {
 
 
 class org.tda553group22.lab3.core.WorkshopWithinRangeHelper {
-	{method}  {static} +isWithinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramVector22 : org.tda553group22.lab3.math.Vector2 , paramdouble3 : double ) : boolean
+	{method}  {static} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramVector22 : org.tda553group22.lab3.math.Vector2 , paramdouble3 : double ) : boolean
 }
 
 

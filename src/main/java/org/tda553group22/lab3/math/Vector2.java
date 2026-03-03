@@ -13,6 +13,12 @@ public final class Vector2 {
         this(another.x, another.y);
     }
 
+    public static Vector2 fromPolar(double radius, double angle) {
+        return new Vector2(
+                Math.cos(angle) * radius,
+                Math.sin(angle) * radius);
+    }
+
     public static Vector2 zero() {
         return new Vector2(0.0, 0.0);
     }

@@ -13,7 +13,6 @@ class Volvo240 extends PersonCar {
         enginePower = 100;
         modelName = "Volvo240";
         this.pos = pos;
-        state = new EngineVehicleStopped();
     }
 
     @Override

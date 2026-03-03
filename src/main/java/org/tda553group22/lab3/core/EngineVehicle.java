@@ -2,26 +2,36 @@ package org.tda553group22.lab3.core;
 
 public abstract class EngineVehicle extends Vehicle {
     protected double enginePower;
-    protected EngineVehicleState state;
+    private EngineVehicleState state = new EngineVehicleStopped(this);
+
+    protected void setState(EngineVehicleState state) {
+        assert state.getEngineVehicleHashCode() == this.hashCode() : "State has a different engineVehicle than this";
+        this.state = state;
+    }
 
     public double getEnginePower() {
         return enginePower;
     }
 
     public void startEngine() {
-        state.startEngine(this);
+        state.startEngine();
     }
 
     public void stopEngine() {
-        state.stopEngine(this);
+        state.stopEngine();
     }
 
     public void gas(double amount) {
-        state.gas(this, amount);
+        state.gas(amount);
     }
 
     public void brake(double amount) {
-        state.brake(this, amount);
+        state.brake(amount);
+    }
+
+    @Override
+    public void move() {
+        state.move();
     }
 
     void incrementSpeed(double amount) {

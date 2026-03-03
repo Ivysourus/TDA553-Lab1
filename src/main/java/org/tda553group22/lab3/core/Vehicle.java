@@ -35,15 +35,12 @@ public abstract class Vehicle implements Loadable, HasAngle, Movable {
         return color;
     }
 
-
     protected void setColor(Color clr) {
         color = clr;
     }
 
     public void move() {
-        this.pos = pos.add(new Vector2(
-                Math.cos(angle) * currentSpeed,
-                Math.sin(angle) * currentSpeed));
+        this.pos = pos.add(Vector2.fromPolar(currentSpeed, angle));
     }
 
     private void turn(double angle) {
