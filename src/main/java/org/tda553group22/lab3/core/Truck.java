@@ -1,6 +1,8 @@
 package org.tda553group22.lab3.core;
 
 public abstract class Truck extends Car implements TruckBedFunctions {
+    private TruckBedState truckBedState = new TruckBedFullyRaised(this);
+
     /**
      * The angle of the truck bed, from 0-`maxBedAngle` degrees (in radians).
      */
@@ -11,16 +13,19 @@ public abstract class Truck extends Car implements TruckBedFunctions {
      */
     protected double maxBedAngle;
 
+    protected void setTruckBedState(TruckBedState truckBedState) {
+        assert truckBedState.getTruckHashCode() == this.hashCode() : "State has a different truck than this";
+        this.truckBedState = truckBedState;
+    }
+
     @Override
     public void raiseBed(double angle) {
-        assert angle >= 0 : "Angle cannot be negative";
-        bedAngle = Math.min(bedAngle + angle, maxBedAngle);
+        truckBedState.raiseBed(angle);
     }
 
     @Override
     public void lowerBed(double angle) {
-        assert angle >= 0 : "Angle cannot be negative";
-        bedAngle = Math.max(0, bedAngle - angle);
+        truckBedState.lowerBed(angle);
     }
 
     @Override
