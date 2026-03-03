@@ -18,6 +18,9 @@ final class CarController {
     private final Model model;
     private final CarView view;
 
+    // The delay (seconds) corresponds to 20 updates a sec (hz)
+    private static final double delay = 50d / 1000;
+
     public static CarController instance;
 
     public CarController(Model model, CarView view) {
@@ -31,15 +34,13 @@ final class CarController {
 
         model.addUpdateObserver(view);
 
-        // The delay (ms) corresponds to 20 updates a sec (hz)
-        int delay = 50;
-        Timer timer = new Timer(delay, new TimerListener());
+        Timer timer = new Timer((int) (delay*1000), new TimerListener());
         timer.start();
     }
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            model.update();
+            model.update(delay);
         }
     }
 

@@ -4,10 +4,6 @@ public abstract class EngineVehicle extends Vehicle {
     protected double enginePower;
     protected EngineVehicleState state;
 
-    public void setState(EngineVehicleState state){
-        this.state = state;
-    }
-
     public double getEnginePower() {
         return enginePower;
     }

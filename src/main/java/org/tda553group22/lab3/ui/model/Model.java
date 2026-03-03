@@ -19,13 +19,15 @@ public class Model {
     private final List<Workshop<? extends Loadable>> workshops = new ArrayList<>();
     private final Map<Integer, MoveObserver> moveObservers = new HashMap<>();
     private final List<UpdateObserver> updateObservers = new ArrayList<>();
+    private double elapsedTime;
 
     public Model(Vector2 boundsMin, Vector2 boundsMax) {
         this.boundsMin = boundsMin;
         this.boundsMax = boundsMax;
     }
 
-    public void update() {
+    public void update(double deltaTime) {
+        elapsedTime += deltaTime;
         for (Car car : cars) {
             car.move();
 
