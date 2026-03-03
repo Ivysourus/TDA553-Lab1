@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 class CarWorkshop<T extends Car> implements Workshop<T> {
-    private final ArrayList<Integer> servicedCars = new ArrayList<>();
     private Vector2 pos;
+
+    private final ArrayList<Integer> servicedCars = new ArrayList<>();
     private final CanLoadHelperUnordered<T> canLoadHelper;
     private final Class<T> supportedType;
+
     private static final double range = 30;
     private static final int serviceTimeMs = 5000;
 

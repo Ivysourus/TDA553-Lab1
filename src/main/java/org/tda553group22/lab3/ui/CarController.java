@@ -6,7 +6,7 @@ import org.tda553group22.lab3.core.Car;
 import org.tda553group22.lab3.core.CarFactory;
 import org.tda553group22.lab3.core.Loadable;
 import org.tda553group22.lab3.math.Vector2;
-import org.tda553group22.lab3.ui.model.Model;
+import org.tda553group22.lab3.ui.model.CarModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
 final class CarController {
-    private final Model model;
+    private final CarModel model;
     private final CarView view;
 
     // The delay (seconds) corresponds to 20 updates a sec (hz)
@@ -23,7 +23,7 @@ final class CarController {
 
     public static CarController instance;
 
-    public CarController(Model model, CarView view) {
+    public CarController(CarModel model, CarView view) {
         if (instance != null) {
             throw new RuntimeException("An instance of CarController already exists");
         }

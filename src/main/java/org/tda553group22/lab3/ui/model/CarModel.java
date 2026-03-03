@@ -12,7 +12,7 @@ import org.tda553group22.lab3.core.TruckBedFunctions;
 import org.tda553group22.lab3.core.TurboFunctions;
 import org.tda553group22.lab3.math.Vector2;
 
-public class Model {
+public class CarModel {
     private final Vector2 boundsMin;
     private final Vector2 boundsMax;
     private final List<Car> cars = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Model {
     private final List<UpdateObserver> updateObservers = new ArrayList<>();
     private double elapsedTime;
 
-    public Model(Vector2 boundsMin, Vector2 boundsMax) {
+    public CarModel(Vector2 boundsMin, Vector2 boundsMax) {
         this.boundsMin = boundsMin;
         this.boundsMax = boundsMax;
     }
