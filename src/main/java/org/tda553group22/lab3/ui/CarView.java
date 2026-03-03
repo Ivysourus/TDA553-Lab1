@@ -25,7 +25,7 @@ class CarView extends JFrame implements UpdateObserver {
         this.setTitle(title);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setBounds(dim.width / 2 - getSize().width / 2, dim.height / 2 - getSize().height / 2, boundsX, boundsY);
+        this.setBounds(dim.width / 2 - boundsX / 2, dim.height / 2 - boundsY / 2, boundsX, boundsY);
 
         this.initComponents(drawPanelSize);
 
