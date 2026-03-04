@@ -1,6 +1,6 @@
 package org.tda553group22.lab3.core;
 
-interface TruckBedState extends TruckBedFunctions {
+interface TruckBedState {
     void raiseBed(double angle);
 
     void lowerBed(double angle);
