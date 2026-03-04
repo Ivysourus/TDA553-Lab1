@@ -2,13 +2,13 @@ package org.tda553group22.lab3.ui.model;
 
 import org.tda553group22.lab3.math.Vector2;
 
-abstract class MoveObserver implements EverythingObserver {
+abstract class RemoveObserver implements EverythingObserver {
     @Override
-    public abstract void actOnMove(Vector2 pos, double angle);
+    public final void actOnMove(Vector2 pos, double angle) {
+    }
 
     @Override
-    public final void actOnRemove() {
-    }
+    public abstract void actOnRemove();
 
     @Override
     public final void actOnUpdate() {

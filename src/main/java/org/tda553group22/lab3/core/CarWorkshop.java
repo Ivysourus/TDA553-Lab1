@@ -13,45 +13,47 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
 
     private final ArrayList<Integer> servicedCars = new ArrayList<>();
     private final CanLoadHelperUnordered<T> canLoadHelper;
-    private final Class<T> supportedType;
 
     private static final double range = 30;
     private static final int serviceTimeMs = 5000;
 
     public CarWorkshop(Vector2 pos, int capacity, Class<T> supportedType) {
         this.pos = pos;
-        canLoadHelper = new CanLoadHelperUnordered<>(capacity);
-        this.supportedType = supportedType;
-    }
-
-    @Override
-    public double getRange() {
-        return range;
-    }
-
-    @Override
-    public boolean withinRange(Vector2 pos) {
-        return WorkshopWithinRangeHelper.withinRange(this.pos, pos, range);
-    }
-
-    @Override
-    public boolean canAccept(Loadable load) {
-        return supportedType.isInstance(load);
+        canLoadHelper = new CanLoadHelperUnordered<>(capacity, supportedType);
     }
 
     @Override
     public void load(T load) {
-        if (servicedCars.contains(load.hashCode())) {
+        if (!canAccept(load)) {
             return;
         }
 
-        load.stopEngine();
-        load.setEngineVehicleState(new EngineVehicleLocked(load));
         canLoadHelper.load(load);
 
-        Timer timer = new Timer(serviceTimeMs, new TimerListener<T>(load, this));
-        timer.setRepeats(false);
-        timer.start();
+        loadedAction(load);
+    }
+
+    /**
+     * Loads an object dynamically by checking if its type matches supportedType.
+     *
+     * @param load The object to load
+     * @return The success of the operation
+     */
+    @Override
+    public boolean tryLoad(Loadable load) {
+        if (!canAccept(load)) {
+            return false;
+        }
+
+        boolean success = canLoadHelper.tryLoad(load);
+
+        if (!success) {
+            return false;
+        }
+
+        loadedAction((T) load);
+
+        return true;
     }
 
     @Override
@@ -62,6 +64,21 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
     }
 
     @Override
+    public boolean canAccept(Loadable load) {
+        return canLoadHelper.canAccept(load);
+    }
+
+    @Override
+    public boolean withinRange(Vector2 pos) {
+        return WorkshopWithinRangeHelper.withinRange(this.pos, pos, range);
+    }
+
+    @Override
+    public double getRange() {
+        return range;
+    }
+
+    @Override
     public Vector2 getPos() {
         return pos;
     }
@@ -69,6 +86,19 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
     @Override
     public void setPos(Vector2 pos) {
         this.pos = pos;
+    }
+
+    private boolean canAccept(T load) {
+        return !servicedCars.contains(load.hashCode());
+    }
+
+    private void loadedAction(T load) {
+        load.stopEngine();
+        load.setEngineVehicleState(new EngineVehicleLocked(load));
+
+        Timer timer = new Timer(serviceTimeMs, new TimerListener<T>(load, this));
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private static class TimerListener<T extends Car> implements ActionListener {

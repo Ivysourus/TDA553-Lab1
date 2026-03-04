@@ -50,8 +50,8 @@ class ControlPanel extends JPanel {
         lowerTruckBedsButton.addActionListener(_ -> CarController.instance.lowerTruckBedAllCars());
         startEnginesButton.addActionListener(_ -> CarController.instance.startAllEngines());
         stopEnginesButton.addActionListener(_ -> CarController.instance.stopAllEngines());
-        addRandomCarButton.addActionListener(_ -> CarController.instance.addCarRandom());
-        removeRandomCarButton.addActionListener(_ -> CarController.instance.removeCarRandom());
+        addRandomCarButton.addActionListener(_ -> CarController.instance.addRandomCar());
+        removeRandomCarButton.addActionListener(_ -> CarController.instance.removeRandomCar());
     }
 
     public void setGasAmount(int gasAmount) {

@@ -2,15 +2,17 @@ package org.tda553group22.lab3.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import org.tda553group22.lab3.ui.model.UpdateObserver;
+import org.tda553group22.lab3.ui.model.EverythingObserver;
+import org.tda553group22.lab3.ui.model.ObserverFactory;
 
-class DrawPanel extends JPanel implements UpdateObserver {
-    private boolean dirty;
+class DrawPanel extends JPanel {
+    private List<Paintable> paintables = new ArrayList<>();
 
     public DrawPanel(Dimension size) {
         this.setDoubleBuffered(true);
@@ -21,16 +23,20 @@ class DrawPanel extends JPanel implements UpdateObserver {
     }
 
     @Override
-    public void actOnUpdate() {
-        this.repaint();
-        if (dirty) {
-            dirty = false;
-            this.revalidate();
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (Paintable p : paintables) {
+            p.paint(g);
         }
     }
 
-    public void addSprite(Sprite sprite) {
-        this.add(sprite);
-        dirty = true;
+    public EverythingObserver makeObserver() {
+        return ObserverFactory.makeUpdateObserver(() -> {
+            this.repaint();
+        });
+    }
+
+    public void addPaintable(Paintable paintable) {
+        paintables.add(paintable);
     }
 }

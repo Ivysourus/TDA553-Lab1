@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 
-final class CarController {
+class CarController {
     private final CarModel model;
     private final CarView view;
 
@@ -32,7 +32,7 @@ final class CarController {
         this.model = model;
         this.view = view;
 
-        model.addUpdateObserver(view);
+        model.addObserver(view.makeObserver());
 
         Timer timer = new Timer((int) (delay*1000), new TimerListener());
         timer.start();
@@ -63,14 +63,14 @@ final class CarController {
 
     private void addCar(Car car, BufferedImage image) {
         Sprite sprite = new Sprite(car.getPos(), car.getAngle(), image);
-        view.addSprite(sprite);
-        model.addObservedCar(car, sprite);
+        view.addPaintable(sprite);
+        model.addObservedCar(car, sprite.makeObserver());
     }
 
     private void addWorkshop(Workshop<? extends Loadable> workshop, BufferedImage image) {
         Sprite sprite = new Sprite(workshop.getPos(), 0, image);
-        view.addSprite(sprite);
-        model.addObservedWorkshop(workshop, sprite);
+        view.addPaintable(sprite);
+        model.addObservedWorkshop(workshop, sprite.makeObserver());
     }
 
     public void gasAllCars(int amount) {
@@ -107,7 +107,7 @@ final class CarController {
         model.lowerBedAllCars();
     }
 
-    public void addCarRandom() {
+    public void addRandomCar() {
         if (model.getCarCount() > 10) {
             return;
         }
@@ -128,7 +128,7 @@ final class CarController {
         }
     }
 
-    public void removeCarRandom() {
+    public void removeRandomCar() {
         int carCount = model.getCarCount();
         if (carCount != 0) {
             int randomIndex = (int)(Math.random() * carCount);

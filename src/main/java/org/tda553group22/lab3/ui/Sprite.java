@@ -1,45 +1,69 @@
 package org.tda553group22.lab3.ui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
-
-import org.tda553group22.lab3.core.AngleFunctions;
-import org.tda553group22.lab3.core.PositionFunctions;
+import org.tda553group22.lab3.core.HasAngle;
+import org.tda553group22.lab3.core.HasPosition;
 import org.tda553group22.lab3.math.Vector2;
-import org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions;
-import org.tda553group22.lab3.ui.model.MoveObserver;
+import org.tda553group22.lab3.ui.model.EverythingObserver;
+import org.tda553group22.lab3.ui.model.ObserverFactory;
 
-class Sprite extends JPanel implements PositionFunctions, AngleFunctions, HasImage, MoveObserver {
+class Sprite implements Paintable, HasPosition, HasAngle, HasImage {
+    private Vector2 pos;
     private double angle;
-    private BufferedImage image;
+    private boolean visible = true;
+
+    private final BufferedImage image;
 
     public Sprite(Vector2 pos, double angle, BufferedImage image) {
-        this.setPos(pos);
+        this.pos = pos;
         this.angle = angle;
         this.image = image;
-        this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-        this.setBackground(Color.white);
+    }
+
+    public EverythingObserver makeObserver() {
+        return ObserverFactory.makeCompositeObserver(new EverythingObserver[] {
+                makeMoveObserver(),
+                makeRemoveObserver()
+        });
+    }
+
+    private EverythingObserver makeMoveObserver() {
+        return ObserverFactory.makeMoveObserver((Vector2 pos, double angle) -> {
+            setPos(pos);
+            setAngle(angle);
+        });
+    }
+
+    private EverythingObserver makeRemoveObserver() {
+        return ObserverFactory.makeRemoveObserver(() -> {
+            visible = false;
+        });
+    }
+
+    public boolean getVisible() {
+        return visible;
+    }
+
+    private void setPos(Vector2 pos) {
+        this.pos = pos;
+    }
+
+    private void setAngle(double angle) {
+        this.angle = angle;
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, null);
+    public void paint(Graphics g) {
+        if (visible) {
+            g.drawImage(image, (int) Math.round(pos.x), (int) Math.round(pos.y), null);
+        }
     }
 
     @Override
     public Vector2 getPos() {
-        return Vector2AwtExtensions.fromPoint(this.getLocation());
-    }
-
-    @Override
-    public void setPos(Vector2 pos) {
-        this.setLocation(Vector2AwtExtensions.toPoint(pos));
+        return pos;
     }
 
     @Override
@@ -48,23 +72,7 @@ class Sprite extends JPanel implements PositionFunctions, AngleFunctions, HasIma
     }
 
     @Override
-    public void setAngle(double angle) {
-        this.angle = angle;
-    }
-
-    @Override
     public BufferedImage getImage() {
         return image;
-    }
-
-    @Override
-    public void actOnMove(Vector2 pos, double angle) {
-        this.setPos(pos);
-        this.setAngle(angle);
-    }
-
-    @Override
-    public void actOnRemove() {
-        this.setVisible(false);
     }
 }

@@ -4,12 +4,12 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JSpinner;
 
-import org.tda553group22.lab3.ui.model.UpdateObserver;
+import org.tda553group22.lab3.ui.model.EverythingObserver;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-class CarView extends JFrame implements UpdateObserver {
+class CarView extends JFrame {
     private final int boundsX;
     private final int boundsY;
 
@@ -34,13 +34,12 @@ class CarView extends JFrame implements UpdateObserver {
         this.setVisible(true);
     }
 
-    @Override
-    public void actOnUpdate() {
-        drawPanel.actOnUpdate();
+    public EverythingObserver makeObserver() {
+        return drawPanel.makeObserver();
     }
 
-    public void addSprite(Sprite sprite) {
-        drawPanel.addSprite(sprite);
+    public void addPaintable(Paintable paintable) {
+        drawPanel.addPaintable(paintable);
     }
 
     private void initComponents(Dimension drawPanelSize) {
@@ -73,7 +72,8 @@ class CarView extends JFrame implements UpdateObserver {
     }
 
     private void initGasPanel() {
-        footer.add(new GasPanel(new Dimension(100, 50), e -> controlPanel.setGasAmount((int) ((JSpinner) e.getSource()).getValue())));
+        footer.add(new GasPanel(new Dimension(100, 50),
+                e -> controlPanel.setGasAmount((int) ((JSpinner) e.getSource()).getValue())));
     }
 
     private void initControlPanel() {

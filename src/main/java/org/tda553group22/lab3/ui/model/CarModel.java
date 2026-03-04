@@ -17,8 +17,9 @@ public class CarModel {
     private final Vector2 boundsMax;
     private final List<Car> cars = new ArrayList<>();
     private final List<Workshop<? extends Loadable>> workshops = new ArrayList<>();
-    private final Map<Integer, MoveObserver> moveObservers = new HashMap<>();
-    private final List<UpdateObserver> updateObservers = new ArrayList<>();
+    private final Map<Integer, EverythingObserver> identifiedObservers = new HashMap<>();
+    private final List<EverythingObserver> unidentifiedObservers = new ArrayList<>();
+
     private double elapsedTime;
 
     public CarModel(Vector2 boundsMin, Vector2 boundsMax) {
@@ -28,6 +29,7 @@ public class CarModel {
 
     public void update(double deltaTime) {
         elapsedTime += deltaTime;
+
         for (Car car : cars) {
             car.move();
 
@@ -47,14 +49,14 @@ public class CarModel {
                 }
             }
 
-            moveObservers.get(car.hashCode()).actOnMove(car.getPos(), car.getAngle());
+            identifiedObservers.get(car.hashCode()).actOnMove(car.getPos(), car.getAngle());
         }
 
         for (Workshop<? extends Loadable> workshop : workshops) {
-            moveObservers.get(workshop.hashCode()).actOnMove(workshop.getPos(), 0);
+            identifiedObservers.get(workshop.hashCode()).actOnMove(workshop.getPos(), 0);
         }
 
-        for (UpdateObserver observer : updateObservers) {
+        for (EverythingObserver observer : unidentifiedObservers) {
             observer.actOnUpdate();
         }
     }
@@ -67,18 +69,18 @@ public class CarModel {
         workshops.add(workshop);
     }
 
-    public void addObservedCar(Car car, MoveObserver observer) {
+    public void addObservedCar(Car car, EverythingObserver observer) {
         addCar(car);
-        moveObservers.put(car.hashCode(), observer);
+        identifiedObservers.put(car.hashCode(), observer);
     }
 
-    public void addObservedWorkshop(Workshop<? extends Loadable> workshop, MoveObserver observer) {
+    public void addObservedWorkshop(Workshop<? extends Loadable> workshop, EverythingObserver observer) {
         addWorkshop(workshop);
-        moveObservers.put(workshop.hashCode(), observer);
+        identifiedObservers.put(workshop.hashCode(), observer);
     }
 
-    public void addUpdateObserver(UpdateObserver observer) {
-        updateObservers.add(observer);
+    public void addObserver(EverythingObserver observer) {
+        unidentifiedObservers.add(observer);
     }
 
     public int getCarCount() {
@@ -94,7 +96,7 @@ public class CarModel {
     }
 
     public void removeCar(int index) {
-        moveObservers.get(cars.get(index).hashCode()).actOnRemove();
+        identifiedObservers.get(cars.get(index).hashCode()).actOnRemove();
         cars.remove(index);
     }
 
