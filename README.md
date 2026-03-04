@@ -48,5 +48,5 @@ One member would begin with separating everything into separate packages. You wo
 - State
     - Could use it to make the cars state machine more robust.
 - Composite
-    - Would be used if there existed a Vehicle that could load itself.
+    - Would be used if there existed a Vehicle that could load itself. Could also be used for the observers to compount different observers.
 - ![](uml/rendered/uml-task-3.svg)
