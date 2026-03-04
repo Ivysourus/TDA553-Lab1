@@ -14,8 +14,8 @@ class ControlPanel extends JPanel {
 
         JButton gasButton = new JButton("Gas");
         this.add(gasButton, 0);
-        JButton turbosOnButton = new JButton("Turbos on");
-        this.add(turbosOnButton, 1);
+        JButton enableTurbosButton = new JButton("Enable turbos");
+        this.add(enableTurbosButton, 1);
         JButton raiseTruckBedsButton = new JButton("Raise truck beds");
         this.add(raiseTruckBedsButton, 2);
         JButton startEnginesButton = new JButton("Start engines");
@@ -24,8 +24,8 @@ class ControlPanel extends JPanel {
         this.add(addRandomCarButton, 4);
         JButton brakeButton = new JButton("Brake");
         this.add(brakeButton, 5);
-        JButton turbosOffButton = new JButton("Turbos off");
-        this.add(turbosOffButton, 6);
+        JButton disableTurbosButton = new JButton("Disable turbos");
+        this.add(disableTurbosButton, 6);
         JButton lowerTruckBedsButton = new JButton("Lower truck beds");
         this.add(lowerTruckBedsButton, 7);
         JButton stopEnginesButton = new JButton("Stop engines");
@@ -35,7 +35,7 @@ class ControlPanel extends JPanel {
 
         Color accentColor = Color.blue;
         gasButton.setForeground(accentColor);
-        turbosOnButton.setForeground(accentColor);
+        enableTurbosButton.setForeground(accentColor);
         raiseTruckBedsButton.setForeground(accentColor);
         startEnginesButton.setForeground(accentColor);
 
@@ -44,8 +44,8 @@ class ControlPanel extends JPanel {
 
         gasButton.addActionListener(_ -> CarController.instance.gasAllCars(gasAmount));
         brakeButton.addActionListener(_ -> CarController.instance.brakeAllCars(gasAmount));
-        turbosOnButton.addActionListener(_ -> CarController.instance.setTurboOnAllCars());
-        turbosOffButton.addActionListener(_ -> CarController.instance.setTurboOffAllCars());
+        enableTurbosButton.addActionListener(_ -> CarController.instance.setTurboOnAllCars());
+        disableTurbosButton.addActionListener(_ -> CarController.instance.setTurboOffAllCars());
         raiseTruckBedsButton.addActionListener(_ -> CarController.instance.raiseTruckBedAllCars());
         lowerTruckBedsButton.addActionListener(_ -> CarController.instance.lowerTruckBedAllCars());
         startEnginesButton.addActionListener(_ -> CarController.instance.startAllEngines());
