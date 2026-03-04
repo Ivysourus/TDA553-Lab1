@@ -216,10 +216,14 @@ abstract class org.tda553group22.lab3.core.Truck {
 }
 
 
-interface org.tda553group22.lab3.core.TruckBedFunctions {
-	{method}  {abstract} +getBedAngle () : double
+interface org.tda553group22.lab3.core.TruckBedSwivel {
 	{method}  {abstract} +lowerBed ( paramdouble1 : double ) : void
 	{method}  {abstract} +raiseBed ( paramdouble1 : double ) : void
+}
+
+
+interface org.tda553group22.lab3.core.TruckBedFunctions {
+	{method}  {abstract} +getBedAngle () : double
 }
 
 
@@ -246,8 +250,6 @@ class org.tda553group22.lab3.core.TruckBedRaised {
 
 interface org.tda553group22.lab3.core.TruckBedState {
 	{method}  {abstract} +getTruckHashCode () : int
-	{method}  {abstract} +lowerBed ( paramdouble1 : double ) : void
-	{method}  {abstract} +raiseBed ( paramdouble1 : double ) : void
 }
 
 
@@ -548,6 +550,8 @@ org.tda553group22.lab3.core.Scania --|>  org.tda553group22.lab3.core.Truck
 org.tda553group22.lab3.core.Truck -->  org.tda553group22.lab3.core.TruckBedState : truckBedState
 org.tda553group22.lab3.core.Truck --|>  org.tda553group22.lab3.core.Car
 org.tda553group22.lab3.core.Truck ..|>  org.tda553group22.lab3.core.TruckBedFunctions
+org.tda553group22.lab3.core.TruckBedFunctions ..|>  org.tda553group22.lab3.core.TruckBedSwivel
+org.tda553group22.lab3.core.TruckBedState ..|>  org.tda553group22.lab3.core.TruckBedSwivel
 org.tda553group22.lab3.core.TruckBedInBetween -->  org.tda553group22.lab3.core.Truck : truck
 org.tda553group22.lab3.core.TruckBedInBetween ..|>  org.tda553group22.lab3.core.TruckBedState
 org.tda553group22.lab3.core.TruckBedLowered -->  org.tda553group22.lab3.core.Truck : truck
@@ -622,6 +626,7 @@ org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.CarFact
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.WorkshopFactory : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.model.ObserverFactory : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.Sprite : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarView : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.model.CarModel : use

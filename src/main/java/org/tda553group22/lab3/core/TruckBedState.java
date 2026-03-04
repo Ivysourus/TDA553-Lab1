@@ -1,9 +1,5 @@
 package org.tda553group22.lab3.core;
 
-interface TruckBedState {
-    void raiseBed(double angle);
-
-    void lowerBed(double angle);
-
+interface TruckBedState extends TruckBedSwivel {
     int getTruckHashCode();
 }
