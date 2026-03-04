@@ -9,10 +9,21 @@ interface org.tda553group22.lab3.core.Angleable {
 }
 
 
+interface org.tda553group22.lab3.core.CanLoadBase {
+	{method}  {abstract} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
+	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
+	{method}  {abstract} +tryLoad ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
+}
+
+
 abstract class org.tda553group22.lab3.core.CanLoadHelper {
 	{field} #capacity : int
 	{field} #cargo : java.util.List
+	{field} #supportedType : Class
+	{method} -belowCapacity () : boolean
+	{method} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
+	{method} +tryLoad ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 }
 
 
@@ -32,13 +43,11 @@ class org.tda553group22.lab3.core.CanLoadHelperUnordered {
 
 
 interface org.tda553group22.lab3.core.CanLoadOrdered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method}  {abstract} +unload () : java.util.Optional
 }
 
 
 interface org.tda553group22.lab3.core.CanLoadUnordered {
-	{method}  {abstract} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method}  {abstract} +unload ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 }
 
@@ -67,12 +76,14 @@ class org.tda553group22.lab3.core.CarFerry {
 class org.tda553group22.lab3.core.CarTransporter {
 	{field} -maxLoadDistance : double
 	{field} -rampDown : boolean
+	{method} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method} +load ( paramPersonCar1 : org.tda553group22.lab3.core.PersonCar ) : void
 	{method} +lowerRamp () : void
 	{method} +move () : void
 	{method} +raiseRamp () : void
 	{method} #speedFactor () : double
+	{method} +tryLoad ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +unload () : java.util.Optional
 }
 
@@ -81,13 +92,20 @@ class org.tda553group22.lab3.core.CarWorkshop {
 	{field} {static} -range : double
 	{field} {static} -serviceTimeMs : int
 	{field} -servicedCars : java.util.ArrayList
-	{field} -supportedType : Class
+	{method} -canAccept ( paramCar1 : org.tda553group22.lab3.core.Car ) : boolean
 	{method} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +load ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
+	{method} -loadedAction ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
+	{method} +tryLoad ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +unload ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
 	{method} +unload ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
+}
+
+
+class org.tda553group22.lab3.core.CarWorkshop$TimerListener {
+	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
@@ -206,7 +224,6 @@ interface org.tda553group22.lab3.core.TruckBedFunctions {
 
 
 class org.tda553group22.lab3.core.TruckBedInBetween {
-	{method} +getBedAngle () : double
 	{method} +getTruckHashCode () : int
 	{method} +lowerBed ( paramdouble1 : double ) : void
 	{method} +raiseBed ( paramdouble1 : double ) : void
@@ -214,7 +231,6 @@ class org.tda553group22.lab3.core.TruckBedInBetween {
 
 
 class org.tda553group22.lab3.core.TruckBedLowered {
-	{method} +getBedAngle () : double
 	{method} +getTruckHashCode () : int
 	{method} +lowerBed ( paramdouble1 : double ) : void
 	{method} +raiseBed ( paramdouble1 : double ) : void
@@ -222,7 +238,6 @@ class org.tda553group22.lab3.core.TruckBedLowered {
 
 
 class org.tda553group22.lab3.core.TruckBedRaised {
-	{method} +getBedAngle () : double
 	{method} +getTruckHashCode () : int
 	{method} +lowerBed ( paramdouble1 : double ) : void
 	{method} +raiseBed ( paramdouble1 : double ) : void
@@ -261,7 +276,6 @@ class org.tda553group22.lab3.core.Volvo240 {
 
 
 interface org.tda553group22.lab3.core.Workshop {
-	{method}  {abstract} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method}  {abstract} +getRange () : double
 	{method}  {abstract} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : boolean
 }
@@ -319,7 +333,7 @@ class org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions {
 class org.tda553group22.lab3.ui.CarController {
 	{field} {static} -delay : double
 	{method} -addCar ( paramCar1 : org.tda553group22.lab3.core.Car , paramBufferedImage2 : java.awt.image.BufferedImage ) : void
-	{method} +addCarRandom () : void
+	{method} +addRandomCar () : void
 	{method} +addSaab95 ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : void
 	{method} +addScania ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : void
 	{method} +addVolvo240 ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : void
@@ -327,13 +341,18 @@ class org.tda553group22.lab3.ui.CarController {
 	{method} -addWorkshop ( paramWorkshop1 : org.tda553group22.lab3.core.Workshop , paramBufferedImage2 : java.awt.image.BufferedImage ) : void
 	{method} +brakeAllCars ( paramint1 : int ) : void
 	{method} +gasAllCars ( paramint1 : int ) : void
-	{method} +lowerBedAllCars () : void
-	{method} +raiseBedAllCars () : void
-	{method} +removeCarRandom () : void
+	{method} +lowerTruckBedAllCars () : void
+	{method} +raiseTruckBedAllCars () : void
+	{method} +removeRandomCar () : void
 	{method} +setTurboOffAllCars () : void
 	{method} +setTurboOnAllCars () : void
 	{method} +startAllEngines () : void
 	{method} +stopAllEngines () : void
+}
+
+
+class org.tda553group22.lab3.ui.CarController$TimerListener {
+	{method} +actionPerformed ( paramActionEvent1 : java.awt.event.ActionEvent ) : void
 }
 
 
@@ -342,36 +361,26 @@ class org.tda553group22.lab3.ui.CarView {
 	{field} -boundsY : int
 	{field} -footer : javax.swing.Box
 	{field} -main : javax.swing.Box
-	{method} +actOnUpdate () : void
-	{method} +addSprite ( paramSprite1 : org.tda553group22.lab3.ui.Sprite ) : void
+	{method} +addPaintable ( paramPaintable1 : org.tda553group22.lab3.ui.Paintable ) : void
 	{method} -initComponents ( paramDimension1 : java.awt.Dimension ) : void
 	{method} -initControlPanel () : void
 	{method} -initDrawPanel ( paramDimension1 : java.awt.Dimension ) : void
 	{method} -initFooter () : void
 	{method} -initGasPanel () : void
 	{method} -initMain ( paramDimension1 : java.awt.Dimension ) : void
+	{method} +makeObserver () : org.tda553group22.lab3.ui.model.EverythingObserver
 }
 
 
 class org.tda553group22.lab3.ui.ControlPanel {
-	{field} -addCarRandomButton : javax.swing.JButton
-	{field} -brakeButton : javax.swing.JButton
 	{field} -gasAmount : int
-	{field} -gasButton : javax.swing.JButton
-	{field} -liftBedButton : javax.swing.JButton
-	{field} -lowerBedButton : javax.swing.JButton
-	{field} -removeCarRandomButton : javax.swing.JButton
-	{field} -startButton : javax.swing.JButton
-	{field} -stopButton : javax.swing.JButton
-	{field} -turboOffButton : javax.swing.JButton
-	{field} -turboOnButton : javax.swing.JButton
 }
 
 
 class org.tda553group22.lab3.ui.DrawPanel {
-	{field} -dirty : boolean
-	{method} +actOnUpdate () : void
-	{method} +addSprite ( paramSprite1 : org.tda553group22.lab3.ui.Sprite ) : void
+	{method} +addPaintable ( paramPaintable1 : org.tda553group22.lab3.ui.Paintable ) : void
+	{method} +makeObserver () : org.tda553group22.lab3.ui.model.EverythingObserver
+	{method} +paintComponent ( paramGraphics1 : java.awt.Graphics ) : void
 }
 
 
@@ -389,6 +398,11 @@ class org.tda553group22.lab3.ui.Main {
 }
 
 
+interface org.tda553group22.lab3.ui.Paintable {
+	{method}  {abstract} +paint ( paramGraphics1 : java.awt.Graphics ) : void
+}
+
+
 class org.tda553group22.lab3.ui.ResourcesHandler {
 	{field} {static} ~saabImage : java.awt.image.BufferedImage
 	{field} {static} ~scaniaImage : java.awt.image.BufferedImage
@@ -400,21 +414,21 @@ class org.tda553group22.lab3.ui.ResourcesHandler {
 class org.tda553group22.lab3.ui.Sprite {
 	{field} +angle : double
 	{field} -image : java.awt.image.BufferedImage
-	{method} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
-	{method} +actOnRemove () : void
-	{method} +getPos () : org.tda553group22.lab3.math.Vector2
-	{method} #paintComponent ( paramGraphics1 : java.awt.Graphics ) : void
-	{method} +setPos ( paramVector21 : org.tda553group22.lab3.math.Vector2 ) : void
+	{field} -visible : boolean
+	{method} -makeMoveObserver () : org.tda553group22.lab3.ui.model.EverythingObserver
+	{method} +makeObserver () : org.tda553group22.lab3.ui.model.EverythingObserver
+	{method} -makeRemoveObserver () : org.tda553group22.lab3.ui.model.EverythingObserver
+	{method} +paint ( paramGraphics1 : java.awt.Graphics ) : void
 }
 
 
 class org.tda553group22.lab3.ui.model.CarModel {
 	{field} -elapsedTime : double
-	{field} -moveObservers : java.util.Map
+	{field} -identifiedObservers : java.util.Map
 	{method} +addCar ( paramCar1 : org.tda553group22.lab3.core.Car ) : void
-	{method} +addObservedCar ( paramCar1 : org.tda553group22.lab3.core.Car , paramMoveObserver2 : org.tda553group22.lab3.ui.model.MoveObserver ) : void
-	{method} +addObservedWorkshop ( paramWorkshop1 : org.tda553group22.lab3.core.Workshop , paramMoveObserver2 : org.tda553group22.lab3.ui.model.MoveObserver ) : void
-	{method} +addUpdateObserver ( paramUpdateObserver1 : org.tda553group22.lab3.ui.model.UpdateObserver ) : void
+	{method} +addObservedCar ( paramCar1 : org.tda553group22.lab3.core.Car , paramEverythingObserver2 : org.tda553group22.lab3.ui.model.EverythingObserver ) : void
+	{method} +addObservedWorkshop ( paramWorkshop1 : org.tda553group22.lab3.core.Workshop , paramEverythingObserver2 : org.tda553group22.lab3.ui.model.EverythingObserver ) : void
+	{method} +addObserver ( paramEverythingObserver1 : org.tda553group22.lab3.ui.model.EverythingObserver ) : void
 	{method} +addWorkshop ( paramWorkshop1 : org.tda553group22.lab3.core.Workshop ) : void
 	{method} +brakeAllCars ( paramdouble1 : double ) : void
 	{method} +gasAllCars ( paramdouble1 : double ) : void
@@ -430,16 +444,63 @@ class org.tda553group22.lab3.ui.model.CarModel {
 }
 
 
-interface org.tda553group22.lab3.ui.model.MoveObserver {
+class org.tda553group22.lab3.ui.model.CompositeObserver {
+	{field} -observers : [Lorg.tda553group22.lab3.ui.model.EverythingObserver;
+	{method} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+	{method} +actOnRemove () : void
+	{method} +actOnUpdate () : void
+}
+
+
+interface org.tda553group22.lab3.ui.model.EverythingObserver {
 	{method}  {abstract} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+	{method}  {abstract} +actOnRemove () : void
+	{method}  {abstract} +actOnUpdate () : void
+}
+
+
+interface org.tda553group22.lab3.ui.model.MoveAction {
+	{method}  {abstract} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+}
+
+
+abstract class org.tda553group22.lab3.ui.model.MoveObserver {
+	{method}  {abstract} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+	{method} +actOnRemove () : void
+	{method} +actOnUpdate () : void
+}
+
+
+class org.tda553group22.lab3.ui.model.ObserverFactory {
+	{method}  {static} +makeCompositeObserver ( paramEverythingObserver;1 : [Lorg.tda553group22.lab3.ui.model.EverythingObserver; ) : org.tda553group22.lab3.ui.model.CompositeObserver
+	{method}  {static} +makeMoveObserver ( paramMoveAction1 : org.tda553group22.lab3.ui.model.MoveAction ) : org.tda553group22.lab3.ui.model.MoveObserver
+	{method}  {static} +makeRemoveObserver ( paramRemoveAction1 : org.tda553group22.lab3.ui.model.RemoveAction ) : org.tda553group22.lab3.ui.model.RemoveObserver
+	{method}  {static} +makeUpdateObserver ( paramUpdateAction1 : org.tda553group22.lab3.ui.model.UpdateAction ) : org.tda553group22.lab3.ui.model.UpdateObserver
+}
+
+
+interface org.tda553group22.lab3.ui.model.RemoveAction {
 	{method}  {abstract} +actOnRemove () : void
 }
 
 
-interface org.tda553group22.lab3.ui.model.UpdateObserver {
+abstract class org.tda553group22.lab3.ui.model.RemoveObserver {
+	{method} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+	{method}  {abstract} +actOnRemove () : void
+	{method} +actOnUpdate () : void
+}
+
+
+interface org.tda553group22.lab3.ui.model.UpdateAction {
 	{method}  {abstract} +actOnUpdate () : void
 }
 
+
+abstract class org.tda553group22.lab3.ui.model.UpdateObserver {
+	{method} +actOnMove ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramdouble2 : double ) : void
+	{method} +actOnRemove () : void
+	{method}  {abstract} +actOnUpdate () : void
+}
 
 
 class javax.swing.JPanel {
@@ -448,15 +509,17 @@ class javax.swing.JPanel {
 
 
 
-
 org.tda553group22.lab3.core.AngleFunctions ..|>  org.tda553group22.lab3.core.Angleable
 org.tda553group22.lab3.core.AngleFunctions ..|>  org.tda553group22.lab3.core.HasAngle
+org.tda553group22.lab3.core.CanLoadHelper ..|>  org.tda553group22.lab3.core.CanLoadBase
 org.tda553group22.lab3.core.CanLoadHelperFirstInFirstOut --|>  org.tda553group22.lab3.core.CanLoadHelper
 org.tda553group22.lab3.core.CanLoadHelperFirstInFirstOut ..|>  org.tda553group22.lab3.core.CanLoadOrdered
 org.tda553group22.lab3.core.CanLoadHelperFirstInLastOut --|>  org.tda553group22.lab3.core.CanLoadHelper
 org.tda553group22.lab3.core.CanLoadHelperFirstInLastOut ..|>  org.tda553group22.lab3.core.CanLoadOrdered
 org.tda553group22.lab3.core.CanLoadHelperUnordered --|>  org.tda553group22.lab3.core.CanLoadHelper
 org.tda553group22.lab3.core.CanLoadHelperUnordered ..|>  org.tda553group22.lab3.core.CanLoadUnordered
+org.tda553group22.lab3.core.CanLoadOrdered ..|>  org.tda553group22.lab3.core.CanLoadBase
+org.tda553group22.lab3.core.CanLoadUnordered ..|>  org.tda553group22.lab3.core.CanLoadBase
 org.tda553group22.lab3.core.Car --|>  org.tda553group22.lab3.core.EngineVehicle
 org.tda553group22.lab3.core.CarFerry --|>  org.tda553group22.lab3.core.EngineVehicle
 org.tda553group22.lab3.core.CarTransporter -->  org.tda553group22.lab3.core.CanLoadHelperFirstInLastOut : canLoadHelper
@@ -465,6 +528,8 @@ org.tda553group22.lab3.core.CarTransporter ..|>  org.tda553group22.lab3.core.Can
 org.tda553group22.lab3.core.CarWorkshop -->  org.tda553group22.lab3.core.CanLoadHelperUnordered : canLoadHelper
 org.tda553group22.lab3.core.CarWorkshop -->  org.tda553group22.lab3.math.Vector2 : pos
 org.tda553group22.lab3.core.CarWorkshop ..|>  org.tda553group22.lab3.core.Workshop
+org.tda553group22.lab3.core.CarWorkshop$TimerListener -->  org.tda553group22.lab3.core.Car : load
+org.tda553group22.lab3.core.CarWorkshop$TimerListener -->  org.tda553group22.lab3.core.Workshop : workshop
 org.tda553group22.lab3.core.EngineVehicle -->  org.tda553group22.lab3.core.EngineVehicleState : engineVehicleState
 org.tda553group22.lab3.core.EngineVehicle --|>  org.tda553group22.lab3.core.Vehicle
 org.tda553group22.lab3.core.EngineVehicleLocked -->  org.tda553group22.lab3.core.EngineVehicle : engineVehicle
@@ -489,7 +554,6 @@ org.tda553group22.lab3.core.TruckBedLowered -->  org.tda553group22.lab3.core.Tru
 org.tda553group22.lab3.core.TruckBedLowered ..|>  org.tda553group22.lab3.core.TruckBedState
 org.tda553group22.lab3.core.TruckBedRaised -->  org.tda553group22.lab3.core.Truck : truck
 org.tda553group22.lab3.core.TruckBedRaised ..|>  org.tda553group22.lab3.core.TruckBedState
-org.tda553group22.lab3.core.TruckBedState ..|>  org.tda553group22.lab3.core.TruckBedFunctions
 org.tda553group22.lab3.core.Vehicle -->  org.tda553group22.lab3.math.Vector2 : pos
 org.tda553group22.lab3.core.Vehicle ..|>  org.tda553group22.lab3.core.HasAngle
 org.tda553group22.lab3.core.Vehicle ..|>  org.tda553group22.lab3.core.Loadable
@@ -500,21 +564,28 @@ org.tda553group22.lab3.core.Workshop ..|>  org.tda553group22.lab3.core.PositionF
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarController : instance
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.CarView : view
 org.tda553group22.lab3.ui.CarController -->  org.tda553group22.lab3.ui.model.CarModel : model
+org.tda553group22.lab3.ui.CarController$TimerListener -->  org.tda553group22.lab3.ui.CarController : this$0
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.ControlPanel : controlPanel
 org.tda553group22.lab3.ui.CarView -->  org.tda553group22.lab3.ui.DrawPanel : drawPanel
-org.tda553group22.lab3.ui.CarView ..|>  org.tda553group22.lab3.ui.model.UpdateObserver
-org.tda553group22.lab3.ui.DrawPanel "1" o-- "0..*"  org.tda553group22.lab3.ui.Sprite : sprites
-org.tda553group22.lab3.ui.DrawPanel ..|>  org.tda553group22.lab3.ui.model.UpdateObserver
+org.tda553group22.lab3.ui.DrawPanel "1" o-- "0..*"  org.tda553group22.lab3.ui.Paintable : paintables
 org.tda553group22.lab3.ui.ResourcesHandler -->  org.tda553group22.lab3.ui.ResourcesHandler : instance
-org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.core.AngleFunctions
-org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.core.PositionFunctions
+org.tda553group22.lab3.ui.Sprite -->  org.tda553group22.lab3.math.Vector2 : pos
+org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.core.HasAngle
+org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.core.HasPosition
 org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.ui.HasImage
-org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.ui.model.MoveObserver
+org.tda553group22.lab3.ui.Sprite ..|>  org.tda553group22.lab3.ui.Paintable
 org.tda553group22.lab3.ui.model.CarModel "1" o-- "0..*"  org.tda553group22.lab3.core.Car : cars
 org.tda553group22.lab3.ui.model.CarModel "1" o-- "0..*"  org.tda553group22.lab3.core.Workshop : workshops
-org.tda553group22.lab3.ui.model.CarModel "1" o-- "0..*"  org.tda553group22.lab3.ui.model.UpdateObserver : updateObservers
+org.tda553group22.lab3.ui.model.CarModel "1" o-- "0..*"  org.tda553group22.lab3.ui.model.EverythingObserver : unidentifiedObservers
 org.tda553group22.lab3.ui.model.CarModel -->  org.tda553group22.lab3.math.Vector2 : boundsMax
 org.tda553group22.lab3.ui.model.CarModel -->  org.tda553group22.lab3.math.Vector2 : boundsMin
+org.tda553group22.lab3.ui.model.CompositeObserver ..|>  org.tda553group22.lab3.ui.model.EverythingObserver
+org.tda553group22.lab3.ui.model.EverythingObserver ..|>  org.tda553group22.lab3.ui.model.MoveAction
+org.tda553group22.lab3.ui.model.EverythingObserver ..|>  org.tda553group22.lab3.ui.model.RemoveAction
+org.tda553group22.lab3.ui.model.EverythingObserver ..|>  org.tda553group22.lab3.ui.model.UpdateAction
+org.tda553group22.lab3.ui.model.MoveObserver ..|>  org.tda553group22.lab3.ui.model.EverythingObserver
+org.tda553group22.lab3.ui.model.RemoveObserver ..|>  org.tda553group22.lab3.ui.model.EverythingObserver
+org.tda553group22.lab3.ui.model.UpdateObserver ..|>  org.tda553group22.lab3.ui.model.EverythingObserver
 
 
 
@@ -549,21 +620,41 @@ org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.math.Vector2
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.ResourcesHandler : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.CarFactory : use
 org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.core.WorkshopFactory : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.model.ObserverFactory : use
+org.tda553group22.lab3.ui.CarController ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarController : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.CarView : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.ui.model.CarModel : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions : use
 org.tda553group22.lab3.ui.Main ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.GasPanel : use
+org.tda553group22.lab3.ui.CarView ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
+org.tda553group22.lab3.ui.Sprite ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
+org.tda553group22.lab3.ui.Sprite ..>  org.tda553group22.lab3.ui.model.ObserverFactory : use
+org.tda553group22.lab3.ui.Sprite ..>  org.tda553group22.lab3.ui.model.MoveAction : use
+org.tda553group22.lab3.ui.Sprite ..>  org.tda553group22.lab3.ui.model.RemoveAction : use
+org.tda553group22.lab3.ui.DrawPanel ..>  org.tda553group22.lab3.ui.model.ObserverFactory : use
+org.tda553group22.lab3.ui.DrawPanel ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
+org.tda553group22.lab3.ui.DrawPanel ..>  org.tda553group22.lab3.ui.model.UpdateAction : use
 
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.MoveObserver : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.RemoveObserver : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.UpdateObserver : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.CompositeObserver : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.MoveAction : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.RemoveAction : use
+org.tda553group22.lab3.ui.model.ObserverFactory ..>  org.tda553group22.lab3.ui.model.UpdateAction : use
 org.tda553group22.lab3.ui.model.MoveObserver ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.model.RemoveObserver ..>  org.tda553group22.lab3.math.Vector2 : use
+org.tda553group22.lab3.ui.model.UpdateObserver ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.core.TurboFunctions : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.core.TruckBedFunctions : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.core.Workshop : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.core.Loadable : use
 org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.core.Car : use
-org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.ui.model.UpdateObserver : use
+org.tda553group22.lab3.ui.model.CarModel ..>  org.tda553group22.lab3.ui.model.EverythingObserver : use
 
 
 org.tda553group22.lab3.mathawtextensions.Vector2AwtExtensions ..>  java.awt.Point : use
@@ -576,6 +667,5 @@ org.tda553group22.lab3.ui.CarView ..>  java.awt.Point : use
 org.tda553group22.lab3.ui.Sprite --|>  javax.swing.JPanel
 org.tda553group22.lab3.ui.Sprite -->  java.awt.image.BufferedImage : image
 org.tda553group22.lab3.ui.Sprite -->  java.awt.Point : pos
-
 
 @enduml
