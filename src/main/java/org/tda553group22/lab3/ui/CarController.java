@@ -99,11 +99,11 @@ final class CarController {
         model.setTurboOffAllCars();
     }
 
-    public void raiseBedAllCars() {
+    public void raiseTruckBedAllCars() {
         model.raiseBedAllCars();
     }
 
-    public void lowerBedAllCars() {
+    public void lowerTruckBedAllCars() {
         model.lowerBedAllCars();
     }
 

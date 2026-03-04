@@ -11,7 +11,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeListener;
 
 class GasPanel extends JPanel {
-    public GasPanel(Dimension minSize, ChangeListener listener) {
+    public GasPanel(Dimension maxSize, ChangeListener listener) {
         SpinnerModel spinnerModel = new SpinnerNumberModel(
                 0, // initial value
                 0, // min
@@ -21,7 +21,7 @@ class GasPanel extends JPanel {
         gasSpinner.addChangeListener(listener);
 
         this.setLayout(new BorderLayout());
-        this.setMinimumSize(minSize);
+        this.setMaximumSize(maxSize);
         this.add(new JLabel("Amount of gas"), BorderLayout.PAGE_START);
         this.add(gasSpinner, BorderLayout.CENTER);
     }
