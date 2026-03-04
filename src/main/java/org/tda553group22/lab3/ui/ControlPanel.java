@@ -7,31 +7,30 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 class ControlPanel extends JPanel {
-    private final JButton gasButton = new JButton("Gas");
-    private final JButton brakeButton = new JButton("Brake");
-    private final JButton turboOnButton = new JButton("Saab Turbo on");
-    private final JButton turboOffButton = new JButton("Saab Turbo off");
-    private final JButton liftBedButton = new JButton("Scania Raise Lift Bed");
-    private final JButton lowerBedButton = new JButton("Scania Lower Lift Bed");
-    private final JButton startButton = new JButton("Start all cars");
-    private final JButton stopButton = new JButton("Stop all cars");
-    private final JButton addCarRandomButton = new JButton("Adds random car");
-    private final JButton removeCarRandomButton = new JButton("Removes random car");
-
     private int gasAmount;
 
     public ControlPanel() {
         this.setLayout(new GridLayout(2, 5));
 
+        JButton gasButton = new JButton("Gas");
         this.add(gasButton, 0);
+        JButton turboOnButton = new JButton("Saab Turbo on");
         this.add(turboOnButton, 1);
+        JButton liftBedButton = new JButton("Scania Raise Lift Bed");
         this.add(liftBedButton, 2);
+        JButton startButton = new JButton("Start all cars");
         this.add(startButton, 3);
+        JButton addCarRandomButton = new JButton("Adds random car");
         this.add(addCarRandomButton, 4);
+        JButton brakeButton = new JButton("Brake");
         this.add(brakeButton, 5);
+        JButton turboOffButton = new JButton("Saab Turbo off");
         this.add(turboOffButton, 6);
+        JButton lowerBedButton = new JButton("Scania Lower Lift Bed");
         this.add(lowerBedButton, 7);
+        JButton stopButton = new JButton("Stop all cars");
         this.add(stopButton, 8);
+        JButton removeCarRandomButton = new JButton("Removes random car");
         this.add(removeCarRandomButton, 9);
 
         startButton.setBackground(Color.blue);
