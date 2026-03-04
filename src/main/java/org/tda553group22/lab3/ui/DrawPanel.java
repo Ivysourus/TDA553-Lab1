@@ -11,7 +11,6 @@ import org.tda553group22.lab3.ui.model.UpdateObserver;
 
 class DrawPanel extends JPanel implements UpdateObserver {
     private boolean dirty;
-    private List<Sprite> sprites = new ArrayList<>();
 
     public DrawPanel(Dimension size) {
         this.setDoubleBuffered(true);
@@ -31,7 +30,6 @@ class DrawPanel extends JPanel implements UpdateObserver {
     }
 
     public void addSprite(Sprite sprite) {
-        sprites.add(sprite);
         this.add(sprite);
         dirty = true;
     }
