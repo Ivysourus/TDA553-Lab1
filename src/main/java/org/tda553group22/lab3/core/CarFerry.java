@@ -15,7 +15,7 @@ public class CarFerry extends EngineVehicle {
         carLanes = 12;
         laneCanLoadHelpers = new ArrayList<>(carLanes);
         for (int i = 0; i < carLanes; i++) {
-            laneCanLoadHelpers.add(new CanLoadHelperFirstInFirstOut<>(15));
+            laneCanLoadHelpers.add(new CanLoadHelperFirstInFirstOut<>(15, Car.class));
         }
     }
 

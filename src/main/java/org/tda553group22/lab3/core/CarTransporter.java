@@ -16,7 +16,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
         color = Color.pink;
         modelName = "Transportmaxxer 5000";
         rampDown = true;
-        canLoadHelper = new CanLoadHelperFirstInLastOut<>(3);
+        canLoadHelper = new CanLoadHelperFirstInLastOut<>(3, PersonCar.class);
         maxLoadDistance = 20.0;
         this.pos = pos;
     }
@@ -35,23 +35,47 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
 
     @Override
     public void load(PersonCar load) {
-        assert rampDown : "Ramp needs to be down to be able to load cars";
-        assert getCurrentSpeed() == 0 : "You are currently moving";
-        assert load.getPos().distance(pos) < maxLoadDistance : "The car you are trying to load is too far away from the Transporter";
-        load.setPos(pos);
+        loadedAction(load);
         canLoadHelper.load(load);
     }
 
     @Override
     public Optional<PersonCar> unload() {
-        assert rampDown : "Ramp needs to be down to be able to unload cars";
-        assert getCurrentSpeed() == 0 : "You are currently moving";
+        if (!loadingReady()) {
+            return Optional.empty();
+        }
+
         Optional<PersonCar> unloadedCar = canLoadHelper.unload();
         if (unloadedCar.isEmpty()) {
             return unloadedCar;
         }
+
         unloadedCar.get().setPos(pos.sub(new Vector2(0, -maxLoadDistance)));
         return unloadedCar;
+    }
+
+    @Override
+    public boolean tryLoad(Loadable load) {
+        if (!canAccept(load)) {
+            return false;
+        }
+
+        boolean success = canLoadHelper.tryLoad(load);
+
+        if (!success) {
+            return false;
+        }
+
+        loadedAction((PersonCar) load);
+
+        return true;
+    }
+
+    @Override
+    public boolean canAccept(Loadable load) {
+        return canLoadHelper.canAccept(load) &&
+                WorkshopWithinRangeHelper.withinRange(pos, load.getPos(), maxLoadDistance) &&
+                loadingReady();
     }
 
     @Override
@@ -65,5 +89,15 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     @Override
     protected double speedFactor() {
         return enginePower * 0.01;
+    }
+
+    private void loadedAction(PersonCar load) {
+        load.stopEngine();
+        load.setPos(pos);
+        load.setEngineVehicleState(new EngineVehicleLocked(load));
+    }
+
+    private boolean loadingReady() {
+        return rampDown && getCurrentSpeed() == 0;
     }
 }
