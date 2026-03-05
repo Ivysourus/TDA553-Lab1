@@ -79,6 +79,8 @@ class org.tda553group22.lab3.core.CarTransporter {
 	{method} +canAccept ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : boolean
 	{method} +load ( paramLoadable1 : org.tda553group22.lab3.core.Loadable ) : void
 	{method} +load ( paramPersonCar1 : org.tda553group22.lab3.core.PersonCar ) : void
+	{method} -loadingReady () : boolean
+	{method} -loadedAction ( paramPersonCar1 : org.tda553group22.lab3.core.PersonCar ) : void
 	{method} +lowerRamp () : void
 	{method} +move () : void
 	{method} +raiseRamp () : void
@@ -288,7 +290,7 @@ class org.tda553group22.lab3.core.WorkshopFactory {
 }
 
 
-class org.tda553group22.lab3.core.WorkshopWithinRangeHelper {
+class org.tda553group22.lab3.core.WithinRangeHelper {
 	{method}  {static} +withinRange ( paramVector21 : org.tda553group22.lab3.math.Vector2 , paramVector22 : org.tda553group22.lab3.math.Vector2 , paramdouble3 : double ) : boolean
 }
 
@@ -612,7 +614,8 @@ org.tda553group22.lab3.core.WorkshopFactory ..> org.tda553group22.lab3.core.Work
 org.tda553group22.lab3.core.WorkshopFactory ..> org.tda553group22.lab3.core.CarWorkshop : use
 org.tda553group22.lab3.core.WorkshopFactory ..> org.tda553group22.lab3.math.Vector2 : use
 org.tda553group22.lab3.core.WorkshopFactory ..> org.tda553group22.lab3.core.Volvo240 : use
-org.tda553group22.lab3.core.CarWorkshop ..> org.tda553group22.lab3.core.WorkshopWithinRangeHelper : use
+org.tda553group22.lab3.core.CarTransporter ..> org.tda553group22.lab3.core.WithinRangeHelper : use
+org.tda553group22.lab3.core.CarWorkshop ..> org.tda553group22.lab3.core.WithinRangeHelper : use
 org.tda553group22.lab3.core.CarWorkshop ..> org.tda553group22.lab3.core.EngineVehicleLocked : use
 org.tda553group22.lab3.core.CarWorkshop ..> org.tda553group22.lab3.core.EngineVehicleStopped : use
 

@@ -74,7 +74,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar> {
     @Override
     public boolean canAccept(Loadable load) {
         return canLoadHelper.canAccept(load) &&
-                WorkshopWithinRangeHelper.withinRange(pos, load.getPos(), maxLoadDistance) &&
+                WithinRangeHelper.withinRange(pos, load.getPos(), maxLoadDistance) &&
                 loadingReady();
     }
 

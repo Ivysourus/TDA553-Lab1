@@ -70,7 +70,7 @@ class CarWorkshop<T extends Car> implements Workshop<T> {
 
     @Override
     public boolean withinRange(Vector2 pos) {
-        return WorkshopWithinRangeHelper.withinRange(this.pos, pos, range);
+        return WithinRangeHelper.withinRange(this.pos, pos, range);
     }
 
     @Override
