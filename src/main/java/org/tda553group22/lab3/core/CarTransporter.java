@@ -5,7 +5,7 @@ import org.tda553group22.lab3.math.Vector2;
 import java.util.Optional;
 import java.awt.Color;
 
-public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
+public class CarTransporter extends Car implements CanLoadOrdered<PersonCar> {
     private final CanLoadHelperFirstInLastOut<PersonCar> canLoadHelper;
     private final double maxLoadDistance;
     private boolean rampDown;
@@ -81,7 +81,7 @@ public class CarTransporter extends Car implements CanLoadOrdered<PersonCar>  {
     @Override
     public void move() {
         super.move();
-        for (var car : canLoadHelper.cargo){
+        for (var car : canLoadHelper.cargo) {
             car.pos = pos;
         }
     }
